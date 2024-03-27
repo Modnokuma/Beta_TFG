@@ -1,0 +1,138 @@
+<?php
+
+include './common/credentialsDB.php';
+
+class Base_Mapping{
+
+    private $conn;
+    public $query;
+    public $ok = true;
+    public $code = '00000';
+    public $feedback = array();
+    public $resource = '';
+    private $host = host;
+    public $rows = array();
+
+
+    //$mysqli = new mysqli(,"my_user","my_password","my_db");
+    function connection(){
+        
+        try {
+            $this->conn = new mysqli($this->host, "dani", "dani", "pruebaBD") or die('fallo conexion');
+        }
+        catch(Exception $e){
+            return false;
+        }
+        return true;
+        
+        
+    }
+
+    private function close_connection() {
+		$this->conn->close();
+	}
+
+    // Metodo para ejecutar funciones de ADD/EDIT/DELETE
+
+    public function execute_simple_query(){
+
+        
+        if(!($this->connection())){
+
+            $this->ok=false;
+            $this->code='CONEXION_KO';
+            //llama a la funcion que construye el mensaje respuesta
+            $this->construct_response();
+            return $this->feedback;
+        } 
+        else{ 
+            
+            $result_query = $this->conn->query($this->query);
+            if($result_query != true){
+                //Ha sucedido un error
+                $this->ok=false;
+                $this->code='SQL_KO';
+                $this->resource= $this->query;
+                //llamamos al metodo que construye el mensaje
+                $this->construct_response();
+                return $this->feedback;
+               
+            } else {
+                //La operacion tiene exito
+                $this->ok=true;
+                $this->code='SQL_OK';
+                $this->resource= $this->query;
+                //llamamos al metodo que construye el mensaje
+                $this->construct_response();
+                return $this->feedback;
+
+            }
+        }
+            
+            $this-> close_connection();
+
+    }
+
+    // Metodo para hacer un SEARCH
+
+    public function get_results_from_query(){
+      
+        if(!($this->connection())){
+
+            $this->ok=false;
+            $this->code='CONEXION_KO';
+            //llama a la funcion que construye el mensaje respuesta
+            $this->construct_response();
+            return $this->feedback;
+        } 
+        else{ 
+
+            $result_query = $this->conn->query($this->query);
+            if($result_query != true){
+                
+                $this->ok=false;
+                $this->code='SQL_KO';
+                $this->resource= $this->query;
+                //llamamos al metodo que construye el mensaje
+                $this->construct_response();
+                return $this->feedback;
+               
+            } else {
+                $numFilas=$result_query->num_rows;
+                if($numFilas==0){
+                    //esta vacio
+                    $this->ok=true;
+                    $this->code='RECORDSET_VACIO';
+                    $this->construct_response();
+                    return $this->feedback;
+                } else {
+                    //devuelves el contenido
+                    for($i = 0; $i<$numFilas; $i++){
+                        $this->rows[]=$result_query->fetch_assoc();
+                        $this->resource=$this->rows;
+                    }
+                    $this->ok=true;
+                    $this->code='RECORDSET_DATOS';
+                    $this->construct_response();
+                    return $this->feedback;
+                }
+            }
+            
+            $this-> close_connection();
+
+        }
+    }
+
+    public function construct_response(){
+        $this->feedback['ok'] = $this->ok;
+        $this->feedback['code'] = $this->code;
+        $this->feedback['resource'] = $this->resource;
+    }
+
+    
+}
+
+
+
+
+?>
