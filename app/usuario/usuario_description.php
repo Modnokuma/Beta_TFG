@@ -49,19 +49,129 @@ define('usuario_description',
                 'pk'=>false,
                 'autoincrement'=>false,
                 'numeric'=>false,
-                'not_null'=>=>array(
+                'not_null'=>array(
                     'ADD'=>true,
                     'EDIT'=>true,
                     'DELETE'=>false,
                 ),
                 'default_value'=>false,
                 'test'=>array(
-                    'ADD'=>array('tam_min'=>false,'tam_max'=>10,'exp_reg'=>false,'personalized'=>true),
-                    'EDIT'=>array('tam_min'=>false,'tam_max'=>10,'exp_reg'=>false,'personalized'=>true),
+                    'ADD'=>array('tam_min'=>false,
+                                 'tam_max'=>10,
+                                 'exp_reg'=>false,
+                                 'personalized'=>true
+                                ),
+                    'EDIT'=>array('tam_min'=>false,
+                                  'tam_max'=>10,
+                                  'exp_reg'=>false,
+                                  'personalized'=>true
+                                ),
                     )            
                 ),
+            'organizacion_usuario'=>array(
+                'pk'=>false,
+                'autoincrement'=>false,
+                'numeric'=>false,
+                'not_null'=>array(
+                    'ADD'=>true,
+                    'EDIT'=>true,
+                    'DELETE'=>false
+                ),
+                'default_value'=>false,
+                'test'=>array(
+                    'ADD'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>45,
+                        'exp_reg'=>false,
+                        'personalized'=>true //no se
+                    ),
+                    'EDIT'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>45,
+                        'exp_reg'=>false,
+                        'personalized'=>true //no se
+                    )
+                   )
+            ),
+            'puesto_usuario'=>array(
+                'pk'=>false,
+                'autoincrement'=>false,
+                'numeric'=>false,
+                'not_null'=>array(
+                    'ADD'=>true,
+                    'EDIT'=>true,
+                    'DELETE'=>false
+                ),
+                'default_value'=>'alumno',
+                'test'=>array(
+                    'ADD'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>45,
+                        'exp_reg'=>false,
+                        'personalized'=>true //no se
+                    ),
+                    'EDIT'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>45,
+                        'exp_reg'=>false,
+                        'personalized'=>true //no se
+                    )
+                )
+            ),
+
+            'direccion_usuario'=>array(
+                'pk'=>false,
+                'autoincrement'=>false,
+                'numeric'=>false,
+                'not_null'=>array(
+                    'ADD'=>true,
+                    'EDIT'=>true,
+                    'DELETE'=>false
+                ),
+                'default_value'=>false,
+                'test'=>array(
+                    'ADD'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>200,
+                        'exp_reg'=>false,
+                        'personalized'=>true //no se
+                    ),
+                    'EDIT'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>200,
+                        'exp_reg'=>false,
+                        'personalized'=>true //no se
+                    )
+                )
+            ),
+
+            'correo_usuario'=>array(
+                'pk'=>false,
+                'autoincrement'=>false,
+                'numeric'=>false,
+                'not_null'=>array(
+                    'ADD'=>true,
+                    'EDIT'=>true,
+                    'DELETE'=>false
+                ),
+                'default_value'=>false,
+                'test'=>array(
+                    'ADD'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>45,
+                        'exp_reg'=>false, //posiblemente
+                        'personalized'=>true //no se
+                    ),
+                    'EDIT'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>45,
+                        'exp_reg'=>false,  //posiblemente
+                        'personalized'=>true //no se
+                    )
+                )
+            )
         )
-        )
+    )
     )
 );
 
