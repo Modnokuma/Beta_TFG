@@ -5,11 +5,11 @@ include './Base/MappingMysqli.php';
 class Base_MODEL{
 
     function EDIT(){
-        $mapping = new Mapping();
+        $mapping = new Mapping($this->tabla);
         return $mapping->EDIT();
     }
     function ADD(){
-        $mapping = new Mapping();
+        $mapping = new Mapping($this->tabla);
         return $mapping->ADD();
     }
     function accion(){
@@ -25,7 +25,9 @@ class Base_MODEL{
             
         
         $mapping = new Mapping($this->tabla);
-        return $mapping->SEARCH($this->tabla, $this->listaAtributos);
+        
+        
+        return $mapping->SEARCH($this->tabla, $this->listaAtributos, $this->valores);
         
     }
 

@@ -25,16 +25,37 @@ class Mapping extends Base_Mapping{
  
      }
     
-    function SEARCH($tabla, $lista_atributos, $valores_busqueda = null){        
+    function SEARCH($tabla, $lista_atributos, $valores){        
         
        $this->query = "SELECT * FROM " .$tabla;
-       if(!($valores_busqueda)){
-            $query = $query. " WHERE ";
+       if(!empty($valores)){
+            $query = $query. " WHERE (";
             // se añadiria a la cadena de busqueda los valores
-
+            $query = $query . $this->construirWhereLike($valores);
+            $query = $query. " )";
        }
-        return $this->get_results_from_query();
+       
+       $this->query = $query;
+       return $this->get_results_from_query();
         
+    }
+
+    function construirWhereLike ($valores){
+        $cadena = '';
+        $primero = true;
+
+        foreach($valores as $clave => $valor){
+            
+            if($primero){
+                $primero = false;
+            } else{
+                $cadena = $cadena . " AND ";
+            }
+
+            $cadena = $cadena . "(". $clave. "LIKE ".  "'%" .$valor ."%' )";
+        }
+
+        return $cadena;
     }
 
     function DELETE(){        

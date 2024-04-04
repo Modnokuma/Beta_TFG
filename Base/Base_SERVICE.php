@@ -9,7 +9,7 @@ class Base_SERVICE{
     function __construct(){
         
         $accion = action;
-        $controlador =  variables['controlador'];
+        $controlador = variables['controlador'];
 
         $this->inicializarRest();
     }
@@ -39,8 +39,8 @@ class Base_SERVICE{
                 $_POST[$atributo] = '';
             }
 
-            $entidad->$atributo = $_POST[$atributo];
-            $entidad->$valores = $_POST[$atributo];
+            $entidad->$atributo = $_POST[$atributo]; // esto no lo pillo
+            $entidad->$valores[$atributo] = $_POST[$atributo];
         }
 
         $entidad->$listaAtributos;    

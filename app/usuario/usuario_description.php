@@ -44,7 +44,7 @@ define('usuario_description',
                         )
                     )
                 )            
-            )
+            ),
             'nombre_usuario'=>array(
                 'pk'=>false,
                 'autoincrement'=>false,

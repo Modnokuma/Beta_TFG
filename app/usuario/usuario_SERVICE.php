@@ -3,6 +3,7 @@
 include './Base/Base_SERVICE.php';
 
 class usuario_SERVICE EXTENDS Base_SERVICE{
+	public $modelo;
 
     function inicializarRest(){
 
