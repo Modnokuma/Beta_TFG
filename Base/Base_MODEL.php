@@ -32,7 +32,7 @@ class Base_MODEL{
     }
 
     function DELETE(){
-        $mapping = new Mapping();
+        $mapping = new Mapping($this->tabla);
         return $mapping->DELETE();
     }
 

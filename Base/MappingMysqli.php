@@ -58,11 +58,34 @@ class Mapping extends Base_Mapping{
         return $cadena;
     }
 
-    function DELETE(){        
+    function DELETE($tabla,$clavesPrimarias,$valores){        
         
-        $this->query = 'DELETE FROM usuario WHERE id_usuario=4';
-         return $this->execute_simple_query();
-         
+        $this->query = 'DELETE FROM' .$tabla. " WHERE (";
+        //funcion de construccion del '='
+        $this->query = $this->query. ")";
+
+
+        return $this->execute_simple_query();        
+     }
+
+     function construirWhereIgual ($clavesPrimarias, $valores){
+        $cadena = '';
+        $primero = true;
+
+        foreach($valores as $clave => $valor){
+            //recorre todo el array y el que no este vacio es la clave que hay que poner?
+
+            if(in_array($clave,$clavesPrimarias)){
+                if($primero){
+                    $primero = false;
+                } else {
+                    $cadena = $cadena . " AND ";
+                }
+
+                $cadena = $cadena . "( " . $clave . " = " .$valor . ")";
+            }
+        }
+
      }
 
 
