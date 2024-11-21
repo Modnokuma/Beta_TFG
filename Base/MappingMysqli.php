@@ -4,38 +4,39 @@ include './Base/Base_Mapping.php';
 
 class Mapping extends Base_Mapping{
 
-    public $query;
-    public $tabla;
+    public $query;  
 
-    function __construct($tabla){
-		$this->tabla = $tabla;
+    function __construct(){
+		
 	}
 
-    function ADD(){        
+    function mapping_ADD(){        
         
         $this->query = 'INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `organizacion_usuario`,`puesto_usuario`, `direccion_usuario`, `correo_usuario`) VALUES (4, "Jorge", "ESEI","alumno","Calle D Nº3 7ºD" , "jorge@gmail.com")';
          return $this->execute_simple_query();
      
      }
 
-     function EDIT(){        
+     function mapping_EDIT(){        
         
         $this->query = 'UPDATE `usuario` SET `nombre_usuario`="Pablo" WHERE id_usuario=4';
          return $this->execute_simple_query();
  
      }
     
-    function SEARCH($tabla, $lista_atributos, $valores){        
+    function mapping_SEARCH(){        
         
-       $this->query = "SELECT * FROM " .$tabla;
-       if(!empty($valores)){
+       $this->query = "SELECT * FROM " .$this->tabla;
+       
+       if(!empty($this->valores)){
             $query = $query. " WHERE (";
             // se añadiria a la cadena de busqueda los valores
-            $query = $query . $this->construirWhereLike($valores);
+            $query = $query . $this->construirWhereLike($this->valores);
             $query = $query. " )";
        }
        
-       $this->query = $query;
+       $this->query .= $query;
+
        return $this->get_results_from_query();
         
     }
@@ -52,13 +53,13 @@ class Mapping extends Base_Mapping{
                 $cadena = $cadena . " AND ";
             }
 
-            $cadena = $cadena . "(". $clave. "LIKE ".  "'%" .$valor ."%' )";
+            $cadena = $cadena . "(". $clave. " LIKE ".  "'%" .$valor ."%' )";
         }
 
         return $cadena;
     }
 
-    function DELETE($tabla,$clavesPrimarias,$valores){        
+    function mapping_DELETE($tabla,$clavesPrimarias,$valores){        
         
         $this->query = 'DELETE FROM' .$tabla. " WHERE (";
         //funcion de construccion del '='

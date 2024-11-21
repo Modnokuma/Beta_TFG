@@ -19,12 +19,11 @@ class Base_Mapping{
         
         try {
             $this->conn = new mysqli($this->host, "dani", "dani", "pruebaBD") or die('fallo conexion');
+            return true;
         }
         catch(Exception $e){
             return false;
         }
-        return true;
-        
         
     }
 
@@ -36,7 +35,7 @@ class Base_Mapping{
 
     public function execute_simple_query(){
 
-        
+
         if(!($this->connection())){
 
             $this->ok=false;
@@ -76,7 +75,7 @@ class Base_Mapping{
     // Metodo para hacer un SEARCH
 
     public function get_results_from_query(){
-      
+
         if(!($this->connection())){
 
             $this->ok=false;
@@ -88,8 +87,9 @@ class Base_Mapping{
         else{ 
 
             $result_query = $this->conn->query($this->query);
+            
             if($result_query != true){
-                
+
                 $this->ok=false;
                 $this->code='SQL_KO';
                 $this->resource= $this->query;
@@ -98,14 +98,17 @@ class Base_Mapping{
                 return $this->feedback;
                
             } else {
+                
                 $numFilas=$result_query->num_rows;
                 if($numFilas==0){
+                    
                     //esta vacio
                     $this->ok=true;
                     $this->code='RECORDSET_VACIO';
                     $this->construct_response();
                     return $this->feedback;
                 } else {
+                    
                     //devuelves el contenido
                     for($i = 0; $i<$numFilas; $i++){
                         $this->rows[]=$result_query->fetch_assoc();

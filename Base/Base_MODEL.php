@@ -2,38 +2,32 @@
 
 include './Base/MappingMysqli.php';
 
-class Base_MODEL{
+class Base_MODEL extends Mapping{
+
+    public $valores = array();
+    public $listaAtributos = array();
 
     function EDIT(){
-        $mapping = new Mapping($this->tabla);
-        return $mapping->EDIT();
+        //$mapping = new Mapping($this->tabla);
+        //return $mapping->EDIT();
     }
     function ADD(){
-        $mapping = new Mapping($this->tabla);
-        return $mapping->ADD();
+        //$mapping = new Mapping($this->tabla);
+        //return $mapping->ADD();
     }
     function accion(){
         return 'accionnnnn de service de usuario';
     }
     function SEARCH(){
-        /*$controlador =  variables['controlador'];
-        $nombre = $controlador."_description";
-        echo(proyecto_description['entity']);
-        foreach (proyecto_description['attributes'] as $i){
-            echo ($i);
-        }*/
-            
-        
-        $mapping = new Mapping($this->tabla);
-        
-        
-        return $mapping->SEARCH($this->tabla, $this->listaAtributos, $this->valores);
+               
+        return $this->mapping_SEARCH();
+    
         
     }
 
     function DELETE(){
-        $mapping = new Mapping($this->tabla);
-        return $mapping->DELETE();
+        //$mapping = new Mapping($this->tabla);
+        //return $mapping->DELETE();
     }
 
 

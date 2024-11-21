@@ -52,4 +52,5 @@ include "./app/".$controlador."/".$controlador."_CONTROLLER.php";
 $claseatratar = $controlador."_CONTROLLER";
 $claseinstanciada = new $claseatratar;
 
+
 ?>

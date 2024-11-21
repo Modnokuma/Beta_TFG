@@ -3,7 +3,6 @@
 class Base_SERVICE{
 
     public $model;
-    public $valores;
     public $listaAtributos = array();
 
     function __construct(){
@@ -22,28 +21,35 @@ class Base_SERVICE{
 
         //Si existe la lista de atributos de la entidad se llama a este metodo
         if(isset($this->listaAtributos)){
-            $this->rellenarModelo($this->controlador, $this->listaAtributos);
+            $this->rellenarModelo($this->listaAtributos);
         }
         return $this->model;
     }
 
-    //Pasamos la entidad por referencia '&'para poder modificarla dentro del foreach.
-    function rellenarModelo(&$controlador, $listaAtributos){
+    //
+    function rellenarModelo($listaAtributos){
         
-        $entidad =  $controlador;
-
         foreach ($listaAtributos as $atributo){
             //Si no viene el atributo de la entidad en lo que recibimos
-            if(!isset($_POST[$atributo])){
-                //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
-                $_POST[$atributo] = '';
+            if (action == 'SEARCH'){
+                if(!isset($_GET[$atributo])){
+                    //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
+                    $_GET[$atributo] = '';
+                }
+                $this->model->valores[$atributo] = $_GET[$atributo];
             }
-
-            $entidad->$atributo = $_POST[$atributo]; // esto no lo pillo
-            $entidad->$valores[$atributo] = $_POST[$atributo];
+            else{
+                if(!isset($_POST[$atributo])){
+                    //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
+                    $_POST[$atributo] = '';
+                }
+                $this->model->valores[$atributo] = $_POST[$atributo];
+            }
+            
         }
 
-        $entidad->$listaAtributos;    
+        $this->model->listaAtributos = $this->listaAtributos;
+
     }
 
     function ADD(){
@@ -61,6 +67,7 @@ class Base_SERVICE{
     function SEARCH(){
 
         return $this->model->SEARCH();
+    
         
     }
 

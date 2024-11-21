@@ -2,7 +2,7 @@
 define('usuario_description',
     array(
         'entity'=>'usuario',
-        'onetomany-rel'=>array('attributes-own'=>array('id_usuario),entity-rel'=>'notas','attributes-rel'=>array('id_usuario')),
+        'onetomany-rel'=>array('attributes-own'=>array('id_usuario),entity-rel'=>'notas','attributes-rel'=>array('id_usuario'))),
         'attributes'=>array(
             'id_usuario'=>array(
                 'pk'=>true,
@@ -45,7 +45,7 @@ define('usuario_description',
                     )
                 )            
             ),
-            'nombre_usuario'=>array(
+           'nombre_usuario'=>array(
                 'pk'=>false,
                 'autoincrement'=>false,
                 'numeric'=>false,
@@ -68,6 +68,7 @@ define('usuario_description',
                                 ),
                     )            
                 ),
+/*
             'organizacion_usuario'=>array(
                 'pk'=>false,
                 'autoincrement'=>false,
@@ -171,6 +172,7 @@ define('usuario_description',
                 )
             )
         )
+    )*/
     )
     )
 );
