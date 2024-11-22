@@ -18,7 +18,8 @@ class Base_Mapping{
     function connection(){
         
         try {
-            $this->conn = new mysqli($this->host, "dani", "dani", "pruebaBD") or die('fallo conexion');
+            $this->conn = new mysqli($this->host, "dani", "dani", "Dani_TFG_BD") or die('fallo conexion');
+            
             return true;
         }
         catch(Exception $e){

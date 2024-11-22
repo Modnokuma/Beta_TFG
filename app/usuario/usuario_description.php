@@ -2,7 +2,11 @@
 define('usuario_description',
     array(
         'entity'=>'usuario',
-        'onetomany-rel'=>array('attributes-own'=>array('id_usuario),entity-rel'=>'notas','attributes-rel'=>array('id_usuario'))),
+        'onetomany-rel'=>array(
+            'attributes-own'=>array('id_usuario'),
+            'entity-rel'=>'notas',
+            'attributes-rel'=>array('id_usuario')
+        ),
         'attributes'=>array(
             'id_usuario'=>array(
                 'pk'=>true,
@@ -56,19 +60,21 @@ define('usuario_description',
                 ),
                 'default_value'=>false,
                 'test'=>array(
-                    'ADD'=>array('tam_min'=>false,
-                                 'tam_max'=>10,
-                                 'exp_reg'=>false,
-                                 'personalized'=>true
-                                ),
-                    'EDIT'=>array('tam_min'=>false,
-                                  'tam_max'=>10,
-                                  'exp_reg'=>false,
-                                  'personalized'=>true
-                                ),
-                    )            
-                ),
-/*
+                    'ADD'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>10,
+                        'exp_reg'=>false,
+                        'personalized'=>true
+                    ),
+                    'EDIT'=>array(
+                        'tam_min'=>false,
+                        'tam_max'=>10,
+                        'exp_reg'=>false,
+                        'personalized'=>true
+                    )
+                )            
+            ),
+
             'organizacion_usuario'=>array(
                 'pk'=>false,
                 'autoincrement'=>false,
@@ -92,7 +98,7 @@ define('usuario_description',
                         'exp_reg'=>false,
                         'personalized'=>true //no se
                     )
-                   )
+                )
             ),
             'puesto_usuario'=>array(
                 'pk'=>false,
@@ -172,12 +178,6 @@ define('usuario_description',
                 )
             )
         )
-    )*/
-    )
     )
 );
-
-
-
-
 ?>

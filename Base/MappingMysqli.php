@@ -27,7 +27,8 @@ class Mapping extends Base_Mapping{
     function mapping_SEARCH(){        
         
        $this->query = "SELECT * FROM " .$this->tabla;
-       
+      
+       $query = '';
        if(!empty($this->valores)){
             $query = $query. " WHERE (";
             // se añadiria a la cadena de busqueda los valores

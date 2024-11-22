@@ -18,14 +18,14 @@ DROP USER `dani`@`localhost`;
 --
 CREATE USER IF NOT EXISTS `dani`@`localhost` IDENTIFIED BY 'dani';
 GRANT USAGE ON *.* TO `dani`@`localhost` REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
-GRANT ALL PRIVILEGES ON `pruebaBD`.* TO `dani`@`localhost` WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON `Dani_TFG_BD`.* TO `dani`@`localhost` WITH GRANT OPTION;
 
 --
--- Base de datos: `pruebaBD`
+-- Base de datos: `Dani_TFG_BD`
 --
-DROP DATABASE IF EXISTS `pruebaBD`;
-CREATE DATABASE IF NOT EXISTS `pruebaBD` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `pruebaBD`;
+DROP DATABASE IF EXISTS `Dani_TFG_BD`;
+CREATE DATABASE IF NOT EXISTS `Dani_TFG_BD` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `Dani_TFG_BD`;
 
 -- --------------------------------------------------------
 
