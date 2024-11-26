@@ -32,9 +32,11 @@ class Mapping extends Base_Mapping{
      }
    
      function mapping_EDIT(){        
+        $this->query = "UPDATE " .$this->tabla . " SET ";
+
+        $temp ="`nombre_usuario`='Pablo' WHERE id_usuario=4";
         
-        $this->query = 'UPDATE `usuario` SET `nombre_usuario`="Pablo" WHERE id_usuario=4';
-         return $this->execute_simple_query();
+        return $this->execute_simple_query();
  
      }
     
