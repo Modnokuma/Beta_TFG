@@ -4,16 +4,20 @@ class Base_SERVICE{
 
     public $model;
     public $listaAtributos = array();
+    public $listaValores = array();
+    public $valores = array();
 
     function __construct(){
         
         $accion = action;
         $controlador = variables['controlador'];
+        
 
         $this->inicializarRest();
     }
 
     function crearModelo($controlador){
+
         //controlador es el nombre de la tabla
         include "./app/".$controlador."/".$controlador."_MODEL.php";
         $modelo = $controlador."_MODEL"; 
@@ -36,6 +40,7 @@ class Base_SERVICE{
                     //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
                     $_GET[$atributo] = '';
                 }
+               
                 $this->model->valores[$atributo] = $_GET[$atributo];
             }
             else{
@@ -47,12 +52,14 @@ class Base_SERVICE{
             }
             
         }
-
+        
         $this->model->listaAtributos = $this->listaAtributos;
+        $this->model->listaValores = $this->listaValores;
 
     }
 
     function ADD(){
+        
 
         return $this->model->ADD();
         
