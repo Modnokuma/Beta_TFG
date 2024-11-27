@@ -10,7 +10,7 @@ class Base_MODEL extends Mapping{
 
     function EDIT(){
         //$mapping = new Mapping($this->tabla);
-        //return $mapping->EDIT();
+        return $this->mapping_EDIT();
     }
     function ADD(){
         //$mapping = new Mapping($this->tabla);

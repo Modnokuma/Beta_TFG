@@ -53,12 +53,12 @@ class Base_SERVICE{
             
         }
         
-        var_dump($this->model->valores);
+        //var_dump($this->model->valores);
        
         $this->model->listaAtributos = $this->listaAtributos;
         $this->model->listaValores = $this->listaValores;
 
-        var_dump($this->model->listaValores);
+        //var_dump($this->model->listaValores);
     }
 
     function ADD(){

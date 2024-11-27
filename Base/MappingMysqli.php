@@ -5,6 +5,9 @@ include './Base/Base_Mapping.php';
 class Mapping extends Base_Mapping{
 
     public $query;
+    public $tabla;
+    public $listaAtributos = [];
+    public $listaValores = [];
 
     function __construct(){
 		
@@ -16,7 +19,8 @@ class Mapping extends Base_Mapping{
         $this->query = "INSERT INTO " .$this->tabla;
 
         $atributos = implode(", ", $this->listaAtributos);
-       
+        var_dump($this->listaValores);
+        var_dump($this->listaAtributos);
         $this->query = $this->query. " (" .$atributos. ")";
         $this->query = $this->query. " VALUES ";
         
@@ -31,10 +35,30 @@ class Mapping extends Base_Mapping{
      
      }
    
-     function mapping_EDIT(){        
+     function mapping_EDIT(){    
+        
         $this->query = "UPDATE " .$this->tabla . " SET ";
 
-        $temp ="`nombre_usuario`='Pablo' WHERE id_usuario=4";
+        $atributos = implode(", ", $this->listaAtributos);
+        $valores = implode(", ", $this->listaValores);
+
+        $total = count($this->listaAtributos);
+        $i = 0;
+        foreach($this->listaAtributos as $clave => $valor){
+            $this->query = $this->query. $valor. " = ";
+            if(is_string($this->listaValores[$clave])){
+                $this->query = $this->query. "'".$this->listaValores[$clave]."'";
+            } else {
+                $this->query = $this->query. $this->listaValores[$clave];
+            }
+
+            if (++$i !== $total) {
+                $this->query .= ", ";
+            }
+        }
+
+        $this->query = $this->query. " WHERE ";
+        $this->query = $this->query. $this->listaAtributos[0]. " = " .$this->listaValores[0];
         
         return $this->execute_simple_query();
  

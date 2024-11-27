@@ -10,7 +10,7 @@ class proyecto_SERVICE EXTENDS Base_SERVICE{
 
 		$this->listaValores = array_slice(array_values(variables), 1); // El primero es controlador por eso nos lo cargamos
 
-		$this->listaAtributos = proyecto_description['attributes'];
+		$this->listaAtributos = array_keys(proyecto_description['attributes']);
 		
 		$this->modelo = $this->crearModelo('proyecto');
 
