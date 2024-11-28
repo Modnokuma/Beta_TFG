@@ -11,6 +11,9 @@ class Base_Mapping{
     public $feedback = array();
     public $resource = '';
     private $host = host;
+    private $userbd = userbd;
+    private $passuserbd = passuserbd;
+    private $bd = bd;
     public $rows = array();
 
 
@@ -18,7 +21,7 @@ class Base_Mapping{
     function connection(){
         
         try {
-            $this->conn = new mysqli($this->host, "dani", "dani", "Dani_TFG_BD") or die('fallo conexion');
+            $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd) or die('fallo conexion');
             
             return true;
         }
@@ -46,7 +49,7 @@ class Base_Mapping{
             return $this->feedback;
         } 
         else{ 
-            
+            echo $this->query;
             $result_query = $this->conn->query($this->query);
             if($result_query != true){
                 //Ha sucedido un error

@@ -5,8 +5,8 @@ include './Base/MappingMysqli.php';
 class Base_MODEL extends Mapping{
 
     public $valores = array();
-    public $listaValores = array();
-    public $listaAtributos = array();
+    public $listaValores = array(); // atributo de modelo
+    public $listaAtributos = array(); // atributo de modelo
 
     function EDIT(){
         //$mapping = new Mapping($this->tabla);

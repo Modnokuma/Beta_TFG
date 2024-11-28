@@ -1,7 +1,6 @@
 <?php
 
-define(
-    'proyecto_description',
+$proyecto_description = 
     array(
         'entity' => 'proyecto',
         'attributes' => array(
@@ -129,5 +128,4 @@ define(
                 )
             )
         )
-    )
-);
+    );

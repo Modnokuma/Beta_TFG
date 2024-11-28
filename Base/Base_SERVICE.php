@@ -6,14 +6,30 @@ class Base_SERVICE{
     public $listaAtributos = array();
     public $listaValores = array();
     public $valores = array();
+    public $estructura;
 
-    function __construct(){
-        
+    function __construct($estructura){
+
         $accion = action;
         $controlador = variables['controlador'];
-        
-
+        $this->estructura = $estructura;
+       
         $this->inicializarRest();
+        
+    }
+
+    function exec(){
+        
+        $nulos = $this->null_test();
+        
+        if(is_bool($nulos)){
+        } 
+        else{
+             return $nulos; 
+        };
+        
+        $accion = action;
+        return $this->$accion();
     }
 
     function crearModelo($controlador){
@@ -22,6 +38,7 @@ class Base_SERVICE{
         include "./app/".$controlador."/".$controlador."_MODEL.php";
         $modelo = $controlador."_MODEL"; 
         $this->model = new $modelo;
+
 
         //Si existe la lista de atributos de la entidad se llama a este metodo
         if(isset($this->listaAtributos)){
@@ -56,7 +73,7 @@ class Base_SERVICE{
         //var_dump($this->model->valores);
        
         $this->model->listaAtributos = $this->listaAtributos;
-        $this->model->listaValores = $this->listaValores;
+        $this->model->listaValores = array_slice(array_values($_POST), 1); // El primero es controlador por eso nos lo cargamos
 
         //var_dump($this->model->listaValores);
     }
@@ -69,7 +86,7 @@ class Base_SERVICE{
     }
 
     function EDIT(){
-        
+
         return $this->model->EDIT();
     
     }
@@ -92,6 +109,42 @@ class Base_SERVICE{
         return 'llegue a otra accion del service';
 
     }
+
+    function null_test(){
+		
+        if (action == 'SEARCH') { return false;}
+		foreach ($this->listaAtributos as $atributo){
+
+            $error = false;
+
+            if ((!(isset(variables[$atributo]))) &&
+                ($this->estructura['attributes'][$atributo]['not_null'][action])
+                ){
+                    $error = true;
+                }
+            else{
+                if (
+                    ($this->estructura['attributes'][$atributo]['not_null'][action]) &&
+                    (($this->model->valores[$atributo] == '') )
+                    ){
+                        $error = true;
+                    }
+            }
+
+            if ($error == true){
+                $feedback['ok'] = false;
+                $feedback['code'] = $atributo.'_is_null_KO';
+                $feedback['resources'] = false;
+                return $feedback;
+            }
+            else{
+                return false;
+            }
+        
+
+	    }
+    }
+
 
 }
 

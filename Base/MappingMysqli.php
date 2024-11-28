@@ -19,8 +19,8 @@ class Mapping extends Base_Mapping{
         $this->query = "INSERT INTO " .$this->tabla;
 
         $atributos = implode(", ", $this->listaAtributos);
-        var_dump($this->listaValores);
-        var_dump($this->listaAtributos);
+        //var_dump($this->listaValores);
+        //var_dump($this->listaAtributos);
         $this->query = $this->query. " (" .$atributos. ")";
         $this->query = $this->query. " VALUES ";
         
