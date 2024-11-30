@@ -1,151 +1,157 @@
 <?php
 
-class Base_SERVICE{
+class Base_SERVICE
+{
 
     public $model;
     public $listaAtributos = array();
-    public $listaValores = array();
     public $valores = array();
     public $estructura;
+    public $accion;
+    public $controlador;
 
-    function __construct($estructura){
+    function __construct($estructura)
+    {
 
-        $accion = action;
-        $controlador = variables['controlador'];
+        $this->accion = action;
+        $this->controlador = variables['controlador'];
         $this->estructura = $estructura;
-       
+        $this->valores = variables;
+
         $this->inicializarRest();
-        
     }
 
-    function exec(){
-        
+    function exec()
+    {
         $nulos = $this->null_test();
-        
-        if(is_bool($nulos)){
-        } 
-        else{
-             return $nulos; 
+
+        if (is_bool($nulos)) {
+        } else {
+            return $nulos;
         };
-        
+
         $accion = action;
         return $this->$accion();
     }
 
-    function crearModelo($controlador){
+    function crearModelo($controlador)
+    {
 
         //controlador es el nombre de la tabla
-        include "./app/".$controlador."/".$controlador."_MODEL.php";
-        $modelo = $controlador."_MODEL"; 
+        include "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
+        $modelo = $controlador . "_MODEL";
         $this->model = new $modelo;
 
 
         //Si existe la lista de atributos de la entidad se llama a este metodo
-        if(isset($this->listaAtributos)){
+        if (isset($this->listaAtributos)) {
+
             $this->rellenarModelo($this->listaAtributos);
         }
         return $this->model;
     }
 
     //
-    function rellenarModelo($listaAtributos){
-        
-        foreach ($listaAtributos as $atributo){
+    function rellenarModelo($listaAtributos)
+    {
+
+        foreach ($listaAtributos as $atributo) {
             //Si no viene el atributo de la entidad en lo que recibimos
-            if (action == 'SEARCH'){
-                if(!isset($_GET[$atributo])){
+
+            if (action == 'SEARCH') {
+                if (!isset($_GET[$atributo])) {
                     //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
                     $_GET[$atributo] = '';
                 }
-               
+
                 $this->model->valores[$atributo] = $_GET[$atributo];
-            }
-            else{
-                if(!isset($_POST[$atributo])){
+            } else {
+
+                if (!isset($this->valores[$atributo])) {
                     //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
-                    $_POST[$atributo] = '';
+                    $this->valores[$atributo] = '';
                 }
-                $this->model->valores[$atributo] = $_POST[$atributo];
+                //echo $_POST[$atributo];
+                $this->model->valores[$atributo] = $this->valores[$atributo];
             }
-            
         }
-        
+
         //var_dump($this->model->valores);
-       
+
         $this->model->listaAtributos = $this->listaAtributos;
-        $this->model->listaValores = array_slice(array_values($_POST), 1); // El primero es controlador por eso nos lo cargamos
+        //$this->model->listaValores = array_slice(array_values($_POST), 1); // El primero es controlador por eso nos lo cargamos
 
         //var_dump($this->model->listaValores);
     }
 
-    function ADD(){
-        
+    function ADD()
+    {
+
 
         return $this->model->ADD();
-        
     }
 
-    function EDIT(){
+    function EDIT()
+    {
 
         return $this->model->EDIT();
-    
     }
 
-    function SEARCH(){
+    function SEARCH()
+    {
 
         return $this->model->SEARCH();
-    
-        
     }
 
-    function DELETE(){
+    function DELETE()
+    {
 
         return $this->model->DELETE();
-        
     }
 
-    function otraaction(){
+    function otraaction()
+    {
 
         return 'llegue a otra accion del service';
-
     }
 
-    function null_test(){
-		
-        if (action == 'SEARCH') { return false;}
-		foreach ($this->listaAtributos as $atributo){
+    function null_test()
+    {
 
+        if ($this->accion == 'SEARCH') {
+            return false;
+        }
+
+        foreach ($this->listaAtributos as $atributo) {
+            echo $atributo;
             $error = false;
 
             if ((!(isset(variables[$atributo]))) &&
-                ($this->estructura['attributes'][$atributo]['not_null'][action])
-                ){
+                ($this->estructura['attributes'][$atributo]['not_null'][$this->accion])
+            ) {
+                echo 'entro';
+                $error = true;
+            } else {
+                echo $this->estructura['attributes'][$atributo]['not_null'][$this->accion];
+                if (
+                    ($this->estructura['attributes'][$atributo]['not_null'][$this->accion]) &&
+                    (($this->model->valores[$atributo] == ''))
+                ) {
+                    echo 'entro 2';
                     $error = true;
                 }
-            else{
-                if (
-                    ($this->estructura['attributes'][$atributo]['not_null'][action]) &&
-                    (($this->model->valores[$atributo] == '') )
-                    ){
-                        $error = true;
-                    }
+
+                //echo 'no error';
             }
 
-            if ($error == true){
+            if ($error == true) {
                 $feedback['ok'] = false;
-                $feedback['code'] = $atributo.'_is_null_KO';
+                $feedback['code'] = $atributo . '_is_null_KO';
                 $feedback['resources'] = false;
                 return $feedback;
-            }
-            else{
-                return false;
-            }
-        
+            }             
+        }
 
-	    }
+        return false;
     }
-
-
 }
-
-?>

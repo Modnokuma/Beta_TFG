@@ -1,6 +1,5 @@
 <?php
-define(
-    'usuario_description',
+$usuario_description =
     array(
         'entity' => 'usuario',
         'onetomany-rel' => array(
@@ -179,5 +178,4 @@ define(
                 )
             )
         )
-    )
-);
+    );
