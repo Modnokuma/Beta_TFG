@@ -35,17 +35,14 @@ class Mapping extends Base_Mapping
 
         $this->query = "UPDATE " . $this->tabla . " SET ";
 
-        $atributos = implode(", ", $this->listaAtributos);
-        $valores = implode(", ", $this->listaValores);
-
         $total = count($this->listaAtributos);
         $i = 0;
-        foreach ($this->listaAtributos as $clave => $valor) {
-            $this->query = $this->query . $valor . " = ";
-            if (is_string($this->listaValores[$clave])) {
-                $this->query = $this->query . "'" . $this->listaValores[$clave] . "'";
+        foreach ($this->listaAtributos as $atributo) {
+            $this->query = $this->query . $atributo . " = ";
+            if (is_string($this->valores[$atributo])) {
+                $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
             } else {
-                $this->query = $this->query . $this->listaValores[$clave];
+                $this->query = $this->query . $this->valores[$atributo];
             }
 
             if (++$i !== $total) {
@@ -54,8 +51,8 @@ class Mapping extends Base_Mapping
         }
 
         $this->query = $this->query . " WHERE ";
-        $this->query = $this->query . $this->listaAtributos[0] . " = " . $this->listaValores[0];
-
+        $this->query = $this->query . $this->listaAtributos[0] . " = " . $this->valores[$this->listaAtributos[0]];
+        
         return $this->execute_simple_query();
     }
 

@@ -25,6 +25,7 @@ class Base_SERVICE
     {
         $nulos = $this->null_test();
 
+        // ??????????
         if (is_bool($nulos)) {
         } else {
             return $nulos;
@@ -86,8 +87,6 @@ class Base_SERVICE
 
     function ADD()
     {
-
-
         return $this->model->ADD();
     }
 
@@ -123,25 +122,22 @@ class Base_SERVICE
         }
 
         foreach ($this->listaAtributos as $atributo) {
-            echo $atributo;
             $error = false;
 
             if ((!(isset(variables[$atributo]))) &&
                 ($this->estructura['attributes'][$atributo]['not_null'][$this->accion])
             ) {
-                echo 'entro';
+                
                 $error = true;
             } else {
-                echo $this->estructura['attributes'][$atributo]['not_null'][$this->accion];
+                
                 if (
                     ($this->estructura['attributes'][$atributo]['not_null'][$this->accion]) &&
                     (($this->model->valores[$atributo] == ''))
                 ) {
-                    echo 'entro 2';
                     $error = true;
                 }
 
-                //echo 'no error';
             }
 
             if ($error == true) {
@@ -149,7 +145,7 @@ class Base_SERVICE
                 $feedback['code'] = $atributo . '_is_null_KO';
                 $feedback['resources'] = false;
                 return $feedback;
-            }             
+            }
         }
 
         return false;

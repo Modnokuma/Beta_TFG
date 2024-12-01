@@ -9,7 +9,7 @@ class usuario_SERVICE EXTENDS Base_SERVICE{
     function inicializarRest(){
 		
 		
-		$this->listaValores = array_slice(array_values(variables), 1); // El primero es controlador por eso nos lo cargamos
+		//$this->listaValores = array_slice(array_values(variables), 1); // El primero es controlador por eso nos lo cargamos
 		
 		$this->listaAtributos = array_keys($this->estructura['attributes']);
 		
