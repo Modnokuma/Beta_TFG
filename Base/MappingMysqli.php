@@ -93,10 +93,10 @@ class Mapping extends Base_Mapping
         return $cadena;
     }
 
-    function mapping_DELETE($tabla, $clavesPrimarias, $valores)
+    function mapping_DELETE()
     {
 
-        $this->query = 'DELETE FROM' . $tabla . " WHERE (";
+        $this->query = 'DELETE FROM' . $this->tabla . " WHERE (";
         //funcion de construccion del '='
         $this->query = $this->query . ")";
 

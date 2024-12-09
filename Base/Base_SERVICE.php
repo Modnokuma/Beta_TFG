@@ -124,20 +124,24 @@ class Base_SERVICE
         foreach ($this->listaAtributos as $atributo) {
             $error = false;
 
+            // No comprobamos que el 'id' esta empty
+            if (substr($atributo, 0, 2) === 'id' && $this->accion == 'ADD') {
+                continue;
+            }
+
             if ((!(isset(variables[$atributo]))) &&
                 ($this->estructura['attributes'][$atributo]['not_null'][$this->accion])
             ) {
-                
+
                 $error = true;
             } else {
-                
+
                 if (
                     ($this->estructura['attributes'][$atributo]['not_null'][$this->accion]) &&
                     (($this->model->valores[$atributo] == ''))
                 ) {
                     $error = true;
                 }
-
             }
 
             if ($error == true) {
