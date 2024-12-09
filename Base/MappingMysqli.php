@@ -86,7 +86,7 @@ class Mapping extends Base_Mapping
             } else {
                 $cadena = $cadena . " AND ";
             }
-
+            
             $cadena = $cadena . "(" . $clave . " LIKE " .  "'%" . $valor . "%' )";
         }
 
@@ -95,32 +95,31 @@ class Mapping extends Base_Mapping
 
     function mapping_DELETE()
     {
-
-        $this->query = 'DELETE FROM' . $this->tabla . " WHERE (";
-        //funcion de construccion del '='
-        $this->query = $this->query . ")";
-
-
+        $this->query = 'DELETE FROM ' . $this->tabla . " WHERE ";
+        $this->query .= $this->construirWhereIgual($this->listaAtributos, $this->valores);
         return $this->execute_simple_query();
     }
 
-    function construirWhereIgual($clavesPrimarias, $valores)
+    function construirWhereIgual($listaAtributos, $valores)
     {
         $cadena = '';
         $primero = true;
 
         foreach ($valores as $clave => $valor) {
             //recorre todo el array y el que no este vacio es la clave que hay que poner?
-
-            if (in_array($clave, $clavesPrimarias)) {
+            
+            if (in_array($clave, $listaAtributos)) {
+                
                 if ($primero) {
                     $primero = false;
                 } else {
                     $cadena = $cadena . " AND ";
                 }
-
+                is_string($valor) ? $valor = "'$valor'" : $valor;
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
+                
             }
         }
+        return $cadena;
     }
 }
