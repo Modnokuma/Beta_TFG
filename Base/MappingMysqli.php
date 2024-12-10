@@ -8,6 +8,7 @@ class Mapping extends Base_Mapping
     public $query;
     public $tabla;
     public $valores = [];
+    public $clavesPrimarias = [];
     public $listaAtributos = [];
 
     function __construct() {}
@@ -32,14 +33,14 @@ class Mapping extends Base_Mapping
 
     function mapping_EDIT()
     {
-
+        
         $this->query = "UPDATE " . $this->tabla . " SET ";
 
         $total = count($this->listaAtributos);
         $i = 0;
         foreach ($this->listaAtributos as $atributo) {
             $this->query = $this->query . $atributo . " = ";
-            if (is_string($this->valores[$atributo])) {
+            if (!$this->estructura['attributes'][$atributo]['numeric']) {
                 $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
             } else {
                 $this->query = $this->query . $this->valores[$atributo];
@@ -50,9 +51,9 @@ class Mapping extends Base_Mapping
             }
         }
 
-        $this->query = $this->query . " WHERE ";
-        $this->query = $this->query . $this->listaAtributos[0] . " = " . $this->valores[$this->listaAtributos[0]];
-        
+        $cadena = $this->construirWhereIgual($this->listaAtributos, $this->valores);
+        $this->query = $this->query . " WHERE " . $cadena;
+
         return $this->execute_simple_query();
     }
 
@@ -86,7 +87,7 @@ class Mapping extends Base_Mapping
             } else {
                 $cadena = $cadena . " AND ";
             }
-            
+
             $cadena = $cadena . "(" . $clave . " LIKE " .  "'%" . $valor . "%' )";
         }
 
@@ -107,9 +108,9 @@ class Mapping extends Base_Mapping
 
         foreach ($valores as $clave => $valor) {
             //recorre todo el array y el que no este vacio es la clave que hay que poner?
-            
+
             if (in_array($clave, $this->clavesPrimarias)) {
-                
+
                 if ($primero) {
                     $primero = false;
                 } else {
@@ -118,7 +119,6 @@ class Mapping extends Base_Mapping
                 //is_string($valor) ? $valor = "'$valor'" : $valor;
                 (!$this->estructura['attributes'][$clave]['numeric']) ? $valor = "'$valor'" : $valor;
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
-                
             }
         }
 
