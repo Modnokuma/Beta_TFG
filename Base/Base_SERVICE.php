@@ -18,6 +18,8 @@ class Base_SERVICE
         $this->estructura = $estructura;
         $this->valores = variables;
 
+		$this->listaAtributos = array_keys($this->estructura['attributes']);
+
         $this->inicializarRest();
     }
 
@@ -49,6 +51,8 @@ class Base_SERVICE
 
             $this->rellenarModelo($this->listaAtributos);
         }
+
+        $this->model->estructura = $this->estructura;
         return $this->model;
     }
 
@@ -122,36 +126,22 @@ class Base_SERVICE
         }
 
         foreach ($this->listaAtributos as $atributo) {
-            $error = false;
 
-            // No comprobamos que el 'id' esta empty
-            if (substr($atributo, 0, 2) === 'id' && $this->accion == 'ADD') {
+            if (!($this->estructura['attributes'][$atributo]['not_null'][$this->accion])){
                 continue;
             }
-
-            if ((!(isset(variables[$atributo]))) &&
-                ($this->estructura['attributes'][$atributo]['not_null'][$this->accion])
-            ) {
-
-                $error = true;
-            } else {
-
-                if (
-                    ($this->estructura['attributes'][$atributo]['not_null'][$this->accion]) &&
-                    (($this->model->valores[$atributo] == ''))
-                ) {
-                    $error = true;
+            else{
+                if ((!(isset(variables[$atributo]))) || (variables[$atributo] == '')){
+                    $feedback['ok'] = false;
+                    $feedback['code'] = $atributo . '_is_null_KO';
+                    $feedback['resources'] = false;
+                    return $feedback;
                 }
             }
 
-            if ($error == true) {
-                $feedback['ok'] = false;
-                $feedback['code'] = $atributo . '_is_null_KO';
-                $feedback['resources'] = false;
-                return $feedback;
-            }
         }
 
         return false;
     }
+    
 }

@@ -9,7 +9,7 @@ $proyecto_description =
                 'autoincrement' => true,
                 'numeric' => true,
                 'not_null' => array(
-                    'ADD' => true,
+                    'ADD' => false,
                     'EDIT' => true,
                     'DELETE' => true,
                 ),

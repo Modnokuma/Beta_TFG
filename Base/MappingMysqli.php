@@ -108,18 +108,20 @@ class Mapping extends Base_Mapping
         foreach ($valores as $clave => $valor) {
             //recorre todo el array y el que no este vacio es la clave que hay que poner?
             
-            if (in_array($clave, $listaAtributos)) {
+            if (in_array($clave, $this->clavesPrimarias)) {
                 
                 if ($primero) {
                     $primero = false;
                 } else {
                     $cadena = $cadena . " AND ";
                 }
-                is_string($valor) ? $valor = "'$valor'" : $valor;
+                //is_string($valor) ? $valor = "'$valor'" : $valor;
+                (!$this->estructura['attributes'][$clave]['numeric']) ? $valor = "'$valor'" : $valor;
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
                 
             }
         }
+
         return $cadena;
     }
 }

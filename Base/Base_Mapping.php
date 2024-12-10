@@ -92,6 +92,7 @@ class Base_Mapping{
 
             $result_query = $this->conn->query($this->query);
             
+            
             if($result_query != true){
 
                 $this->ok=false;
