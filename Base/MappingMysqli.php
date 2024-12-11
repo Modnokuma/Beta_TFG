@@ -18,22 +18,40 @@ class Mapping extends Base_Mapping
 
         $this->query = "INSERT INTO " . $this->tabla;
 
-        $atributos = implode(", ", $this->listaAtributos);
+        $atributos = implode(", ", array_slice($this->listaAtributos, 1));
 
         $this->query = $this->query . " (" . $atributos . ")";
-        $this->query = $this->query . " VALUES ";
-
-        $aux = implode(", ", array_map(function ($value) {
+        $this->query = $this->query . " VALUES (";
+        /*$aux = implode(", ", array_map(function ($value) {
             return is_string($value) ? "'$value'" : $value;
-        }, array_values($this->valores)));
+        }, array_values($this->valores)));*/
+       
+        $total = count($this->listaAtributos);
+        $i = 0;
+        foreach ($this->listaAtributos as $atributo) {
 
-        $this->query = $this->query . " (" . $aux . ")";
+            if($this->estructura['attributes'][$atributo]['pk']){
+                $i++;
+                continue;
+            }
+            if (!$this->estructura['attributes'][$atributo]['numeric']) {
+                $this->query = $this->query. "'" . $this->valores[$atributo] . "'";
+            } else {
+                $this->query = $this->query . $this->valores[$atributo];
+            }
+
+            if (++$i !== $total) {
+                $this->query .= ", ";
+            }
+        }
+        $this->query = $this->query . ")";
+       
         return $this->execute_simple_query();
     }
 
     function mapping_EDIT()
     {
-        
+
         $this->query = "UPDATE " . $this->tabla . " SET ";
 
         $total = count($this->listaAtributos);
@@ -51,7 +69,7 @@ class Mapping extends Base_Mapping
             }
         }
 
-        $cadena = $this->construirWhereIgual($this->listaAtributos, $this->valores);
+        $cadena = $this->construirWhereIgual($this->valores);
         $this->query = $this->query . " WHERE " . $cadena;
 
         return $this->execute_simple_query();
@@ -97,18 +115,18 @@ class Mapping extends Base_Mapping
     function mapping_DELETE()
     {
         $this->query = 'DELETE FROM ' . $this->tabla . " WHERE ";
-        $this->query .= $this->construirWhereIgual($this->listaAtributos, $this->valores);
+        $this->query .= $this->construirWhereIgual($this->valores);
         return $this->execute_simple_query();
     }
 
-    function construirWhereIgual($listaAtributos, $valores)
+    function construirWhereIgual($valores)
     {
         $cadena = '';
         $primero = true;
 
         foreach ($valores as $clave => $valor) {
             //recorre todo el array y el que no este vacio es la clave que hay que poner?
-
+            
             if (in_array($clave, $this->clavesPrimarias)) {
 
                 if ($primero) {
@@ -121,7 +139,7 @@ class Mapping extends Base_Mapping
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
             }
         }
-
+        
         return $cadena;
     }
 }

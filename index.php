@@ -32,7 +32,6 @@ switch ($metodoHTTP){
         $action = 'SEARCH';
         break;
     case 'OPTIONS':
-        echo "Entro en OPTIONS ";
         parse_str(file_get_contents("php://input"),$variables);
         define ('variables', $variables);
         //$variables = $_GET;   

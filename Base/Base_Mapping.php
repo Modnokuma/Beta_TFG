@@ -50,6 +50,7 @@ class Base_Mapping{
         } 
         else{ 
             //ejecutamos la query
+            
             $result_query = $this->conn->query($this->query);
             if($result_query != true){
                 //Ha sucedido un error
