@@ -80,7 +80,7 @@ class Base_Mapping{
     // Metodo para hacer un SEARCH
 
     public function get_results_from_query(){
-
+        
         if(!($this->connection())){
 
             $this->ok=false;
