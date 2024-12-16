@@ -24,8 +24,6 @@ class Base_MODEL extends Mapping{
     function SEARCH(){
                
         return $this->mapping_SEARCH();
-    
-        
     }
 
     function DELETE(){

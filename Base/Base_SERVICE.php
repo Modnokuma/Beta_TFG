@@ -17,8 +17,7 @@ class Base_SERVICE
         $this->controlador = variables['controlador'];
         $this->estructura = $estructura;
         $this->valores = variables;
-
-		$this->listaAtributos = array_keys($this->estructura['attributes']);
+        $this->listaAtributos = array_keys($this->estructura['attributes']);
 
         $this->inicializarRest();
     }
@@ -61,32 +60,19 @@ class Base_SERVICE
     {
 
         foreach ($listaAtributos as $atributo) {
-            //Si no viene el atributo de la entidad en lo que recibimos
 
-            if (action == 'SEARCH') {
-                if (!isset($_GET[$atributo])) {
-                    //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
-                    $_GET[$atributo] = '';
-                }
-
-                $this->model->valores[$atributo] = $_GET[$atributo];
-            } else {
-
-                if (!isset($this->valores[$atributo])) {
-                    //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
-                    $this->valores[$atributo] = '';
-                }
-                //echo $_POST[$atributo];
-                $this->model->valores[$atributo] = $this->valores[$atributo];
+            if (!isset($this->valores[$atributo])) {
+                //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
+                $this->valores[$atributo] = '';
             }
+            //echo $_POST[$atributo];
+            $this->model->valores[$atributo] = $this->valores[$atributo];
         }
-
-        //var_dump($this->model->valores);
+  
 
         $this->model->listaAtributos = $this->listaAtributos;
         //$this->model->listaValores = array_slice(array_values($_POST), 1); // El primero es controlador por eso nos lo cargamos
 
-        //var_dump($this->model->listaValores);
     }
 
     function ADD()
@@ -127,21 +113,18 @@ class Base_SERVICE
 
         foreach ($this->listaAtributos as $atributo) {
 
-            if (!($this->estructura['attributes'][$atributo]['not_null'][$this->accion])){
+            if (!($this->estructura['attributes'][$atributo]['not_null'][$this->accion])) {
                 continue;
-            }
-            else{
-                if ((!(isset(variables[$atributo]))) || (variables[$atributo] == '')){
+            } else {
+                if ((!(isset(variables[$atributo]))) || (variables[$atributo] == '')) {
                     $feedback['ok'] = false;
                     $feedback['code'] = $atributo . '_is_null_KO';
                     $feedback['resources'] = false;
                     return $feedback;
                 }
             }
-
         }
 
         return false;
     }
-    
 }

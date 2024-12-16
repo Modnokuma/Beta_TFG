@@ -77,9 +77,9 @@ class Mapping extends Base_Mapping
 
     function mapping_SEARCH()
     {
-
+        
         $this->query = "SELECT * FROM " . $this->tabla;
-
+        
         $query = '';
         if (!empty($this->valores)) {
             $query = $query . " WHERE (";
@@ -89,7 +89,7 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-
+       
         return $this->get_results_from_query();
     }
 
@@ -97,7 +97,8 @@ class Mapping extends Base_Mapping
     {
         $cadena = '';
         $primero = true;
-
+        
+        
         foreach ($valores as $clave => $valor) {
 
             if ($primero) {
