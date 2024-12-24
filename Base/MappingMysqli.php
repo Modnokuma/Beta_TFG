@@ -9,6 +9,8 @@ class Mapping extends Base_Mapping
     public $tabla;
     public $valores = [];
     public $clavesPrimarias = [];
+    public $aux;
+    public $existeFK;
     public $listaAtributos = [];
 
     function __construct() {}
@@ -28,11 +30,24 @@ class Mapping extends Base_Mapping
        
         $total = count($this->listaAtributos);
         $i = 0;
+        
         foreach ($this->listaAtributos as $atributo) {
 
             if($this->estructura['attributes'][$atributo]['pk']){
                 $i++;
                 continue;
+            }
+
+            if($this->estructura['attributes'][$atributo]['foreign_key']){
+                $this->existeFK = $this->foreignKeyExists($this->estructura['attributes'][$atributo]['references'], $atributo, $this->valores[$atributo]);
+                
+                if(!$this->existeFK){
+                    $this->ok=false;
+                    $this->code='FOREIGN_KEY_KO';
+                    $this->resource= $this->query;
+                    $this->construct_response();
+                    return $this->feedback;
+                }
             }
             if (!$this->estructura['attributes'][$atributo]['numeric']) {
                 $this->query = $this->query. "'" . $this->valores[$atributo] . "'";
@@ -142,5 +157,29 @@ class Mapping extends Base_Mapping
         }
         
         return $cadena;
+    }
+
+    function foreignKeyExists($table, $foreignKey, $value)
+    { 
+              
+        $queryPrueba = "SELECT COUNT(*) as count FROM $table WHERE $foreignKey = $value";
+        $prueba = $this->get_Fk($queryPrueba);
+    
+        return $prueba;
+       
+        /*$stmt = $this->conexion->prepare($query);
+        if ($stmt === false) {
+            throw new Exception('Failed to prepare statement: ' . $this->conexion->error);
+        }
+        
+        $stmt->execute();
+
+        // resultado
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        $stmt->close();
+
+        return $row['count'] > 0;*/
     }
 }
