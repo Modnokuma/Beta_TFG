@@ -43,7 +43,7 @@ class Mapping extends Base_Mapping
                 
                 if(!$this->existeFK){
                     $this->ok=false;
-                    $this->code='FOREIGN_KEY_KO';
+                    $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
                     $this->resource= $this->query;
                     $this->construct_response();
                     return $this->feedback;
