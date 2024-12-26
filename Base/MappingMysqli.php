@@ -24,6 +24,7 @@ class Mapping extends Base_Mapping
 
         $this->query = $this->query . " (" . $atributos . ")";
         $this->query = $this->query . " VALUES (";
+        
         /*$aux = implode(", ", array_map(function ($value) {
             return is_string($value) ? "'$value'" : $value;
         }, array_values($this->valores)));*/
@@ -73,6 +74,19 @@ class Mapping extends Base_Mapping
         $i = 0;
         foreach ($this->listaAtributos as $atributo) {
             $this->query = $this->query . $atributo . " = ";
+           
+            if($this->estructura['attributes'][$atributo]['foreign_key']){
+                $this->existeFK = $this->foreignKeyExists($this->estructura['attributes'][$atributo]['references'], $atributo, $this->valores[$atributo]);
+                
+                if(!$this->existeFK){
+                    $this->ok=false;
+                    $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
+                    $this->resource= $this->query;
+                    $this->construct_response();
+                    return $this->feedback;
+                }
+            }
+            
             if (!$this->estructura['attributes'][$atributo]['numeric']) {
                 $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
             } else {
