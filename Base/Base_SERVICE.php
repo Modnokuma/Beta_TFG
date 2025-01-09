@@ -26,9 +26,7 @@ class Base_SERVICE
     {
         $nulos = $this->null_test();
 
-        // ??????????
-        if (is_bool($nulos)) {
-        } else {
+        if (!is_bool($nulos)) {
             return $nulos;
         };
 
@@ -65,6 +63,8 @@ class Base_SERVICE
                 //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
                 $this->valores[$atributo] = '';
             }
+
+            
             //echo $_POST[$atributo];
             $this->model->valores[$atributo] = $this->valores[$atributo];
         }
@@ -127,6 +127,26 @@ class Base_SERVICE
         return false;
     }
 
+    function validations($atributo, $valor)
+    {
+        $minSize = $this->validateMinSize($atributo, $valor);
+        if ($minSize !== true) {
+            return $minSize;
+        }
+
+        $maxSize = $this->validateMaxSize($atributo, $valor);
+        if ($maxSize !== true) {
+            return $maxSize;
+        }
+
+        $expReg = $this->validateRegExpr($atributo, $valor);
+        if ($expReg !== true) {
+            return $expReg;
+        }
+
+        return true;
+    }
+    
     function validateMinSize($atributo, $valor)
     {
         $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['tam_min'];
