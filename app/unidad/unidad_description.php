@@ -20,13 +20,13 @@ $unidad_description =
                         'ADD' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
-                            'exp_reg' => false,
+                            'exp_reg' => '/.*/',
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
-                            'exp_reg' => false,
+                            'exp_reg' => '/.*/',
                             'personalized' => true
                         )
                     ),
@@ -34,13 +34,13 @@ $unidad_description =
                         'ADD' => array(
                             'tam_min' => 'KO_tam_min_id_unidad',
                             'tam_max' => 10,
-                            'exp_reg' => false,
+                            'exp_reg' => '/.*/',
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
-                            'exp_reg' => false,
+                            'exp_reg' => '/.*/',
                             'personalized' => true
                         )
                     )
@@ -60,15 +60,15 @@ $unidad_description =
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
-                            'tam_min' => 1,
-                            'tam_max' => 50,
-                            'exp_reg' => false,
+                            'tam_min' => 3,
+                            'tam_max' => 25,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             'personalized' => true
                         ),
                         'EDIT' => array(
-                            'tam_min' => 1,
-                            'tam_max' => 50,
-                            'exp_reg' => false,
+                            'tam_min' => 3,
+                            'tam_max' => 25,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             'personalized' => true
                         )
                     ),
@@ -104,13 +104,13 @@ $unidad_description =
                         'ADD' => array(
                             'tam_min' => 1,
                             'tam_max' => 255,
-                            'exp_reg' => false,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => 1,
                             'tam_max' => 255,
-                            'exp_reg' => false,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             'personalized' => true
                         )
                     ),
@@ -147,13 +147,13 @@ $unidad_description =
                         'ADD' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
-                            'exp_reg' => false,
+                            'exp_reg' => '/.*/',
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
-                            'exp_reg' => false,
+                            'exp_reg' => '/.*/',
                             'personalized' => true
                         )
                     ),

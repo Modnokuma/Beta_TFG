@@ -24,11 +24,16 @@ class Base_SERVICE
 
     function exec()
     {
+
         $nulos = $this->null_test();
 
         if (!is_bool($nulos)) {
             return $nulos;
         };
+
+        if ($this->validations() !== true) {
+            return $this->validations();
+        }
 
         $accion = action;
         return $this->$accion();
@@ -36,7 +41,6 @@ class Base_SERVICE
 
     function crearModelo($controlador)
     {
-
         //controlador es el nombre de la tabla
         include "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
         $modelo = $controlador . "_MODEL";
@@ -64,7 +68,6 @@ class Base_SERVICE
                 $this->valores[$atributo] = '';
             }
 
-            
             //echo $_POST[$atributo];
             $this->model->valores[$atributo] = $this->valores[$atributo];
         }
@@ -106,7 +109,7 @@ class Base_SERVICE
     function null_test()
     {
 
-        if ($this->accion == 'SEARCH') {
+        if ($this->accion == 'SEARCH' || $this->accion == 'DELETE') {
             return false;
         }
 
@@ -127,29 +130,36 @@ class Base_SERVICE
         return false;
     }
 
-    function validations($atributo, $valor)
+    function validations()
     {
-        $minSize = $this->validateMinSize($atributo, $valor);
-        if ($minSize !== true) {
-            return $minSize;
-        }
 
-        $maxSize = $this->validateMaxSize($atributo, $valor);
-        if ($maxSize !== true) {
-            return $maxSize;
-        }
+        if ($this->accion != 'SEARCH' && $this->accion != 'DELETE') {
 
-        $expReg = $this->validateRegExpr($atributo, $valor);
-        if ($expReg !== true) {
-            return $expReg;
-        }
+            foreach ($this->listaAtributos as $atributo) {
+                $minSize = $this->validateMinSize($atributo, $this->valores[$atributo]);
+                if ($minSize !== true) {
+                    return $minSize;
+                }
 
+                $maxSize = $this->validateMaxSize($atributo, $this->valores[$atributo]);
+                if ($maxSize !== true) {
+                    return $maxSize;
+                }
+
+                $expReg = $this->validateRegExpr($atributo, $this->valores[$atributo]);
+                if ($expReg !== true) {
+                    return $expReg;
+                }
+            }
+        }
         return true;
     }
-    
+
     function validateMinSize($atributo, $valor)
     {
+        
         $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['tam_min'];
+        
         if ($minSize !== false && strlen($valor) < $minSize) {
             $feedback['ok'] = false;
             $feedback['code'] = 'MIN_SIZE_' . strtoupper($atributo) . '_KO';
@@ -182,4 +192,30 @@ class Base_SERVICE
         }
         return true;
     }
+
+
+    /*function validations()
+    {
+        $nulos = $this->null_test();
+        if (!is_bool($nulos)) {
+            return $nulos;
+        };
+
+        $minSize = $this->validateMinSize($atributo, $valor);
+        if ($minSize !== true) {
+            return $minSize;
+        }
+
+        $maxSize = $this->validateMaxSize($atributo, $valor);
+        if ($maxSize !== true) {
+            return $maxSize;
+        }
+
+        $expReg = $this->validateRegExpr($atributo, $valor);
+        if ($expReg !== true) {
+            return $expReg;
+        }
+
+        return true;
+    }*/
 }

@@ -24,13 +24,13 @@ $usuario_description =
                         'ADD' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
-                            'exp_reg' => '/^[0-9]+$/',
+                            'exp_reg' => '/.*/', //'/^[0-9]+$/', 
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
-                            'exp_reg' => '/^[0-9]+$/',
+                            'exp_reg' => '/.*/',
                             'personalized' => true
                         )
                     ),
@@ -61,18 +61,34 @@ $usuario_description =
                     'DELETE' => false,
                 ),
                 'default_value' => false,
-                'test' => array(
-                    'ADD' => array(
-                        'tam_min' => 3,
-                        'tam_max' => 25,
-                        'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]$/', // empieza por letra y puede contener numeros, guiones y guiones bajos
-                        'personalized' => true
+                'rules' => array(
+                    'validations' => array(
+                        'ADD' => array(
+                            'tam_min' => 3,
+                            'tam_max' => 25,
+                            'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/', // empieza por letra y puede contener numeros, guiones y guiones bajos
+                            'personalized' => true
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => 3,
+                            'tam_max' => 25,
+                            'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/',
+                            'personalized' => true
+                        )
                     ),
-                    'EDIT' => array(
-                        'tam_min' => 3,
-                        'tam_max' => 25,
-                        'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]$/',
-                        'personalized' => true
+                    'error' => array(
+                        'ADD' => array(
+                            'tam_min' => 'KO_tam_min_id_usuario',
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => false,
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        )
                     )
                 )
             ),
@@ -88,18 +104,34 @@ $usuario_description =
                     'DELETE' => false
                 ),
                 'default_value' => false,
-                'test' => array(
-                    'ADD' => array(
-                        'tam_min' => 3,
-                        'tam_max' => 45,
-                        'exp_reg' => '/^[a-zA-Z]+$/',
-                        'personalized' => true //no se
+                'rules' => array(
+                    'validations' => array(
+                        'ADD' => array(
+                            'tam_min' => 3,
+                            'tam_max' => 45,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
+                            'personalized' => true //no se
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => 3,
+                            'tam_max' => 45,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
+                            'personalized' => true //no se
+                        )
                     ),
-                    'EDIT' => array(
-                        'tam_min' => 3,
-                        'tam_max' => 45,
-                        'exp_reg' => '/^[a-zA-Z]+$/',
-                        'personalized' => true //no se
+                    'error' => array(
+                        'ADD' => array(
+                            'tam_min' => 'KO_tam_min_id_usuario',
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => false,
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        )
                     )
                 )
             ),
@@ -114,18 +146,34 @@ $usuario_description =
                     'DELETE' => false
                 ),
                 'default_value' => 'alumno',
-                'test' => array(
-                    'ADD' => array(
-                        'tam_min' => 6,
-                        'tam_max' => 45,
-                        'exp_reg' => '/^[a-zA-Z]+$/',
-                        'personalized' => true //no se
+                'rules' => array(
+                    'validations' => array(
+                        'ADD' => array(
+                            'tam_min' => 6,
+                            'tam_max' => 45,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
+                            'personalized' => true //no se
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => 6,
+                            'tam_max' => 45,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
+                            'personalized' => true //no se
+                        )
                     ),
-                    'EDIT' => array(
-                        'tam_min' => 6,
-                        'tam_max' => 45,
-                        'exp_reg' => '/^[a-zA-Z]+$/',
-                        'personalized' => true //no se
+                    'error' => array(
+                        'ADD' => array(
+                            'tam_min' => 'KO_tam_min_id_usuario',
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => false,
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        )
                     )
                 )
             ),
@@ -141,7 +189,8 @@ $usuario_description =
                     'DELETE' => false
                 ),
                 'default_value' => false,
-                'test' => array(
+               'rules' => array(
+                    'validations' => array(
                     'ADD' => array(
                         'tam_min' => 10,
                         'tam_max' => 200,
@@ -153,6 +202,21 @@ $usuario_description =
                         'tam_max' => 200,
                         'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]+$/',
                         'personalized' => true //no se
+                    )
+                    ), 
+                    'error' => array(
+                        'ADD' => array(
+                            'tam_min' => 'KO_tam_min_id_usuario',
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => false,
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        )
                     )
                 )
             ),
@@ -168,7 +232,8 @@ $usuario_description =
                     'DELETE' => false
                 ),
                 'default_value' => false,
-                'test' => array(
+                'rules' => array(
+                    'validations' => array(
                     'ADD' => array(
                         'tam_min' => 6,  //a@m.com
                         'tam_max' => 45,
@@ -180,6 +245,21 @@ $usuario_description =
                         'tam_max' => 45,
                         'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',  //posiblemente
                         'personalized' => true //no se
+                    )
+                    ),
+                    'error' => array(
+                        'ADD' => array(
+                            'tam_min' => 'KO_tam_min_id_usuario',
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'EDIT' => array(
+                            'tam_min' => false,
+                            'tam_max' => 10,
+                            'exp_reg' => false,
+                            'personalized' => true
+                        )
                     )
                 )
             )
