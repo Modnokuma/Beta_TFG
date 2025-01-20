@@ -185,5 +185,13 @@ $unidad_description =
                     )
                 )
             )
+        ),
+        'associations' => array(
+            'BelongsTo' => array(
+                'parametro' => array(
+                    'className' => 'parametro',
+                    'foreignKey' => 'id_parametro'
+                )
+            )
         )
     );

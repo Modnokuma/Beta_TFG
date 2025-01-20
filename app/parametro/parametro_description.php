@@ -318,5 +318,14 @@ $parametro_description =
                     )
                 )
             )
+        ),
+        'associations' => array(
+            'HasMany' => array(
+                'unidad' => array(
+                    'className' => 'unidad',
+                    'foreignKey' => 'id_parametro',
+                    'dependent' => true
+                )
+            )
         )
     );
