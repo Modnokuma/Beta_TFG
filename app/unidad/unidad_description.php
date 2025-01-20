@@ -8,7 +8,11 @@ $unidad_description =
                 'pk' => true,
                 'autoincrement' => true,
                 'numeric' => true,
-                'foreign_key' => false,
+                'foreign_key' => array(
+                    'table' => false,
+                    'attribute' => false
+                ),
+
                 'not_null' => array(
                     'ADD' => false,
                     'EDIT' => true,
@@ -50,7 +54,10 @@ $unidad_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'numeric' => false,
-                'foreign_key' => false,
+                'foreign_key' => array(
+                    'table' => false,
+                    'attribute' => false
+                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,
@@ -92,7 +99,10 @@ $unidad_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'numeric' => false,
-                'foreign_key' => false,
+                'foreign_key' => array(
+                    'table' => false,
+                    'attribute' => false
+                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,
@@ -134,8 +144,10 @@ $unidad_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'numeric' => true,
-                'foreign_key' => true,
-                'references' => 'parametro',
+                'foreign_key' => array(
+                    'table' => array('parametro'),
+                    'attribute' => array('id_parametro')
+                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,

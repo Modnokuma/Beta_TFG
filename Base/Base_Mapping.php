@@ -141,7 +141,7 @@ class Base_Mapping
             $this->construct_response();
             return $this->feedback;
         } else {
-
+            
             $result_query = $this->conn->query($queryPrueba);
 
             if ($result_query != true) {

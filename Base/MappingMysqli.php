@@ -39,15 +39,20 @@ class Mapping extends Base_Mapping
                 continue;
             }
 
-            if($this->estructura['attributes'][$atributo]['foreign_key']){
-                $this->existeFK = $this->foreignKeyExists($this->estructura['attributes'][$atributo]['references'], $atributo, $this->valores[$atributo]);
+            if($this->estructura['attributes'][$atributo]['foreign_key']['table']){
+                $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
+                $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
                 
-                if(!$this->existeFK){
-                    $this->ok=false;
-                    $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
-                    $this->resource= $this->query;
-                    $this->construct_response();
-                    return $this->feedback;
+                foreach(array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk){
+                    $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
+                   
+                    if(!$this->existeFK){
+                        $this->ok=false;
+                        $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
+                        $this->resource= $this->query;
+                        $this->construct_response();
+                        return $this->feedback;
+                    }
                 }
             }
             if (!$this->estructura['attributes'][$atributo]['numeric']) {
@@ -75,15 +80,20 @@ class Mapping extends Base_Mapping
         foreach ($this->listaAtributos as $atributo) {
             $this->query = $this->query . $atributo . " = ";
            
-            if($this->estructura['attributes'][$atributo]['foreign_key']){
-                $this->existeFK = $this->foreignKeyExists($this->estructura['attributes'][$atributo]['references'], $atributo, $this->valores[$atributo]);
+            if($this->estructura['attributes'][$atributo]['foreign_key']['table']){
+                $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
+                $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
                 
-                if(!$this->existeFK){
-                    $this->ok=false;
-                    $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
-                    $this->resource= $this->query;
-                    $this->construct_response();
-                    return $this->feedback;
+                foreach(array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk){
+                    $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
+                   
+                    if(!$this->existeFK){
+                        $this->ok=false;
+                        $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
+                        $this->resource= $this->query;
+                        $this->construct_response();
+                        return $this->feedback;
+                    }
                 }
             }
             
@@ -175,7 +185,7 @@ class Mapping extends Base_Mapping
 
     function foreignKeyExists($table, $foreignKey, $value)
     { 
-              
+        echo $table;
         $queryPrueba = "SELECT COUNT(*) as count FROM $table WHERE $foreignKey = $value";
         $prueba = $this->get_Fk($queryPrueba);
     
