@@ -12,7 +12,6 @@ class Base_CONTROLLER{
         
         $controlador .= "_SERVICE";
         $estructura = variables['controlador'].'_description';
-        var_dump($estructura);
         $service = new $controlador($$estructura);
         
         responder($service->exec());

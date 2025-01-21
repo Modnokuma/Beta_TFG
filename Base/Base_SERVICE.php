@@ -30,7 +30,7 @@ class Base_SERVICE
         if (!is_bool($nulos)) {
             return $nulos;
         };
-
+        //var_dump($this->valores);
         if ($this->validations() !== true) {
             return $this->validations();
         }
@@ -109,7 +109,7 @@ class Base_SERVICE
     function null_test()
     {
 
-        if ($this->accion == 'SEARCH' || $this->accion == 'DELETE') {
+        if ($this->accion == 'DELETE') {
             return false;
         }
 
@@ -132,10 +132,11 @@ class Base_SERVICE
 
     function validations()
     {
-
-        if ($this->accion != 'SEARCH' && $this->accion != 'DELETE') {
-
+       
+        if ($this->accion != 'DELETE') {
+            
             foreach ($this->listaAtributos as $atributo) {
+                
                 $minSize = $this->validateMinSize($atributo, $this->valores[$atributo]);
                 if ($minSize !== true) {
                     return $minSize;
@@ -145,9 +146,10 @@ class Base_SERVICE
                 if ($maxSize !== true) {
                     return $maxSize;
                 }
-
+                
                 $expReg = $this->validateRegExpr($atributo, $this->valores[$atributo]);
                 if ($expReg !== true) {
+                  
                     return $expReg;
                 }
             }
@@ -184,6 +186,7 @@ class Base_SERVICE
     function validateRegExpr($atributo, $valor)
     {
         $expReg = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['exp_reg'];
+        
         if ($expReg !== false && !preg_match($expReg, $valor)) {
             $feedback['ok'] = false;
             $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';

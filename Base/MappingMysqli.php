@@ -185,7 +185,7 @@ class Mapping extends Base_Mapping
 
     function foreignKeyExists($table, $foreignKey, $value)
     { 
-        echo $table;
+        
         $queryPrueba = "SELECT COUNT(*) as count FROM $table WHERE $foreignKey = $value";
         $prueba = $this->get_Fk($queryPrueba);
     

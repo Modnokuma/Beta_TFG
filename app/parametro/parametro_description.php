@@ -15,6 +15,7 @@ $parametro_description =
                     'ADD' => false,
                     'EDIT' => true,
                     'DELETE' => true,
+                    'SEARCH' => false
                 ),
                 'default_value' => false,
                 'rules' => array(
@@ -30,19 +31,31 @@ $parametro_description =
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
                             'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 10,
+                            'exp_reg' => '/.*/',
+                            'personalized' => true
                         )
                     ),
                     'error' => array(
                         'ADD' => array(
                             'tam_min' => 'KO_tam_min_id_parametro',
-                            'tam_max' => 10,
-                            'exp_reg' => '/.*/',
+                            'tam_max' => 'KO_tam_max_id_parametro',
+                            'exp_reg' => 'KO_exp_reg_id_parametro',
                             'personalized' => true
                         ),
                         'EDIT' => array(
+                            'tam_min' => 'KO_tam_min_id_parametro',
+                            'tam_max' => 'KO_tam_max_id_parametro',
+                            'exp_reg' => 'KO_exp_reg_id_parametro',
+                            'personalized' => true
+                        ),
+                        'SEARCH' => array(
                             'tam_min' => false,
-                            'tam_max' => 10,
-                            'exp_reg' => '/.*/',
+                            'tam_max' => 'KO_tam_max_id_parametro',
+                            'exp_reg' => 'KO_exp_reg_id_parametro',
                             'personalized' => true
                         )
                     )
@@ -60,6 +73,7 @@ $parametro_description =
                     'ADD' => true,
                     'EDIT' => true,
                     'DELETE' => false,
+                    'SEARCH' => false
                 ),
                 'default_value' => false,
                 'rules' => array(
@@ -75,19 +89,31 @@ $parametro_description =
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 25,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
+                            'personalized' => true
                         )
                     ),
                     'error' => array(
                         'ADD' => array(
                             'tam_min' => 'KO_tam_min_nombre_parametro',
                             'tam_max' => 'KO_tam_max_nombre_parametro',
-                            'exp_reg' => false,
+                            'exp_reg' => 'KO_exp_reg_nombre_parametro',
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => 'KO_tam_min_nombre_parametro',
                             'tam_max' => 'KO_tam_max_nombre_parametro',
-                            'exp_reg' => false,
+                            'exp_reg' => 'KO_exp_reg_nombre_parametro',
+                            'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 'KO_tam_max_nombre_parametro',
+                            'exp_reg' => 'KO_exp_reg_nombre_parametro',
                             'personalized' => true
                         )
                     )
@@ -105,6 +131,7 @@ $parametro_description =
                     'ADD' => true,
                     'EDIT' => true,
                     'DELETE' => false,
+                    'SEARCH' => false
                 ),
                 'default_value' => false,
                 'rules' => array(
@@ -120,19 +147,31 @@ $parametro_description =
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 255,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
+                            'personalized' => true
                         )
                     ),
                     'error' => array(
                         'ADD' => array(
                             'tam_min' => 'KO_tam_min_descripcion_parametro',
                             'tam_max' => 'KO_tam_max_descripcion_parametro',
-                            'exp_reg' => false,
+                            'exp_reg' => 'KO_exp_reg_descripcion_parametro',
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => 'KO_tam_min_descripcion_parametro',
                             'tam_max' => 'KO_tam_max_descripcion_parametro',
-                            'exp_reg' => false,
+                            'exp_reg' => 'KO_exp_reg_descripcion_parametro',
+                            'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 'KO_tam_max_descripcion_parametro',
+                            'exp_reg' => 'KO_exp_reg_descripcion_parametro',
                             'personalized' => true
                         )
                     )
@@ -150,6 +189,7 @@ $parametro_description =
                     'ADD' => true,
                     'EDIT' => true,
                     'DELETE' => false,
+                    'SEARCH' => false
                 ),
                 'default_value' => false,
                 'rules' => array(
@@ -165,19 +205,31 @@ $parametro_description =
                             'tam_max' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 45,
+                            'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
+                            'personalized' => true
                         )
                     ),
                     'error' => array(
                         'ADD' => array(
                             'tam_min' => 'KO_tam_min_tipo_parametro',
                             'tam_max' => 'KO_tam_max_tipo_parametro',
-                            'exp_reg' => false,
+                            'exp_reg' => 'KO_exp_reg_tipo_parametro',
                             'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => 'KO_tam_min_tipo_parametro',
                             'tam_max' => 'KO_tam_max_tipo_parametro',
-                            'exp_reg' => false,
+                            'exp_reg' => 'KO_exp_reg_tipo_parametro',
+                            'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => 'KO_tam_min_tipo_parametro',
+                            'tam_max' => 'KO_tam_max_tipo_parametro',
+                            'exp_reg' => 'KO_exp_reg_tipo_parametro',
                             'personalized' => true
                         )
                     )
@@ -195,6 +247,7 @@ $parametro_description =
                     'ADD' => false,
                     'EDIT' => false,
                     'DELETE' => false,
+                    'SEARCH' => false
                 ),
                 'default_value' => false,
                 'rules' => array(
@@ -210,6 +263,12 @@ $parametro_description =
                             'tam_max' => 45,
                             'exp_reg' => false,
                             'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 45,
+                            'exp_reg' => false,
+                            'personalized' => true
                         )
                     ),
                     'error' => array(
@@ -220,6 +279,12 @@ $parametro_description =
                             'personalized' => true
                         ),
                         'EDIT' => array(
+                            'tam_min' => 'KO_tam_min_formato_parametro',
+                            'tam_max' => 'KO_tam_max_formato_parametro',
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'SEARCH' => array(
                             'tam_min' => 'KO_tam_min_formato_parametro',
                             'tam_max' => 'KO_tam_max_formato_parametro',
                             'exp_reg' => false,
@@ -240,6 +305,7 @@ $parametro_description =
                     'ADD' => false,
                     'EDIT' => false,
                     'DELETE' => false,
+                    'SEARCH' => false
                 ),
                 'default_value' => false,
                 'rules' => array(
@@ -255,6 +321,12 @@ $parametro_description =
                             'tam_max' => 45,
                             'exp_reg' => false,
                             'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 45,
+                            'exp_reg' => false,
+                            'personalized' => true
                         )
                     ),
                     'error' => array(
@@ -265,6 +337,12 @@ $parametro_description =
                             'personalized' => true
                         ),
                         'EDIT' => array(
+                            'tam_min' => 'KO_tam_min_rango_desde_parametro',
+                            'tam_max' => 'KO_tam_max_rango_desde_parametro',
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'SEARCH' => array(
                             'tam_min' => 'KO_tam_min_rango_desde_parametro',
                             'tam_max' => 'KO_tam_max_rango_desde_parametro',
                             'exp_reg' => false,
@@ -285,6 +363,7 @@ $parametro_description =
                     'ADD' => false,
                     'EDIT' => false,
                     'DELETE' => false,
+                    'SEARCH' => false
                 ),
                 'default_value' => false,
                 'rules' => array(
@@ -300,6 +379,12 @@ $parametro_description =
                             'tam_max' => 45,
                             'exp_reg' => false,
                             'personalized' => true
+                        ),
+                        'SEARCH' => array(
+                            'tam_min' => false,
+                            'tam_max' => 45,
+                            'exp_reg' => false,
+                            'personalized' => true
                         )
                     ),
                     'error' => array(
@@ -310,6 +395,12 @@ $parametro_description =
                             'personalized' => true
                         ),
                         'EDIT' => array(
+                            'tam_min' => 'KO_tam_min_rango_hasta_parametro',
+                            'tam_max' => 'KO_tam_max_rango_hasta_parametro',
+                            'exp_reg' => false,
+                            'personalized' => true
+                        ),
+                        'SEARCH' => array(
                             'tam_min' => 'KO_tam_min_rango_hasta_parametro',
                             'tam_max' => 'KO_tam_max_rango_hasta_parametro',
                             'exp_reg' => false,
