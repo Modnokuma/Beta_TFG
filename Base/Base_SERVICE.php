@@ -132,11 +132,11 @@ class Base_SERVICE
 
     function validations()
     {
-       
+
         if ($this->accion != 'DELETE') {
-            
+
             foreach ($this->listaAtributos as $atributo) {
-                
+
                 $minSize = $this->validateMinSize($atributo, $this->valores[$atributo]);
                 if ($minSize !== true) {
                     return $minSize;
@@ -146,10 +146,10 @@ class Base_SERVICE
                 if ($maxSize !== true) {
                     return $maxSize;
                 }
-                
+
                 $expReg = $this->validateRegExpr($atributo, $this->valores[$atributo]);
                 if ($expReg !== true) {
-                  
+
                     return $expReg;
                 }
             }
@@ -159,39 +159,47 @@ class Base_SERVICE
 
     function validateMinSize($atributo, $valor)
     {
-        
-        $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['tam_min'];
-        
-        if ($minSize !== false && strlen($valor) < $minSize) {
-            $feedback['ok'] = false;
-            $feedback['code'] = 'MIN_SIZE_' . strtoupper($atributo) . '_KO';
-            $feedback['resources'] = false;
-            return $feedback;
+        if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion])) {
+            $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['tam_min'];
+
+            if ($minSize !== false && strlen($valor) < $minSize) {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'MIN_SIZE_' . strtoupper($atributo) . '_KO';
+                $feedback['resources'] = false;
+                return $feedback;
+            }
+        } else {
+            echo "prueba";
         }
+
         return true;
     }
 
     function validateMaxSize($atributo, $valor)
     {
-        $maxSize = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['tam_max'];
-        if ($maxSize !== false && strlen($valor) > $maxSize) {
-            $feedback['ok'] = false;
-            $feedback['code'] = 'MAX_SIZE_' . strtoupper($atributo) . '_KO';
-            $feedback['resources'] = false;
-            return $feedback;
+        if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion])) {
+            $maxSize = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['tam_max'];
+            if ($maxSize !== false && strlen($valor) > $maxSize) {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'MAX_SIZE_' . strtoupper($atributo) . '_KO';
+                $feedback['resources'] = false;
+                return $feedback;
+            }
         }
         return true;
     }
 
     function validateRegExpr($atributo, $valor)
     {
-        $expReg = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['exp_reg'];
-        
-        if ($expReg !== false && !preg_match($expReg, $valor)) {
-            $feedback['ok'] = false;
-            $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
-            $feedback['resources'] = false;
-            return $feedback;
+        if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion])) {
+            $expReg = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['exp_reg'];
+
+            if ($expReg !== false && !preg_match($expReg, $valor)) {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
+                $feedback['resources'] = false;
+                return $feedback;
+            }
         }
         return true;
     }
