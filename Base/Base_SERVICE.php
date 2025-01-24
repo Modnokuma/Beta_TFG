@@ -31,8 +31,8 @@ class Base_SERVICE
             return $nulos;
         };
         //var_dump($this->valores);
-        if ($this->validations() !== true) {
-            return $this->validations();
+        if ($this->data_validations() !== true) {
+            return $this->data_validations();
         }
 
         $accion = action;
@@ -130,7 +130,7 @@ class Base_SERVICE
         return false;
     }
 
-    function validations()
+    function data_validations()
     {
 
         if ($this->accion != 'DELETE') {
@@ -164,7 +164,7 @@ class Base_SERVICE
 
             if ($minSize !== false && strlen($valor) < $minSize) {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'MIN_SIZE_' . strtoupper($atributo) . '_KO';
+                $feedback['code'] = 'TAM_MIN_' . strtoupper($atributo) . '_KO';
                 $feedback['resources'] = false;
                 return $feedback;
             }
@@ -181,7 +181,7 @@ class Base_SERVICE
             $maxSize = $this->estructura['attributes'][$atributo]['rules']['validations'][$this->accion]['tam_max'];
             if ($maxSize !== false && strlen($valor) > $maxSize) {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'MAX_SIZE_' . strtoupper($atributo) . '_KO';
+                $feedback['code'] = 'TAM_MAX_' . strtoupper($atributo) . '_KO';
                 $feedback['resources'] = false;
                 return $feedback;
             }
