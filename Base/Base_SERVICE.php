@@ -22,7 +22,7 @@ class Base_SERVICE
         $this->inicializarRest();
     }
 
-    function exec()
+    /*function exec()
     {
 
         $nulos = $this->null_test();
@@ -37,10 +37,11 @@ class Base_SERVICE
 
         $accion = action;
         return $this->$accion();
-    }
+    }*/
 
     function crearModelo($controlador)
     {
+        
         //controlador es el nombre de la tabla
         include "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
         $modelo = $controlador . "_MODEL";
@@ -106,7 +107,7 @@ class Base_SERVICE
         return 'llegue a otra accion del service';
     }
 
-    function null_test()
+    /*function null_test()
     {
 
         if ($this->accion == 'DELETE') {
@@ -203,7 +204,7 @@ class Base_SERVICE
         }
         return true;
     }
-
+    */
 
     /*function validations()
     {

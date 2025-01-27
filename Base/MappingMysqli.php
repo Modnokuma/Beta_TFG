@@ -17,7 +17,7 @@ class Mapping extends Base_Mapping
 
     function mapping_ADD()
     {
-
+        
         $this->query = "INSERT INTO " . $this->tabla;
 
         $atributos = implode(", ", array_slice($this->listaAtributos, 1));

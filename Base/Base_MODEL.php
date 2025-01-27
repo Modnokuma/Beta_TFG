@@ -13,9 +13,7 @@ class Base_MODEL extends Mapping{
     }
     function ADD(){
         //$mapping = new Mapping($this->tabla);
-        //return $mapping->ADD();
-        //var_dump($this->valores);
-        //var_dump($this->listaAtributos);
+       
         return $this->mapping_ADD();
     }
     function accion(){
