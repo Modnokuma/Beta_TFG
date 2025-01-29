@@ -23,20 +23,22 @@ class Base_CONTROLLER
         $this->listaAtributos = array_keys($this->prueba['attributes']);
 
         $service = new $controlador($this->prueba);
-        $accion = $this->validations();
+        $respuesta_validations = $this->validations();
 
-        if (is_array($accion)) {
+        if (is_array($respuesta_validations)) {
             //  Hay errores
-            responder($accion);
-        } else {
-            //Ejecución normal
-            responder($service->$accion());
+            responder($respuesta_validations);
         }
+        
+        $accion = action;
+        responder($service->$accion());
+
     }
 
 
     function validations()
     {
+        $respuesta = true;
 
         $nulos = $this->null_test();
 
@@ -49,8 +51,10 @@ class Base_CONTROLLER
         if ($validaciones !== true) {
             return $this->data_validations();
         }
-        $accion = action;
-        return $accion;
+
+        //validaciones acciones
+        
+        return $respuesta;
     }
 
     function null_test()
@@ -99,6 +103,11 @@ class Base_CONTROLLER
 
                         return $expReg;
                     }
+
+                    $personalized = eval('return $this->'.$this->prueba['attributes'][$atributo]['rules']['validations'][action]['personalized'].';');
+                    if ($personalized !== true) {
+                        return $personalized;
+                    }
                 }
             }
         }
@@ -108,6 +117,7 @@ class Base_CONTROLLER
     function validateMinSize($atributo, $valor)
     {
         if (isset($this->prueba['attributes'][$atributo]['rules']['validations'][action])) {
+           
             $minSize = $this->prueba['attributes'][$atributo]['rules']['validations'][action]['tam_min'];
 
             if ($minSize !== false && strlen($valor) < $minSize) {
@@ -149,7 +159,7 @@ class Base_CONTROLLER
         }
         return true;
     }
-
+/*
     function validarDesdeParametro($atributo, $valor)
     {
         if (isset($this->prueba['attributes'][$atributo]['rules']['validations'][action])) {
@@ -162,5 +172,5 @@ class Base_CONTROLLER
             }
         }
         return true;
-    }
+    }*/
 }

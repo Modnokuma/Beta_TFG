@@ -25,7 +25,7 @@ $proyecto_description =
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            //'personalized' => true
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
@@ -83,7 +83,7 @@ $proyecto_description =
                             'tam_min' => 3,
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                            'personalized' => "personalized_nombre_proyecto(Array('Javi','Dani'))"
                         ),
                         'EDIT' => array(
                             'tam_min' => 3,
