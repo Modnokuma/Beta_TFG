@@ -149,4 +149,18 @@ class Base_CONTROLLER
         }
         return true;
     }
+
+    function validarDesdeParametro($atributo, $valor)
+    {
+        if (isset($this->prueba['attributes'][$atributo]['rules']['validations'][action])) {
+            if($valor >)
+            if ($this->prueba['attributes'][$atributo]['rules']['validations'][action]['personalized']) {
+                $feedback['ok'] = false;
+                $feedback['code'] = $this->prueba['attributes'][$atributo]['rules']['error'][action]['personalized'];
+                $feedback['resources'] = false;
+                return $feedback;
+            }
+        }
+        return true;
+    }
 }
