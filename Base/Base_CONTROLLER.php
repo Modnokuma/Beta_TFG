@@ -13,9 +13,11 @@ class Base_CONTROLLER
 
         include "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
         include "./app/" . $controlador . "/" . $controlador . "_description.php";
+        include "Base/Base_Validations.php";
 
         $controlador .= "_SERVICE";
         $estructura = variables['controlador'] . '_description';
+        $validaciones = new Base_Validations($$estructura, variables, array_keys($$estructura['attributes']));
 
         //nuevo
         $this->prueba = $$estructura;
@@ -23,7 +25,7 @@ class Base_CONTROLLER
         $this->listaAtributos = array_keys($this->prueba['attributes']);
 
         $service = new $controlador($this->prueba);
-        $respuesta_validations = $this->validations();
+        $respuesta_validations = $validaciones->validations();
 
         if (is_array($respuesta_validations)) {
             //  Hay errores
@@ -36,7 +38,7 @@ class Base_CONTROLLER
     }
 
 
-    function validations()
+    /*function validations()
     {
         $respuesta = true;
 

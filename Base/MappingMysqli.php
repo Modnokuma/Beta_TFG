@@ -55,7 +55,7 @@ class Mapping extends Base_Mapping
                     }
                 }
             }
-            if (!$this->estructura['attributes'][$atributo]['numeric']) {
+            if ($this->estructura['attributes'][$atributo]['type']!="integer") {
                 $this->query = $this->query. "'" . $this->valores[$atributo] . "'";
             } else {
                 $this->query = $this->query . $this->valores[$atributo];
