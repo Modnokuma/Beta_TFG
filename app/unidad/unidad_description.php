@@ -25,19 +25,19 @@ $unidad_description =
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            
                         )
                     ),
                     'error' => array(
@@ -45,19 +45,19 @@ $unidad_description =
                             'tam_min' => 'TAM_MIN_ID_UNIDAD_KO',
                             'tam_max' => 'TAM_MAX_ID_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_ID_UNIDAD_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_ID_UNIDAD_KO',
                             'tam_max' => 'TAM_MAX_ID_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_ID_UNIDAD_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_ID_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_ID_UNIDAD_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -83,19 +83,19 @@ $unidad_description =
                             'tam_min' => 3,
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 3,
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            'personalized' => true
+                            
                         )
                     ),
                     'error' => array(
@@ -103,19 +103,19 @@ $unidad_description =
                             'tam_min' => 'TAM_MIN_NOMBRE_UNIDAD_KO',
                             'tam_max' => 'TAM_MAX_NOMBRE_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_UNIDAD_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_NOMBRE_UNIDAD_KO',
                             'tam_max' => 'TAM_MAX_NOMBRE_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_UNIDAD_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_NOMBRE_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_UNIDAD_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -141,19 +141,19 @@ $unidad_description =
                             'tam_min' => 1,
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 1,
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            'personalized' => true
+                            
                         )
                     ),
                     'error' => array(
@@ -161,19 +161,19 @@ $unidad_description =
                             'tam_min' => 'TAM_MIN_DESCRIPCION_UNIDAD_KO',
                             'tam_max' => 'TAM_MAX_DESCRIPCION_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_UNIDAD_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_DESCRIPCION_UNIDAD_KO',
                             'tam_max' => 'TAM_MAX_DESCRIPCION_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_UNIDAD_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_DESCRIPCION_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_UNIDAD_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -198,13 +198,13 @@ $unidad_description =
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            
                         )
                     ),
                     'error' => array(
@@ -212,19 +212,19 @@ $unidad_description =
                             'tam_min' => 'TAM_MIN_ID_PARAMETRO_KO',
                             'tam_max' => 'TAM_MAX_ID_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_ID_PARAMETRO_KO',
                             'tam_max' => 'TAM_MAX_ID_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_ID_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )

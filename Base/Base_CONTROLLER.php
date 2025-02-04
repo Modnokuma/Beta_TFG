@@ -12,7 +12,6 @@ class Base_CONTROLLER extends Base_Validations
         include "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
         include "./app/" . $controlador . "/" . $controlador . "_description.php";
         
-
         $controlador .= "_SERVICE";
         $description = variables['controlador'] . '_description';
 

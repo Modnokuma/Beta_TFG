@@ -25,19 +25,19 @@ $proyecto_description =
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            //'personalized' => true
+                           
                         ),
                         'EDIT' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                           
                         )
                     ),
                     'error' => array(
@@ -45,19 +45,19 @@ $proyecto_description =
                             'tam_min' => 'TAM_MIN_ID_PROYECTO_KO',
                             'tam_max' => 'TAM_MAX_ID_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_ID_PROYECTO_KO',
-                            'personalized' => true
+                           
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_ID_PROYECTO_KO',
                             'tam_max' => 'TAM_MAX_ID_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_ID_PROYECTO_KO',
-                            'personalized' => true
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_ID_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_ID_PROYECTO_KO',
-                            'personalized' => true
+                           
                         )
                     )
                 )
@@ -89,13 +89,13 @@ $proyecto_description =
                             'tam_min' => 3,
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            'personalized' => true
+                           
                         )
                     ),
                     'error' => array(
@@ -103,19 +103,19 @@ $proyecto_description =
                             'tam_min' => 'TAM_MIN_NOMBRE_PROYECTO_KO',
                             'tam_max' => 'TAM_MAX_NOMBRE_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_PROYECTO_KO',
-                            'personalized' => true
+                           
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_NOMBRE_PROYECTO_KO',
                             'tam_max' => 'TAM_MAX_NOMBRE_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_PROYECTO_KO',
-                            'personalized' => true
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_NOMBRE_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_PROYECTO_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -141,19 +141,19 @@ $proyecto_description =
                             'tam_min' => 1,
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 1,
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            'personalized' => true
+                            
                         )
                     ),
                     'error' => array(
@@ -161,19 +161,19 @@ $proyecto_description =
                             'tam_min' => 'TAM_MIN_DESCRIPCION_PROYECTO_KO',
                             'tam_max' => 'TAM_MAX_DESCRIPCION_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_PROYECTO_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_DESCRIPCION_PROYECTO_KO',
                             'tam_max' => 'TAM_MAX_DESCRIPCION_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_PROYECTO_KO',
-                            'personalized' => true
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_DESCRIPCION_PROYECTO_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_PROYECTO_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )

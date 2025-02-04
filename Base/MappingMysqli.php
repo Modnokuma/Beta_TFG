@@ -97,7 +97,7 @@ class Mapping extends Base_Mapping
                 }
             }
             
-            if (!$this->estructura['attributes'][$atributo]['numeric']) {
+            if ($this->estructura['attributes'][$atributo]['type']!="integer") {
                 $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
             } else {
                 $this->query = $this->query . $this->valores[$atributo];
@@ -175,7 +175,7 @@ class Mapping extends Base_Mapping
                     $cadena = $cadena . " AND ";
                 }
                 //is_string($valor) ? $valor = "'$valor'" : $valor;
-                (!$this->estructura['attributes'][$clave]['numeric']) ? $valor = "'$valor'" : $valor;
+                ($this->estructura['attributes'][$clave]['type']=='integer') ? $valor  : $valor = "'$valor'";
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
             }
         }

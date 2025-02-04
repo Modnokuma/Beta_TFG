@@ -35,13 +35,13 @@ $usuario_description =
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 10,
                             'exp_reg' => '/.*/',
-                            'personalized' => true
+                          
                         )
                     ),
                     'error' => array(
@@ -49,19 +49,19 @@ $usuario_description =
                             'tam_min' => 'TAM_MIN_ID_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_ID_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_ID_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MAX_ID_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_ID_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_ID_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_ID_USUARIO_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -93,13 +93,13 @@ $usuario_description =
                             'tam_min' => 3,
                             'tam_max' => 25,
                             'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 25,
                             'exp_reg' => '/^([a-zA-Z][a-zA-Z0-9_-]+)?$/',
-                            'personalized' => true
+                           
                         )
                     ),
                     'error' => array(
@@ -107,19 +107,19 @@ $usuario_description =
                             'tam_min' => 'TAM_MIN_NOMBRE_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_NOMBRE_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MAX_NOMBRE_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_NOMBRE_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                            'personalized' => true
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_NOMBRE_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -152,13 +152,13 @@ $usuario_description =
                             'tam_min' => 3,
                             'tam_max' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true //no se
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            'personalized' => true //no se
+                            
                         )
                     ),
                     'error' => array(
@@ -166,19 +166,19 @@ $usuario_description =
                             'tam_min' => 'TAM_MIN_ORGANIZACION_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_ORGANIZACION_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_ORGANIZACION_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_ORGANIZACION_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_ORGANIZACION_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_ORGANIZACION_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_ORGANIZACION_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_ORGANIZACION_USUARIO_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -210,13 +210,13 @@ $usuario_description =
                             'tam_min' => 6,
                             'tam_max' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => true //no se
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            'personalized' => true //no se
+                            
                         )
                     ),
                     'error' => array(
@@ -224,19 +224,19 @@ $usuario_description =
                             'tam_min' => 'TAM_MIN_PUESTO_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_PUESTO_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_PUESTO_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_PUESTO_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_PUESTO_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_PUESTO_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_PUESTO_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_PUESTO_USUARIO_KO',
-                            'personalized' => true
+                            
                         )
                     )
                 )
@@ -269,13 +269,13 @@ $usuario_description =
                             'tam_min' => 10,
                             'tam_max' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]+$/',
-                            'personalized' => true //no se
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]*$/',
-                            'personalized' => true //no se
+                            
                         )
                     ),
                     'error' => array(
@@ -283,19 +283,19 @@ $usuario_description =
                             'tam_min' => 'TAM_MIN_DIRECCION_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_PUESTO_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_DIRECCION_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_DIRECCION_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_DIRECCION_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_DIRECCION_USUARIO_KO',
-                            'personalized' => true
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'TAM_MAX_DIRECCION_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_DIRECCION_USUARIO_KO',
-                            'personalized' => true
+                          
                         )
                     )
                 )
@@ -328,13 +328,13 @@ $usuario_description =
                             'tam_min' => 6,
                             'tam_max' => 45,
                             'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',  //posiblemente
-                            'personalized' => true //no se
+                           
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 45,
                             'exp_reg' => '/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/',  //posiblemente
-                            'personalized' => true //no se
+                           
                         )
                     ),
                     'error' => array(
@@ -342,19 +342,19 @@ $usuario_description =
                             'tam_min' => 'TAM_MIN_CORREO_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_CORREO_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
-                            'personalized' => true
+                           
                         ),
                         'EDIT' => array(
                             'tam_min' => 'TAM_MIN_CORREO_USUARIO_KO',
                             'tam_max' => 'TAM_MAX_CORREO_USUARIO_KO',
                             'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
-                            'personalized' => true
+                            
                         ),
                         'SEARCH' => array(
                             'tam_min' => false,
                             'tam_max' => 'KO_tam_max_correo_usuario',
                             'exp_reg' => 'EXP_REG_CORREO_USUARIO_KOS',
-                            'personalized' => true
+                           
                         )
                     )
                 )

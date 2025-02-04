@@ -78,9 +78,12 @@ class Base_Validations
                     }
 
                     if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
+                        
+                        echo $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
                         $personalized = eval('return $this->' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'] . ';');
 
                         if ($personalized !== true) {
+                            
                             return $personalized;
                         }
                     }
@@ -143,9 +146,9 @@ class Base_Validations
 
     public function validarDesdeParametro($atributo)
     {
-        $feedback['ok'] = false;
+        /*$feedback['ok'] = false;
         $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
-        $feedback['resources'] = false;
-        return $feedback;
+        $feedback['resources'] = false;*/
+        return true;
     }
 }
