@@ -3,16 +3,16 @@
 class Base_Validations
 {
 
-    private $estructura;
-    private $valores;
-    private $listaAtributos;
+    protected $estructura;
+    protected $valores;
+    protected $listaAtributos;
 
-    public function __construct($estructura, $valores, $listaAtributos)
+    /*public function __construct($estructura, $valores, $listaAtributos)
     {
         $this->estructura = $estructura;
         $this->valores = $valores;
         $this->listaAtributos = $listaAtributos;
-    }
+    }*/
 
     public function validations()
     {
@@ -76,10 +76,10 @@ class Base_Validations
                     if ($expReg !== true) {
                         return $expReg;
                     }
-                   
+
                     if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
-                        $personalized = eval('return $this->' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'].';');
-                        
+                        $personalized = eval('return $this->' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'] . ';');
+
                         if ($personalized !== true) {
                             return $personalized;
                         }

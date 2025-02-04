@@ -1,11 +1,9 @@
 <?php
 
-class Base_CONTROLLER
-{
-    public $listaAtributos = array();
-    public $prueba;
-    public $valores = array();
+include './Base/Base_Validations.php';
 
+class Base_CONTROLLER extends Base_Validations
+{
     public function __construct()
     {
 
@@ -13,28 +11,26 @@ class Base_CONTROLLER
 
         include "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
         include "./app/" . $controlador . "/" . $controlador . "_description.php";
-        include "Base/Base_Validations.php";
+        
 
         $controlador .= "_SERVICE";
-        $estructura = variables['controlador'] . '_description';
-        $validaciones = new Base_Validations($$estructura, variables, array_keys($$estructura['attributes']));
+        $description = variables['controlador'] . '_description';
 
-        //nuevo
-        $this->prueba = $$estructura;
+        // Inicializar las propiedades heredadas
+        $this->estructura = $$description;
         $this->valores = variables;
-        $this->listaAtributos = array_keys($this->prueba['attributes']);
+        $this->listaAtributos = array_keys($this->estructura['attributes']);
 
-        $service = new $controlador($this->prueba);
-        $respuesta_validations = $validaciones->validations();
+        $service = new $controlador($this->estructura);
+        $respuesta_validations = $this->validations();
 
         if (is_array($respuesta_validations)) {
-            //  Hay errores
+            //  Si existen errores
             responder($respuesta_validations);
         }
-        
+
         $accion = action;
         responder($service->$accion());
-
     }
 
 
