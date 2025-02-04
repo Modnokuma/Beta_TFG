@@ -1,6 +1,7 @@
 <?php
 
-class Base_Validations{
+class Base_Validations
+{
 
     private $estructura;
     private $valores;
@@ -28,7 +29,7 @@ class Base_Validations{
             return $validaciones;
         }
 
-        
+
         return $respuesta;
     }
 
@@ -75,11 +76,14 @@ class Base_Validations{
                     if ($expReg !== true) {
                         return $expReg;
                     }
-
-                    /*$personalized = eval('return $this->'.$this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'].';');
-                    if ($personalized !== true) {
-                        return $personalized;
-                    }*/
+                   
+                    if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
+                        $personalized = eval('return $this->' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'].';');
+                        
+                        if ($personalized !== true) {
+                            return $personalized;
+                        }
+                    }
                 }
             }
         }
@@ -89,28 +93,32 @@ class Base_Validations{
     public function validateMinSize($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
-            $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_min'];
+            if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_min'])) {
+                $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_min'];
 
-            if ($minSize !== false && strlen($valor) < $minSize) {
-                $feedback['ok'] = false;
-                $feedback['code'] = 'TAM_MIN_' . strtoupper($atributo) . '_KO';
-                $feedback['resources'] = false;
-                return $feedback;
+                if (strlen($valor) < $minSize) {
+                    $feedback['ok'] = false;
+                    $feedback['code'] = 'TAM_MIN_' . strtoupper($atributo) . '_KO';
+                    $feedback['resources'] = false;
+                    return $feedback;
+                }
             }
-        } 
-
+        }
         return true;
     }
 
     public function validateMaxSize($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
-            $maxSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_max'];
-            if ($maxSize !== false && strlen($valor) > $maxSize) {
-                $feedback['ok'] = false;
-                $feedback['code'] = 'TAM_MAX_' . strtoupper($atributo) . '_KO';
-                $feedback['resources'] = false;
-                return $feedback;
+            if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_max'])) {
+                $maxSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_max'];
+
+                if (strlen($valor) > $maxSize) {
+                    $feedback['ok'] = false;
+                    $feedback['code'] = 'TAM_MAX_' . strtoupper($atributo) . '_KO';
+                    $feedback['resources'] = false;
+                    return $feedback;
+                }
             }
         }
         return true;
@@ -119,17 +127,25 @@ class Base_Validations{
     public function validateRegExpr($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
-            $expReg = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['exp_reg'];
-            if ($expReg !== false && !preg_match($expReg, $valor)) {
-                $feedback['ok'] = false;
-                $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
-                $feedback['resources'] = false;
-                return $feedback;
+            if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['exp_reg'])) {
+                $expReg = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['exp_reg'];
+
+                if (!preg_match($expReg, $valor)) {
+                    $feedback['ok'] = false;
+                    $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
+                    $feedback['resources'] = false;
+                    return $feedback;
+                }
             }
         }
         return true;
     }
+
+    public function validarDesdeParametro($atributo)
+    {
+        $feedback['ok'] = false;
+        $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
+        $feedback['resources'] = false;
+        return $feedback;
+    }
 }
-
-
-?>
