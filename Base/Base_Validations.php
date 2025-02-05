@@ -59,40 +59,31 @@ class Base_Validations
     public function data_validations()
     {
         if (action != 'DELETE') {
+
             foreach ($this->listaAtributos as $atributo) {
+
                 if (isset($this->valores[$atributo])) {
-                    $minSize = $this->validateMinSize($atributo, $this->valores[$atributo]);
-                    if ($minSize !== true) {
-                        return $minSize;
-                    }
 
-                    $maxSize = $this->validateMaxSize($atributo, $this->valores[$atributo]);
-                    if ($maxSize !== true) {
-                        return $maxSize;
-                    }
+                    if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])){
+                        $nomval = $this->estructura['attributes'][$atributo]['rules']['validations'][action];
+                        foreach($nomval as $key => $value){
+                            $test = 'validate_'.$key;
+                            $resultado = $this->$test($atributo, $this->valores[$atributo]);
 
-                    $expReg = $this->validateRegExpr($atributo, $this->valores[$atributo]);
-                    if ($expReg !== true) {
-                        return $expReg;
-                    }
-
-                    if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
-                        
-                        echo $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
-                        $personalized = eval('return $this->' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'] . ';');
-
-                        if ($personalized !== true) {
-                            
-                            return $personalized;
+                            if ($resultado !== true) {
+                                return $resultado;
+                            }
                         }
                     }
+
                 }
+
             }
         }
         return true;
     }
 
-    public function validateMinSize($atributo, $valor)
+    public function validate_tam_min($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
             if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_min'])) {
@@ -109,7 +100,8 @@ class Base_Validations
         return true;
     }
 
-    public function validateMaxSize($atributo, $valor)
+  
+    public function validate_tam_max($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
             if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_max'])) {
@@ -126,7 +118,7 @@ class Base_Validations
         return true;
     }
 
-    public function validateRegExpr($atributo, $valor)
+    public function validate_exp_reg($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
             if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['exp_reg'])) {
@@ -140,6 +132,21 @@ class Base_Validations
                 }
             }
         }
+        return true;
+    }
+
+    public function validate_personalized($atributo, $valor)
+    {
+        if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
+                        
+            $personalized = eval('return $this->' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'] . ';');
+
+            if ($personalized !== true) {
+                
+                return $personalized;
+            }
+        }
+
         return true;
     }
 

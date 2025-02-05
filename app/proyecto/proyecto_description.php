@@ -138,7 +138,7 @@ $proyecto_description =
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
-                            'tam_min' => 1,
+                            'tam_min' => 7,
                             'tam_max' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
