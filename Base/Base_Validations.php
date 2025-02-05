@@ -29,7 +29,6 @@ class Base_Validations
             return $validaciones;
         }
 
-
         return $respuesta;
     }
 

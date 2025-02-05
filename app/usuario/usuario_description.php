@@ -322,6 +322,7 @@ $usuario_description =
                             'tam_min' => 6,  //a@m.com
                             'tam_max' => 45,
                             'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', //posiblemente
+                            'personalized' => 'personalized_correo_usuario()'
                             
                         ),
                         'EDIT' => array(
