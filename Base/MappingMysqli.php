@@ -17,46 +17,46 @@ class Mapping extends Base_Mapping
 
     function mapping_ADD()
     {
-        
+
         $this->query = "INSERT INTO " . $this->tabla;
 
         $atributos = implode(", ", array_slice($this->listaAtributos, 1));
 
         $this->query = $this->query . " (" . $atributos . ")";
         $this->query = $this->query . " VALUES (";
-        
+
         /*$aux = implode(", ", array_map(function ($value) {
             return is_string($value) ? "'$value'" : $value;
         }, array_values($this->valores)));*/
-       
+
         $total = count($this->listaAtributos);
         $i = 0;
-        
+
         foreach ($this->listaAtributos as $atributo) {
 
-            if($this->estructura['attributes'][$atributo]['pk']){
+            if ($this->estructura['attributes'][$atributo]['pk']) {
                 $i++;
                 continue;
             }
 
-            if($this->estructura['attributes'][$atributo]['foreign_key']['table']){
+            if ($this->estructura['attributes'][$atributo]['foreign_key']['table']) {
                 $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
                 $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
-                
-                foreach(array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk){
+
+                foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
                     $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
-                   
-                    if(!$this->existeFK){
-                        $this->ok=false;
-                        $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
-                        $this->resource= $this->query;
+
+                    if (!$this->existeFK) {
+                        $this->ok = false;
+                        $this->code = 'FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
+                        $this->resource = $this->query;
                         $this->construct_response();
                         return $this->feedback;
                     }
                 }
             }
-            if ($this->estructura['attributes'][$atributo]['type']!="integer") {
-                $this->query = $this->query. "'" . $this->valores[$atributo] . "'";
+            if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
+                $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
             } else {
                 $this->query = $this->query . $this->valores[$atributo];
             }
@@ -66,7 +66,7 @@ class Mapping extends Base_Mapping
             }
         }
         $this->query = $this->query . ")";
-       
+
         return $this->execute_simple_query();
     }
 
@@ -79,25 +79,25 @@ class Mapping extends Base_Mapping
         $i = 0;
         foreach ($this->listaAtributos as $atributo) {
             $this->query = $this->query . $atributo . " = ";
-           
-            if($this->estructura['attributes'][$atributo]['foreign_key']['table']){
+
+            if ($this->estructura['attributes'][$atributo]['foreign_key']['table']) {
                 $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
                 $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
-                
-                foreach(array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk){
+
+                foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
                     $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
-                   
-                    if(!$this->existeFK){
-                        $this->ok=false;
-                        $this->code='FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
-                        $this->resource= $this->query;
+
+                    if (!$this->existeFK) {
+                        $this->ok = false;
+                        $this->code = 'FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
+                        $this->resource = $this->query;
                         $this->construct_response();
                         return $this->feedback;
                     }
                 }
             }
-            
-            if ($this->estructura['attributes'][$atributo]['type']!="integer") {
+
+            if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
                 $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
             } else {
                 $this->query = $this->query . $this->valores[$atributo];
@@ -116,9 +116,9 @@ class Mapping extends Base_Mapping
 
     function mapping_SEARCH()
     {
-        
+
         $this->query = "SELECT * FROM " . $this->tabla;
-        
+
         $query = '';
         if (!empty($this->valores)) {
             $query = $query . " WHERE (";
@@ -128,7 +128,7 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-       
+
         return $this->get_results_from_query();
     }
 
@@ -136,8 +136,8 @@ class Mapping extends Base_Mapping
     {
         $cadena = '';
         $primero = true;
-        
-        
+
+
         foreach ($valores as $clave => $valor) {
 
             if ($primero) {
@@ -166,7 +166,7 @@ class Mapping extends Base_Mapping
 
         foreach ($valores as $clave => $valor) {
             //recorre todo el array y el que no este vacio es la clave que hay que poner?
-            
+
             if (in_array($clave, $this->clavesPrimarias)) {
 
                 if ($primero) {
@@ -175,22 +175,33 @@ class Mapping extends Base_Mapping
                     $cadena = $cadena . " AND ";
                 }
                 //is_string($valor) ? $valor = "'$valor'" : $valor;
-                ($this->estructura['attributes'][$clave]['type']=='integer') ? $valor  : $valor = "'$valor'";
+                ($this->estructura['attributes'][$clave]['type'] == 'integer') ? $valor  : $valor = "'$valor'";
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
             }
         }
-        
+
         return $cadena;
     }
 
     function foreignKeyExists($table, $foreignKey, $value)
-    { 
-        
+    {
+
         $queryPrueba = "SELECT COUNT(*) as count FROM $table WHERE $foreignKey = $value";
-        $prueba = $this->get_Fk($queryPrueba);
-    
-        return $prueba;
-       
+        $result_query = $this->personalized_query($queryPrueba);
+
+        $rows = $result_query->fetch_all(MYSQLI_ASSOC);
+        $numApariciones = intval($rows[0]['count']);
+
+        if ($numApariciones == 0) {
+            // La clave foranea no existe
+            return false;
+        } else {
+
+            return true;
+        }
+
+        return $result_query;
+
         /*$stmt = $this->conexion->prepare($query);
         if ($stmt === false) {
             throw new Exception('Failed to prepare statement: ' . $this->conexion->error);

@@ -129,9 +129,9 @@ class Base_Mapping
     }
 
 
-    // Prueba
+    // Metodo para ejecutar una query personalizada
 
-    public function get_Fk($queryPrueba)
+    public function personalized_query($queryPrueba)
     {
 
         if (!($this->connection())) {
@@ -151,18 +151,8 @@ class Base_Mapping
                 $this->resource = $queryPrueba;
                 $this->construct_response();
                 return $this->feedback;
-            } else {
-                $rows = $result_query->fetch_all(MYSQLI_ASSOC);
-                $numApariciones = intval($rows[0]['count']);
-
-                if ($numApariciones == 0) {
-                    // La clave foranea no existe
-                    return false;
-                } else {
-
-                    return true;
-                }
-            }
+            } 
+            return $result_query;
         }
     }
 
