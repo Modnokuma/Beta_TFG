@@ -83,15 +83,15 @@ class Base_Validations
         return true;
     }
 
-    public function validate_tam_min($atributo, $valor)
+    public function validate_min_size($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
-            if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_min'])) {
-                $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_min'];
+            if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['min_size'])) {
+                $minSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['min_size'];
 
                 if (strlen($valor) < $minSize) {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'TAM_MIN_' . strtoupper($atributo) . '_KO';
+                    $feedback['code'] = 'MIN_SIZE_' . strtoupper($atributo) . '_KO';
                     $feedback['resources'] = false;
                     return $feedback;
                 }
@@ -101,15 +101,15 @@ class Base_Validations
     }
 
   
-    public function validate_tam_max($atributo, $valor)
+    public function validate_max_size($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
-            if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_max'])) {
-                $maxSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['tam_max'];
+            if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['max_size'])) {
+                $maxSize = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['max_size'];
 
                 if (strlen($valor) > $maxSize) {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'TAM_MAX_' . strtoupper($atributo) . '_KO';
+                    $feedback['code'] = 'MAX_SIZE_' . strtoupper($atributo) . '_KO';
                     $feedback['resources'] = false;
                     return $feedback;
                 }
