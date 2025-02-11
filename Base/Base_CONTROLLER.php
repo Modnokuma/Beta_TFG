@@ -9,7 +9,7 @@ class Base_CONTROLLER extends Base_Validations
 
         $controlador = variables['controlador'];
 
-        include "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
         include "./app/" . $controlador . "/" . $controlador . "_description.php";
         
         $controlador .= "_SERVICE";
@@ -20,14 +20,15 @@ class Base_CONTROLLER extends Base_Validations
         $this->valores = variables;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
 
-        $service = new $controlador($this->estructura);
+        
         $respuesta_validations = $this->validations();
 
         if (is_array($respuesta_validations)) {
             //  Si existen errores
             responder($respuesta_validations);
         }
-
+        
+        $service = new $controlador($this->estructura);
         $accion = action;
         responder($service->$accion());
     }

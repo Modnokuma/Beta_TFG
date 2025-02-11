@@ -1,6 +1,6 @@
 <?php
 
-include './Base/Base_Mapping.php';
+include_once './Base/Base_Mapping.php';
 
 class Mapping extends Base_Mapping
 {
@@ -181,6 +181,24 @@ class Mapping extends Base_Mapping
         }
 
         return $cadena;
+    }
+
+    function sameUserExists()
+    {
+        $queryPrueba = "SELECT COUNT(*) as count FROM usuario WHERE nombre_usuario = '" . $this->valores['nombre_usuario'] . "'";
+        $result_query = $this->personalized_query($queryPrueba);
+
+        $rows = $result_query->fetch_all(MYSQLI_ASSOC);
+        $numApariciones = intval($rows[0]['count']);
+
+        if ($numApariciones > 0) {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'USERNAME_ALREADY_EXISTS_KO';
+            $feedback['resources'] = $queryPrueba;
+            return $feedback;
+        }
+
+        return true;
     }
 
     function foreignKeyExists($table, $foreignKey, $value)

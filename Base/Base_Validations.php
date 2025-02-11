@@ -1,6 +1,8 @@
 <?php
 
-class Base_Validations
+include './Base/Base_Action_Validations.php';
+
+class Base_Validations extends Base_Action_Validations
 {
 
     protected $estructura;
@@ -18,6 +20,12 @@ class Base_Validations
     {
         $respuesta = true;
         $nulos = $this->null_test();
+
+        $respuesta_action_validations = $this->action_validations($this->estructura, $this->valores, $this->listaAtributos);
+
+        if ($respuesta_action_validations !== true) {
+            responder($respuesta_action_validations);
+        }
 
         if (!is_bool($nulos)) {
             return $nulos;
@@ -150,11 +158,11 @@ class Base_Validations
         return true;
     }
 
-    public function validarDesdeParametro($atributo)
+    /*public function validarDesdeParametro($atributo)
     {
-        /*$feedback['ok'] = false;
+        $feedback['ok'] = false;
         $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
-        $feedback['resources'] = false;*/
+        $feedback['resources'] = false;
         return true;
-    }
+    }*/
 }

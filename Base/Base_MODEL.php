@@ -1,6 +1,6 @@
 <?php
 
-include './Base/MappingMysqli.php';
+include_once './Base/MappingMysqli.php';
 
 class Base_MODEL extends Mapping{
 
@@ -18,6 +18,11 @@ class Base_MODEL extends Mapping{
     }
     function accion(){
         return 'accionnnnn de service de usuario';
+    }
+
+    function same_user(){
+        //$mapping = new Mapping($this->tabla);
+        return $this->sameUserExists();
     }
     function SEARCH(){
                

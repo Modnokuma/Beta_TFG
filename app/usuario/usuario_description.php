@@ -87,7 +87,7 @@ $usuario_description =
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/', // empieza por letra y puede contener numeros, guiones y guiones bajos
-                             'personalized' => 'validarDesdeParametro($atributo)'
+                            // 'personalized' => 'validarDesdeParametro($atributo)'
                         ),
                         'EDIT' => array(
                             'min_size' => 3,

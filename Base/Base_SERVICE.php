@@ -41,9 +41,9 @@ class Base_SERVICE
 
     function crearModelo($controlador)
     {
-        
+  
         //controlador es el nombre de la tabla
-        include "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
+        include_once "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
         $modelo = $controlador . "_MODEL";
         $this->model = new $modelo;
 
@@ -61,7 +61,7 @@ class Base_SERVICE
     //
     function rellenarModelo($listaAtributos)
     {
-
+ 
         foreach ($listaAtributos as $atributo) {
 
             if (!isset($this->valores[$atributo])) {
@@ -80,6 +80,7 @@ class Base_SERVICE
 
     function ADD()
     {
+
         return $this->model->ADD();
     }
 
@@ -105,6 +106,12 @@ class Base_SERVICE
     {
 
         return 'llegue a otra accion del service';
+    }
+
+    function same_user()
+    {
+
+        return $this->model->same_user();
     }
 
     /*function null_test()
