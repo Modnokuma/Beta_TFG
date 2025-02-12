@@ -10,13 +10,25 @@ class Base_SERVICE
     public $accion;
     public $controlador;
 
-    function __construct($estructura)
+    function __construct($estructura, $action, $variables)
     {
 
-        $this->accion = action;
+        if ($action !== ''){
+            $this->accion = $action;
+        }else{
+            $this->accion = action;
+        }
+        if ($variables !== ''){
+            $this->valores = $variables;
+        }else{
+            $this->valores = variables;
+        }
+
         $this->controlador = variables['controlador'];
+
         $this->estructura = $estructura;
-        $this->valores = variables;
+
+        //$this->valores = variables;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
 
         $this->inicializarRest();

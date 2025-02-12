@@ -7,10 +7,11 @@ $proyecto_description =
             'id_proyecto' => array(
                 'pk' => true,
                 'autoincrement' => true,
+                'unique' => true,
                 'type' => 'integer',
                 'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
+                    'table' => 'parametro',
+                    'attribute' => 'id_parametro'
                 ),
                 'not_null' => array(
                     'ADD' => false,
@@ -66,10 +67,10 @@ $proyecto_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'string',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
+               /* 'foreign_key' => array(
+                    'table' => 'parametro',
+                    'attribute' => 'nombre_parametro'
+                ),*/
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,

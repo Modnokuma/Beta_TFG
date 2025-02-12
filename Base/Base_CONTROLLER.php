@@ -1,6 +1,6 @@
 <?php
 
-include './Base/Base_Validations.php';
+include_once './Base/Base_Validations.php';
 
 class Base_CONTROLLER extends Base_Validations
 {
@@ -10,7 +10,7 @@ class Base_CONTROLLER extends Base_Validations
         $controlador = variables['controlador'];
 
         include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
-        include "./app/" . $controlador . "/" . $controlador . "_description.php";
+        include_once "./app/" . $controlador . "/" . $controlador . "_description.php";
         
         $controlador .= "_SERVICE";
         $description = variables['controlador'] . '_description';
@@ -28,7 +28,7 @@ class Base_CONTROLLER extends Base_Validations
             responder($respuesta_validations);
         }
         
-        $service = new $controlador($this->estructura);
+        $service = new $controlador($this->estructura,'','');
         $accion = action;
         responder($service->$accion());
     }

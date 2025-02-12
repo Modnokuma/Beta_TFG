@@ -21,22 +21,25 @@ class Base_Validations extends Base_Action_Validations
         $respuesta = true;
         $nulos = $this->null_test();
 
+        if (!is_bool($nulos)) {
+            return $nulos;
+        }
+
         $respuesta_action_validations = $this->action_validations($this->estructura, $this->valores, $this->listaAtributos);
+
 
         if ($respuesta_action_validations !== true) {
             responder($respuesta_action_validations);
         }
 
-        if (!is_bool($nulos)) {
-            return $nulos;
-        }
-
+        
+/*
         $validaciones = $this->data_validations();
 
         if ($validaciones !== true) {
             return $validaciones;
         }
-
+*/
         return $respuesta;
     }
 
