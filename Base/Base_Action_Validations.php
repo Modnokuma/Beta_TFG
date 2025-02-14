@@ -7,13 +7,16 @@ class Base_Action_Validations
     protected $listaAtributos;
     protected $controlador;
 
-    public function action_validations($estructura, $valores, $listaAtributos)
+    public function __construct($estructura, $valores, $listaAtributos)
     {
-        $respuesta = true;
         $this->estructura = $estructura;
         $this->valores = $valores;
         $this->listaAtributos = $listaAtributos;
+    }
 
+    public function action_validations()
+    {
+        $respuesta = true;
         
         foreach ($this->listaAtributos as $atributo) {
             

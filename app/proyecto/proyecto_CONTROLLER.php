@@ -8,7 +8,9 @@ class proyecto_CONTROLLER extends Base_CONTROLLER{
 	}
 
     function personalized_nombre_proyecto($data){
+        echo 'personalized_nombre_proyecto';
         if (in_array($this->valores['nombre_proyecto'], $data)){
+            echo 'El nombre del proyecto ya existe';
             return true;
         }
         else{
