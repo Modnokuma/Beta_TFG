@@ -4,7 +4,7 @@
 define('host','localhost');
 define('userbd', 'dani');
 define('passuserbd', 'dani');
-define('bd', 'dani_TFG_bd');
+define('bd', 'Dani_TFG_BD');
 
 ?>
 
