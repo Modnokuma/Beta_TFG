@@ -8,11 +8,12 @@ class Base_Data_Validations
     protected $valores;
     protected $listaAtributos;
 
-    public function __construct($estructura, $valores, $listaAtributos)
+    public function __construct($estructura, $valores, $listaAtributos, $entidad)
     {
         $this->estructura = $estructura;
         $this->valores = $valores;
         $this->listaAtributos = $listaAtributos;
+        $this->objetoentidad = $entidad;
     }
 
     public function data_validations()
@@ -143,7 +144,7 @@ class Base_Data_Validations
             //echo ('return ' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'] . ';');
             $method = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
             
-            $personalized = eval('return ' .$method . ';');
+            $personalized = eval('return $this->objetoentidad->' .$method . ';');
         
             if ($personalized !== true) {
                 

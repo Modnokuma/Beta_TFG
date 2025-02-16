@@ -20,30 +20,33 @@ class Base_Action_Validations
         
         foreach ($this->listaAtributos as $atributo) {
             
-            // unique, pk (no repeat values)
-            if ((isset($this->valores[$atributo])) && ((action == 'ADD') || action == 'EDIT')) {
-  
-                if ((isset($this->estructura['attributes'][$atributo]['pk']))
-                    ||
-                    (isset($this->estructura['attributes'][$atributo]['unique']))
-                    )
-                {
-                    $resp = $this->action_validate_pk_unique();
-                    if ($resp !== true){
-                        return $resp;
+            if (isset($this->valores[$atributo])){
+                
+                // unique, pk (no repeat values)
+                if ((action == 'ADD') || (action == 'EDIT')) {
+      
+                    if ((isset($this->estructura['attributes'][$atributo]['pk']))
+                        ||
+                        (isset($this->estructura['attributes'][$atributo]['unique']))
+                        )
+                    {
+                        $resp = $this->action_validate_pk_unique();
+                        if ($resp !== true){
+                            return $resp;
+                        }
                     }
                 }
-            }
 
-            // foreign key (error si valor no esta en la otra tabla)
-            // si foreign key para un atributo
-            if ((isset($this->estructura['attributes'][$atributo]['foreign_key']))){
+                // foreign key (error si valor no esta en la otra tabla)
+                // si foreign key para un atributo
+                if ((isset($this->estructura['attributes'][$atributo]['foreign_key']))){
 
-                $entidad = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
-                $campo = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
-                $resp = $this->exist_in_other_entity($entidad, $campo, $atributo, $this->valores[$atributo]);
-                if ($resp !== true){
-                    return "construyo respuesta para error";
+                    $entidad = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
+                    $campo = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
+                    $resp = $this->exist_in_other_entity($entidad, $campo, $atributo, $this->valores[$atributo]);
+                    if ($resp !== true){
+                        return "construyo respuesta para error";
+                    }
                 }
             }
         }
