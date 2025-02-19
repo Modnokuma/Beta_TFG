@@ -10,8 +10,8 @@ $proyecto_description =
                 'unique' => true,
                 'type' => 'integer',
                 'foreign_key' => array(
-                    'table' => 'parametro',
-                    'attribute' => 'id_parametro'
+                    'table' => array('parametro', 'unidad'),
+                    'attribute' => array('id_parametro', 'id_unidad')
                 ),
                 'not_null' => array(
                     'ADD' => false,

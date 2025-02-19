@@ -21,14 +21,21 @@ class Base_Mapping
     //$mysqli = new mysqli(,"my_user","my_password","my_db");
     function connection()
     {
-
-        try {
-            $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd) or die('fallo conexion');
-
-            return true;
-        } catch (Exception $e) {
-            return false;
+        if (isset(variables['TESTING'])){
+            echo 'estoy haciendo test';
         }
+        else{
+            
+            try {
+                $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd) or die('fallo conexion');
+
+                return true;
+            } catch (Exception $e) {
+                return false;
+            }
+
+        }
+
     }
 
     private function close_connection()
@@ -51,7 +58,7 @@ class Base_Mapping
             return $this->feedback;
         } else {
             //ejecutamos la query
-
+echo $this->query;
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
@@ -65,7 +72,10 @@ class Base_Mapping
                 //La operacion tiene exito
                 $this->ok = true;
                 $this->code = 'SQL_OK';
-                $this->resource = $this->query;
+                if (action == 'ADD'){
+                    //$lastid = $this->conn->query(SELECT LAST_INSERT_ID());
+                    $this->resource = mysqli_insert_id($this->conn);
+                }
                 //llamamos al metodo que construye el mensaje
                 $this->construct_response();
                 return $this->feedback;

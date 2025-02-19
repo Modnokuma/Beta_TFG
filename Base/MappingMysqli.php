@@ -20,7 +20,7 @@ class Mapping extends Base_Mapping
 
         $this->query = "INSERT INTO " . $this->tabla;
 
-        $atributos = implode(", ", array_slice($this->listaAtributos, 1));
+        $atributos = implode(", ", array_slice($this->listaAtributos,0));
 
         $this->query = $this->query . " (" . $atributos . ")";
         $this->query = $this->query . " VALUES (";
@@ -34,33 +34,10 @@ class Mapping extends Base_Mapping
 
         foreach ($this->listaAtributos as $atributo) {
 
-            if ($this->estructura['attributes'][$atributo]['pk']) {
+            if ($this->estructura['attributes'][$atributo]['autoincrement']) {
                 $i++;
                 continue;
             }
-
-            /*if (isset($this->estructura['attributes'][$atributo]['foreign_key'])){
-                if ($this->estructura['attributes'][$atributo]['foreign_key']['table']) {
-                    $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
-                    $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
-                    
-                    echo $array_tablas;
-                    echo $array_pk_tablas;
-                    
-
-                    foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
-                        $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
-
-                        if (!$this->existeFK) {
-                            $this->ok = false;
-                            $this->code = 'FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
-                            $this->resource = $this->query;
-                            $this->construct_response();
-                            return $this->feedback;
-                        }
-                    }
-                }
-            }*/
             
             if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
                 $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
@@ -189,7 +166,7 @@ class Mapping extends Base_Mapping
 
         return $cadena;
     }
-
+/*
     function sameUserExists()
     {
         $queryPrueba = "SELECT COUNT(*) as count FROM usuario WHERE nombre_usuario = '" . $this->valores['nombre_usuario'] . "'";
@@ -207,7 +184,7 @@ class Mapping extends Base_Mapping
 
         return true;
     }
-
+*/
     function foreignKeyExists($table, $foreignKey, $value)
     {
 

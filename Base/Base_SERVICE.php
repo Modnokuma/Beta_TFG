@@ -87,6 +87,7 @@ class Base_SERVICE
 
         $this->model->listaAtributos = $this->listaAtributos;
         //$this->model->listaValores = array_slice(array_values($_POST), 1); // El primero es controlador por eso nos lo cargamos
+        var_dump($this->model->valores);
 
     }
 

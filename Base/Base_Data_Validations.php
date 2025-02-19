@@ -44,16 +44,21 @@ class Base_Data_Validations
 
         foreach ($this->listaAtributos as $atributo) {
 
-            if (!($this->estructura['attributes'][$atributo]['not_null'][action])) {
-                continue;
-            } else {
-                if ((!(isset($this->valores[$atributo]))) || ($this->valores[$atributo] == '')) {
-                    $feedback['ok'] = false;
-                    $feedback['code'] = $atributo . '_is_null_KO';
-                    $feedback['resources'] = false;
-                    return $feedback;
+            if (isset($this->estructura['attributes'][$atributo]['not_null'][action])){
+                
+                if (!($this->estructura['attributes'][$atributo]['not_null'][action])) {
+                    continue;
+                } else {
+                    if ((!(isset($this->valores[$atributo]))) || ($this->valores[$atributo] == '')) {
+                        $feedback['ok'] = false;
+                        $feedback['code'] = $atributo . '_is_null_KO';
+                        $feedback['resources'] = false;
+                        return $feedback;
+                    }
                 }
+        
             }
+        
         }
 
         return false;
