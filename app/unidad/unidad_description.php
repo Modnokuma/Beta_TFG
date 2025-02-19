@@ -224,6 +224,12 @@ $unidad_description =
                     'className' => 'parametro',
                     'foreignKey' => 'id_parametro'
                 )
-            )
+            ),
+            'OneToMany' => array(
+                'entidad' => array(
+                    'attributes-own' => array('id_usuario'),
+                    'attributes-rel' => array('id_usuario')
+                )
+            ),
         )
     );
