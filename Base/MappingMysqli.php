@@ -39,22 +39,29 @@ class Mapping extends Base_Mapping
                 continue;
             }
 
-            if ($this->estructura['attributes'][$atributo]['foreign_key']['table']) {
-                $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
-                $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
+            /*if (isset($this->estructura['attributes'][$atributo]['foreign_key'])){
+                if ($this->estructura['attributes'][$atributo]['foreign_key']['table']) {
+                    $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
+                    $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
+                    
+                    echo $array_tablas;
+                    echo $array_pk_tablas;
+                    
 
-                foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
-                    $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
+                    foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
+                        $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
 
-                    if (!$this->existeFK) {
-                        $this->ok = false;
-                        $this->code = 'FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
-                        $this->resource = $this->query;
-                        $this->construct_response();
-                        return $this->feedback;
+                        if (!$this->existeFK) {
+                            $this->ok = false;
+                            $this->code = 'FOREIGN_KEY_' . strtoupper($atributo) . '_KO';
+                            $this->resource = $this->query;
+                            $this->construct_response();
+                            return $this->feedback;
+                        }
                     }
                 }
-            }
+            }*/
+            
             if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
                 $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
             } else {

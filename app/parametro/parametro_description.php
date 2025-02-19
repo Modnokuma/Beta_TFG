@@ -7,10 +7,6 @@ $parametro_description =
                 'pk' => true,
                 'autoincrement' => true,
                 'type' => 'integer',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => false,
                     'EDIT' => true,
@@ -61,10 +57,6 @@ $parametro_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'string',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,
@@ -119,10 +111,6 @@ $parametro_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'string',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,
@@ -177,10 +165,6 @@ $parametro_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'string',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,
@@ -235,10 +219,6 @@ $parametro_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'string',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => false,
                     'EDIT' => false,
@@ -293,10 +273,6 @@ $parametro_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'numeric',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => false,
                     'EDIT' => false,
@@ -351,10 +327,6 @@ $parametro_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'numeric',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => false,
                     'EDIT' => false,

@@ -8,12 +8,13 @@ class proyecto_CONTROLLER extends Base_CONTROLLER{
 	}
 
     function personalized_nombre_proyecto($data){
+
         if (in_array($this->valores['nombre_proyecto'], $data)){
             return true;
         }
         else{
             $feedback['ok'] = false;
-            $feedback['code'] = 'noestaenlista_nombre_atributo_KO';
+            $feedback['code'] = 'noestaenlista_nombre_proyecto_KO';
             $feedback['resources'] = false;
             return $feedback;
         }
