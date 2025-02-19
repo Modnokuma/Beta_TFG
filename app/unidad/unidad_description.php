@@ -8,10 +8,6 @@ $unidad_description =
                 'pk' => true,
                 'autoincrement' => true,
                 'type' => 'integer',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => false,
                     'EDIT' => true,
@@ -66,10 +62,6 @@ $unidad_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'string',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,
@@ -124,10 +116,6 @@ $unidad_description =
                 'pk' => false,
                 'autoincrement' => false,
                 'type' => 'string',
-                'foreign_key' => array(
-                    'table' => false,
-                    'attribute' => false
-                ),
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true,

@@ -39,10 +39,14 @@ class Mapping extends Base_Mapping
                 continue;
             }
 
-            if (isset($this->estructura['attributes'][$atributo]['foreign_key'])){
+            /*if (isset($this->estructura['attributes'][$atributo]['foreign_key'])){
                 if ($this->estructura['attributes'][$atributo]['foreign_key']['table']) {
                     $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
                     $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
+                    
+                    echo $array_tablas;
+                    echo $array_pk_tablas;
+                    
 
                     foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
                         $this->existeFK = $this->foreignKeyExists($tabla, $pk, $this->valores[$atributo]);
@@ -56,7 +60,7 @@ class Mapping extends Base_Mapping
                         }
                     }
                 }
-            }
+            }*/
             
             if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
                 $this->query = $this->query . "'" . $this->valores[$atributo] . "'";

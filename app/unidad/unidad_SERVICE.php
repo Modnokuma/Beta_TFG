@@ -1,6 +1,6 @@
 <?php
 
-include './Base/Base_SERVICE.php';
+include_once './Base/Base_SERVICE.php';
 
 class unidad_SERVICE EXTENDS Base_SERVICE{
 

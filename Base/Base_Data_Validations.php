@@ -7,6 +7,7 @@ class Base_Data_Validations
     protected $estructura;
     protected $valores;
     protected $listaAtributos;
+    protected $objetoentidad;
 
     public function __construct($estructura, $valores, $listaAtributos, $entidad)
     {
