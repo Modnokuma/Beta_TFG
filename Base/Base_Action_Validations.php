@@ -30,6 +30,7 @@ class Base_Action_Validations
                         (isset($this->estructura['attributes'][$atributo]['unique']))
                     ) {
                         $resp = $this->action_validate_pk_unique();
+
                         if ($resp !== true) {
                             return $resp;
                         }
@@ -42,11 +43,11 @@ class Base_Action_Validations
 
                     $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
                     $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
-
+                    
 
                     foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
                         $resp = $this->exist_in_other_entity($tabla, $pk, $this->valores[$atributo]);
-
+                        
                         if ($resp !== true) {
 
                             $feedback['ok'] = false;
@@ -56,29 +57,30 @@ class Base_Action_Validations
                         }
                     }
                 }
-            }
-        }
-        
-        echo $this->controlador;
-        // Antes de añadir un usuario, comprobar si ya existe
-        if ($this->controlador == 'usuario') {
-            echo   'entra';
-            $same_user = $this->same_user_name();
 
-            if ($same_user !== true) {
-                $feedback['ok'] = false;
-                $feedback['code'] = 'NOMBRE_USUARIO_ALREADY_EXISTS_KO';
-                $feedback['resources'] = true;
-                return $feedback;
+                // Antes de añadir un valor unique, comprueba que exista
+                if (isset($this->estructura['attributes'][$atributo]['unique']) && action == 'ADD') {
+                    $resp = $this->unique_value_already_exists($atributo, $this->valores[$atributo]);
+
+                    if ($resp !== true) {
+                        $feedback['ok'] = false;
+                        $feedback['code'] =  strtoupper($atributo).'_ALREADY_EXISTS_KO';
+                        $feedback['resources'] = true;
+                        return $feedback;
+                    }
+                }
             }
         }
+
+
+
 
         return $respuesta;
     }
 
     public function exist_in_other_entity($entidad, $campo, $valorvariable)
     {
-
+        
         include_once "./app/" . $entidad . "/" . $entidad . "_SERVICE.php";
         include_once "./app/" . $entidad . "/" . $entidad . "_description.php";
 
@@ -88,13 +90,29 @@ class Base_Action_Validations
         $entidad_service = $entidad . "_SERVICE";
         $service = new $entidad_service($contenidoestructura, 'SEARCH', array($campo => $valorvariable));
         $resultado = $service->SEARCH();
-
-        var_dump($resultado);
+        
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function unique_value_already_exists($campo, $valorvariable)
+    {
+
+        $controlador = variables['controlador'];
+        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+
+        $entidad_service = $controlador . "_SERVICE";
+        $service = new $entidad_service($this->estructura, 'SEARCH', array($campo => $valorvariable));
+        $resultado = $service->SEARCH();
+
+        if ($resultado['code'] === 'RECORDSET_DATOS') {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -102,22 +120,4 @@ class Base_Action_Validations
     {
         return true;
     }
-
-    public function same_user_name()
-    {
-
-        $controlador = variables['controlador'];
-        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
-
-        $entidad_service = $controlador . "_SERVICE";
-        $service = new $entidad_service($this->estructura, 'SEARCH', array('nombre_usuario' => $this->valores['nombre_usuario']));
-        $resultado = $service->SEARCH();
-        
-        if ($resultado['code'] === 'RECORDSET_DATOS') {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
 }

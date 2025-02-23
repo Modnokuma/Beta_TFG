@@ -58,7 +58,7 @@ class Base_Mapping
             return $this->feedback;
         } else {
             //ejecutamos la query
-echo $this->query;
+        
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
