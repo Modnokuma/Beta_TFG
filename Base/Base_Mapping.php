@@ -15,17 +15,30 @@ class Base_Mapping
     private $userbd = userbd;
     private $passuserbd = passuserbd;
     private $bd = bd;
+    private $bd_testing = bd_testing;
     public $rows = array();
 
 
     //$mysqli = new mysqli(,"my_user","my_password","my_db");
     function connection()
     {
-        if (isset(variables['TESTING'])){
+        /*if (isset(variables['TESTING'])) {
             echo 'estoy haciendo test';
-        }
-        else{
+            echo "BD: " .$this->bd_testing ."\n";
+            echo "host: " .$this->host."\n";
+            echo "usuario bd: " .$this->userbd."\n";
+            echo "pass: " .$this->passuserbd."\n";
+
+            $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd_testing) or die('fallo conexion');
+            include_once './Base/Base_Tests.php';
             
+            // Ejecutar las pruebas
+            $test = new Base_Tests();
+            $test->run();
+            return true;
+
+        } else {
+        */
             try {
                 $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd) or die('fallo conexion');
 
@@ -33,9 +46,7 @@ class Base_Mapping
             } catch (Exception $e) {
                 return false;
             }
-
-        }
-
+        //}
     }
 
     private function close_connection()
@@ -58,7 +69,7 @@ class Base_Mapping
             return $this->feedback;
         } else {
             //ejecutamos la query
-        
+
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
@@ -72,7 +83,7 @@ class Base_Mapping
                 //La operacion tiene exito
                 $this->ok = true;
                 $this->code = 'SQL_OK';
-                if (action == 'ADD'){
+                if (action == 'ADD') {
                     //$lastid = $this->conn->query(SELECT LAST_INSERT_ID());
                     $this->resource = mysqli_insert_id($this->conn);
                 }
@@ -100,8 +111,7 @@ class Base_Mapping
         } else {
 
             $result_query = $this->conn->query($this->query);
-
-
+            echo $this->query;
             if ($result_query != true) {
 
                 $this->ok = false;
@@ -151,7 +161,7 @@ class Base_Mapping
             $this->construct_response();
             return $this->feedback;
         } else {
-            
+
             $result_query = $this->conn->query($queryPrueba);
 
             if ($result_query != true) {
@@ -161,7 +171,7 @@ class Base_Mapping
                 $this->resource = $queryPrueba;
                 $this->construct_response();
                 return $this->feedback;
-            } 
+            }
             return $result_query;
         }
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2024 a las 12:52:03
+-- Tiempo de generación: 21-01-2025 a las 23:59:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -119,9 +119,9 @@ CREATE TABLE `parametro` (
   `nombre_parametro` varchar(45) NOT NULL,
   `descripcion_parametro` varchar(200) NOT NULL,
   `tipo_parametro` varchar(45) NOT NULL,
-  `formato_parametro` varchar(45) DEFAULT NULL,
-  `rango_desde_parametro` varchar(45) DEFAULT NULL,
-  `rango_hasta_parametro` varchar(45) DEFAULT NULL
+  `formato_parametro` varchar(45) NOT NULL,
+  `rango_desde_parametro` varchar(45) NOT NULL,
+  `rango_hasta_parametro` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -129,9 +129,10 @@ CREATE TABLE `parametro` (
 --
 
 INSERT INTO `parametro` (`id_parametro`, `nombre_parametro`, `descripcion_parametro`, `tipo_parametro`, `formato_parametro`, `rango_desde_parametro`, `rango_hasta_parametro`) VALUES
-(1, 'Masa', 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo', 'Tipo 1', NULL, NULL, NULL),
-(2, 'Plomo', 'El plomo es un metal pesado de densidad relativa', 'Tipo 2', NULL, NULL, NULL),
-(3, 'Cloruro', 'Los cloruros son aniones derivados del cloruro de hidrógeno y son compuestos que llevan un átomo de cloro en estado de oxidación formal -1', 'Tipo 3', NULL, NULL, NULL);
+(1, 'Masa', 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo', 'Tipo 1', '', '', ''),
+(2, 'Plomo', 'El plomo es un metal pesado de densidad relativa', 'Tipo 2', '', '', ''),
+(3, 'Cloruro', 'Los cloruros son aniones derivados del cloruro de hidrógeno y son compuestos que llevan un átomo de cloro en estado de oxidación formal -1', 'Tipo 3', '', '', ''),
+(373, 'Tercera prueba', 'descripción prueba', 'tipo prueba', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -198,7 +199,7 @@ INSERT INTO `proyecto` (`id_proyecto`, `nombre_proyecto`, `descripcion_proyecto`
 (1, 'AQUA', 'Investigación de la calidad del agua en los embalses gallegos'),
 (2, 'JAB', 'Control de la densidad de poblacion de jabalies en Galicia'),
 (3, 'AIR', 'Investigación sobre la calidad del aire en la ciudad de Ourense'),
-(4, 'PRUEBAEDIT', 'Es una prueba de un edit 2');
+(4, 'PRUEBAEDIT', 'Es una prueba de un edit ');
 
 -- --------------------------------------------------------
 
@@ -261,8 +262,11 @@ CREATE TABLE `unidad` (
 
 INSERT INTO `unidad` (`id_unidad`, `nombre_unidad`, `descripcion_unidad`, `id_parametro`) VALUES
 (1, 'Kg', 'Kilogramos, Unidad de peso y 1000 veces 1g', 1),
-(2, 'ug/L', 'Microgramos por Litro', 2),
-(3, 'mg/L', 'ración de peso a volumen y se utiliza en el análisis de agua y aguas residuales', 3);
+(2, 'Nueva unidad', 'descripcion prueba', 2),
+(3, 'mg/L', 'ración de peso a volumen y se utiliza en el análisis de agua y aguas residuales', 3),
+(81, 'Nueva unidad', 'descripcion prueba', 2),
+(102, 'Nueva unidad', 'descripcion prueba', 3),
+(106, 'Segunda prueba', 'descripción prueba', 3);
 
 -- --------------------------------------------------------
 
@@ -287,18 +291,12 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `organizacion_usuario`, `
 (1, 'Daniel', 'ESEI', 'alumno', 'Calle A Nº1 4ºD', 'dani@gmail.com'),
 (2, 'Javi', 'ESEI', 'profesor', 'Calle B Nº2 1ºC', 'javi@javi.es'),
 (3, 'prueba', 'prueba', 'prueba', 'prueba', 'prueba@prueba.es'),
-(4, 'Erik', 'ESEI', 'alumnoEDIT2', 'PruebaEDIT2', 'erik@gmail.com'),
+(4, 'Erik', 'ESEI', 'alumno editado', 'PruebaEDIT', 'erik@gmail.com'),
 (5, 'Jorge', 'ESEI', 'alumno', 'Calle D Nº3 7ºD', 'jorge@gmail.com'),
 (6, 'hugo', 'ESEI', 'alumno', 'Calle D Nº3 7ºD', 'hugo@gmail.com'),
 (7, 'Laura', 'ESEI', 'alumno', 'Calle R Nº6 2N', 'laura@gmail.com'),
 (82, 'Andrea', 'ESEI', 'alumno', 'Calle R Nº6 2N', 'Andrea@gmail.com'),
-(89, 'Samuel', 'ESEI', 'alumno', 'Calle S', 'Samuel@gmail.com'),
-(90, 'Samuel', 'ESEI', 'alumno', 'Calle S', 'Samuel@gmail.com'),
-(91, 'Samuel', 'ESEI', 'alumno', 'Calle S', 'Samuel@gmail.com'),
-(92, 'Samuel', 'ESEI', 'alumno', 'Calle S', 'Samuel@gmail.com'),
-(93, 'Samuel', 'ESEI', 'alumno', 'Calle S', 'Samuel@gmail.com'),
-(94, 'Samuel', 'ESEI', 'alumno', 'Calle S', 'Samuel@gmail.com'),
-(95, 'Samuel', 'ESEI', 'alumno', 'Calle S', 'Samuel@gmail.com');
+(114, 'Samuel', 'ESEI', 'alumno', 'Calle Santo Domingo', 'Samuel@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -445,7 +443,7 @@ ALTER TABLE `observacion`
 -- AUTO_INCREMENT de la tabla `parametro`
 --
 ALTER TABLE `parametro`
-  MODIFY `id_parametro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=370;
+  MODIFY `id_parametro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
 
 --
 -- AUTO_INCREMENT de la tabla `parametro_obtenido`
@@ -463,7 +461,7 @@ ALTER TABLE `propiedad_observacion`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_observacion`
@@ -475,13 +473,13 @@ ALTER TABLE `tipo_observacion`
 -- AUTO_INCREMENT de la tabla `unidad`
 --
 ALTER TABLE `unidad`
-  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- Restricciones para tablas volcadas

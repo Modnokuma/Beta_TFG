@@ -30,6 +30,7 @@ class Base_CONTROLLER extends Base_Validations
         
         $service = new $controlador($this->estructura,'','');
         $accion = action;
+        
         responder($service->$accion());
     }
 }

@@ -19,16 +19,6 @@ class Mapping extends Base_Mapping
     {
 
         $this->query = "INSERT INTO " . $this->tabla . " ( ";
-
-        //$atributos = implode(", ", array_slice($this->listaAtributos,0));
-
-        //$this->query = $this->query . " (" . $atributos . ")";
-        //$this->query = $this->query . " VALUES (";
-
-        /*$aux = implode(", ", array_map(function ($value) {
-            return is_string($value) ? "'$value'" : $value;
-        }, array_values($this->valores)));*/
-
         $total = count($this->listaAtributos);
         $i = 0;
 
@@ -45,9 +35,10 @@ class Mapping extends Base_Mapping
                 $this->query .= ", ";
             }
         }
-        $this->query = $this->query . ") VALUES (";
 
+        $this->query = $this->query . ") VALUES (";
         $i = 0;
+        
         foreach ($this->listaAtributos as $atributo) {
 
             if ($this->estructura['attributes'][$atributo]['autoincrement']) {
@@ -93,6 +84,7 @@ class Mapping extends Base_Mapping
 
         $cadena = $this->construirWhereIgual($this->valores);
         $this->query = $this->query . " WHERE " . $cadena;
+        
 
         return $this->execute_simple_query();
     }
@@ -111,7 +103,7 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-
+        
         return $this->get_results_from_query();
     }
 
@@ -142,6 +134,23 @@ class Mapping extends Base_Mapping
         return $this->execute_simple_query();
     }
 
+    function mapping_SEARCH_BY()
+    {
+        $this->query = "SELECT * FROM " . $this->tabla;
+        //var_dump($this->valores);
+        $query = '';
+        if (!empty($this->valores)) {
+            $query = $query . " WHERE (";
+            // se añadiria a la cadena de busqueda los valores
+            $query = $query . $this->construirWhereIgualSearchBy($this->valores);
+            $query = $query . " )";
+        }
+
+        $this->query .= $query;
+        echo $this->query;
+        return $this->get_results_from_query();
+    }
+
     function construirWhereIgual($valores)
     {
         $cadena = '';
@@ -160,6 +169,33 @@ class Mapping extends Base_Mapping
                 //is_string($valor) ? $valor = "'$valor'" : $valor;
                 ($this->estructura['attributes'][$clave]['type'] == 'integer') ? $valor  : $valor = "'$valor'";
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
+            }
+        }
+
+        return $cadena;
+    }
+
+    function construirWhereIgualSearchBy($valores)
+    {
+        $cadena = '';
+        $primero = true;
+        //echo "\n" .$valores;
+
+        foreach ($valores as $clave => $valor) {
+            if ($primero) {
+                $primero = false;
+            } else {
+                $cadena = $cadena . " AND ";
+            }
+            echo $valor;
+            // Manejar el operador !=
+            if (strpos($clave, '!=') !== false) {
+                
+                $clave = str_replace('!=', '', $clave);
+                $cadena = $cadena . "(" . $clave . " != " . (is_string($valor) ? "'$valor'" : $valor) . ")";
+            } else {
+                
+                $cadena = $cadena . "(" . $clave . " = " . (is_string($valor) ? "'$valor'" : $valor) . ")";
             }
         }
 

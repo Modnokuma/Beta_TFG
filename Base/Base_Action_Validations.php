@@ -19,6 +19,7 @@ class Base_Action_Validations
         $respuesta = true;
 
         foreach ($this->listaAtributos as $atributo) {
+          
 
             if (isset($this->valores[$atributo])) {
 
@@ -43,11 +44,11 @@ class Base_Action_Validations
 
                     $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
                     $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
-                    
+
 
                     foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
                         $resp = $this->exist_in_other_entity($tabla, $pk, $this->valores[$atributo]);
-                        
+
                         if ($resp !== true) {
 
                             $feedback['ok'] = false;
@@ -60,11 +61,24 @@ class Base_Action_Validations
 
                 // Antes de añadir un valor unique, comprueba que exista
                 if (isset($this->estructura['attributes'][$atributo]['unique']) && action == 'ADD') {
+                    
                     $resp = $this->unique_value_already_exists($atributo, $this->valores[$atributo]);
 
                     if ($resp !== true) {
                         $feedback['ok'] = false;
-                        $feedback['code'] =  strtoupper($atributo).'_ALREADY_EXISTS_KO';
+                        $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
+                        $feedback['resources'] = true;
+                        return $feedback;
+                    }
+                }
+
+                if (isset($this->estructura['attributes'][$atributo]['unique']) && action == 'EDIT') {
+                    
+                    $resp = $this->edit_unique_value_already_exists($atributo, $this->valores[$atributo]);
+
+                    if ($resp !== true) {
+                        $feedback['ok'] = false;
+                        $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
                         $feedback['resources'] = true;
                         return $feedback;
                     }
@@ -72,15 +86,12 @@ class Base_Action_Validations
             }
         }
 
-
-
-
         return $respuesta;
     }
 
     public function exist_in_other_entity($entidad, $campo, $valorvariable)
     {
-        
+
         include_once "./app/" . $entidad . "/" . $entidad . "_SERVICE.php";
         include_once "./app/" . $entidad . "/" . $entidad . "_description.php";
 
@@ -90,7 +101,7 @@ class Base_Action_Validations
         $entidad_service = $entidad . "_SERVICE";
         $service = new $entidad_service($contenidoestructura, 'SEARCH', array($campo => $valorvariable));
         $resultado = $service->SEARCH();
-        
+
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             return true;
@@ -108,11 +119,41 @@ class Base_Action_Validations
         $entidad_service = $controlador . "_SERVICE";
         $service = new $entidad_service($this->estructura, 'SEARCH', array($campo => $valorvariable));
         $resultado = $service->SEARCH();
+        
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public function edit_unique_value_already_exists($campo, $valorvariable)
+    {
+        $controlador = variables['controlador'];
+        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+
+        $entidad_service = $controlador . "_SERVICE";
+        $primaryKey = $this->listaAtributos[0];
+        $currentId = $this->valores[$primaryKey];
+        
+        echo "campo : ".$campo;
+        echo ", valorvariable : ".$valorvariable;
+        echo " , primaryKey : ".$primaryKey;
+        echo " , currentId : ".$currentId;
+        echo "\n";
+        $service = new $entidad_service($this->estructura, 'SEARCH_BY', array(
+            $campo => $valorvariable,
+            $primaryKey.'!=' => $currentId 
+        ));
+        
+        $resultado = $service->SEARCH_BY();
+        
+
+        if ($resultado['code'] === 'RECORDSET_DATOS') {
+            return true;
+        } else {
+            return false;
         }
     }
 

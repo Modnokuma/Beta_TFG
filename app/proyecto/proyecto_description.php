@@ -66,6 +66,7 @@ $proyecto_description =
             'nombre_proyecto' => array(
                 'pk' => false,
                 'autoincrement' => false,
+                'unique' => true,
                 'type' => 'string',
                 'not_null' => array(
                     'ADD' => true,
