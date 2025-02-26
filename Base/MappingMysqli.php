@@ -147,7 +147,7 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-        echo $this->query;
+        //echo $this->query;
         return $this->get_results_from_query();
     }
 
@@ -187,7 +187,7 @@ class Mapping extends Base_Mapping
             } else {
                 $cadena = $cadena . " AND ";
             }
-            echo $valor;
+            
             // Manejar el operador !=
             if (strpos($clave, '!=') !== false) {
                 

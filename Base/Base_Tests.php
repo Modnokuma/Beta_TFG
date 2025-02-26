@@ -1,5 +1,7 @@
 <?php
+
 include_once './Base/Base_Tests_Description.php';
+include_once "./common/config.php";
 
 class Base_Tests
 {
@@ -11,10 +13,129 @@ class Base_Tests
     public function __construct()
     {
         $description = 'base_test_description';
-        $this->estructura = $$description;
+        $this->estructura = $description;
         
     }
 
+    public function test_put($test){
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, URL_test);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($test['variables']));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    
+    }
+
+    function test_get($test){
+
+        $curl = curl_init();
+        $salida = "?";
+        foreach ($test['variables'] as $key => $value){
+            $salida .= $key."=".$value."&";
+
+        }
+        curl_setopt($curl, CURLOPT_URL, URL_test.$salida);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    }
+
+    function test_post($test){
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, URL_test);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($test['variables']));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+
+    }
+
+    public function test_delete($test){
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, URL_test);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($test['variables']));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    
+    }
+
+
+    public function test_run($test){
+
+        switch ($test['variables']['action']) {
+            case 'ADD':
+                return $this->test_put($test);
+                break;
+            case 'SEARCH':
+                return $this->test_get($test);
+                break;
+            case 'EDIT':
+                return $this->test_post($test);
+                break;
+            case 'DELETE':
+                return $this->test_delete($test);
+                break;
+            default:
+                
+                break;
+        }
+
+    }
+
+
+   
+    public function test_exec(){
+
+        foreach (base_tests_description as $test){
+            $result = $this->test_run($test);
+          
+            $result = json_decode($result, true);
+
+            echo "\n";
+            echo "Esperado : ".$test['mensaje']." || Devuelto : ".$result['code'];
+            if ($result['code'] == $test['mensaje']){
+               echo "  ||  CORRECTO";
+            }
+            else{
+                echo "  || INCORRECTO";
+            }
+            
+        }
+
+        return true;
+
+    }
+
+
+    public function run()
+    {
+
+        return $this->test_exec();
+    }
+
+}
+
+
+/*
     public function testAdd()
     {
         $accion = $this->estructura['testAdd']['action'];
@@ -95,16 +216,4 @@ class Base_Tests
             echo "DELETE test failed\n";
         }
     }
-
-
-    public function run()
-    {
-        $this->testAdd();
-        $this->testEdit();
-        $this->testSearch();
-        $this->testDelete();
-    }
-
-}
-
-
+*/

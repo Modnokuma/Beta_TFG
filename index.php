@@ -7,12 +7,15 @@ function responder($texto){
 }
 
 $metodoHTTP = $_SERVER['REQUEST_METHOD'];
-//echo  $metodoHTTP;
+
+
 switch ($metodoHTTP){
     case 'PUT':
         // Se puede  usar $_PUT
         parse_str(file_get_contents("php://input"),$variables);
+        
         define ('variables', $variables);
+
         define ('action', 'ADD');
         break;
     case 'DELETE':
@@ -27,7 +30,9 @@ switch ($metodoHTTP){
         $action = 'EDIT';
         break;
     case 'GET':
+
         define ('variables', $_GET);
+
         define ('action', 'SEARCH');     
         $action = 'SEARCH';
         break;

@@ -16,29 +16,27 @@ class Base_Mapping
     private $passuserbd = passuserbd;
     private $bd = bd;
     private $bd_testing = bd_testing;
+    private $user_testing = user_testing;
+    private $pass_testing = pass_testing;
     public $rows = array();
 
 
     //$mysqli = new mysqli(,"my_user","my_password","my_db");
     function connection()
     {
-        /*if (isset(variables['TESTING'])) {
-            echo 'estoy haciendo test';
+        if (isset(variables['TESTING'])) {
+            /*echo 'estoy haciendo test';
             echo "BD: " .$this->bd_testing ."\n";
             echo "host: " .$this->host."\n";
-            echo "usuario bd: " .$this->userbd."\n";
-            echo "pass: " .$this->passuserbd."\n";
-
-            $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd_testing) or die('fallo conexion');
-            include_once './Base/Base_Tests.php';
+            echo "usuario bd: " .$this->user_testing."\n";
+            echo "pass: " .$this->pass_testing."\n";
+*/
+            $this->conn = new mysqli($this->host, $this->user_testing, $this->pass_testing, $this->bd_testing) or die('fallo conexion');
             
-            // Ejecutar las pruebas
-            $test = new Base_Tests();
-            $test->run();
             return true;
 
         } else {
-        */
+        
             try {
                 $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd) or die('fallo conexion');
 
@@ -46,7 +44,7 @@ class Base_Mapping
             } catch (Exception $e) {
                 return false;
             }
-        //}
+        }
     }
 
     private function close_connection()
@@ -111,7 +109,7 @@ class Base_Mapping
         } else {
 
             $result_query = $this->conn->query($this->query);
-            echo $this->query;
+
             if ($result_query != true) {
 
                 $this->ok = false;

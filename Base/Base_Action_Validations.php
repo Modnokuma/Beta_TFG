@@ -137,11 +137,11 @@ class Base_Action_Validations
         $primaryKey = $this->listaAtributos[0];
         $currentId = $this->valores[$primaryKey];
         
-        echo "campo : ".$campo;
+       /* echo "campo : ".$campo;
         echo ", valorvariable : ".$valorvariable;
         echo " , primaryKey : ".$primaryKey;
         echo " , currentId : ".$currentId;
-        echo "\n";
+        echo "\n";*/
         $service = new $entidad_service($this->estructura, 'SEARCH_BY', array(
             $campo => $valorvariable,
             $primaryKey.'!=' => $currentId 
