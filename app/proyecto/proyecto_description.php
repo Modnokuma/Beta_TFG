@@ -81,7 +81,7 @@ $proyecto_description =
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            'personalized' => "personalized_nombre_proyecto(Array('Javi','Dani'))"
+                            //'personalized' => "personalized_nombre_proyecto(Array('Javi','Dani'))"
                         ),
                         'EDIT' => array(
                             'min_size' => 3,

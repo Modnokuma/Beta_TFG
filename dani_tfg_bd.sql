@@ -132,7 +132,7 @@ INSERT INTO `parametro` (`id_parametro`, `nombre_parametro`, `descripcion_parame
 (1, 'Masa', 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo', 'Tipo 1', '', '', ''),
 (2, 'Plomo', 'El plomo es un metal pesado de densidad relativa', 'Tipo 2', '', '', ''),
 (3, 'Cloruro', 'Los cloruros son aniones derivados del cloruro de hidrógeno y son compuestos que llevan un átomo de cloro en estado de oxidación formal -1', 'Tipo 3', '', '', ''),
-(373, 'Tercera prueba', 'descripción prueba', 'tipo prueba', '', '', '');
+(4, 'prueba', 'descripción prueba', 'tipo prueba', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -264,9 +264,9 @@ INSERT INTO `unidad` (`id_unidad`, `nombre_unidad`, `descripcion_unidad`, `id_pa
 (1, 'Kg', 'Kilogramos, Unidad de peso y 1000 veces 1g', 1),
 (2, 'Nueva unidad', 'descripcion prueba', 2),
 (3, 'mg/L', 'ración de peso a volumen y se utiliza en el análisis de agua y aguas residuales', 3),
-(81, 'Nueva unidad', 'descripcion prueba', 2),
-(102, 'Nueva unidad', 'descripcion prueba', 3),
-(106, 'Segunda prueba', 'descripción prueba', 3);
+(4, 'cuarta unidad', 'descripcion prueba', 2),
+(5, 'quinta unidad', 'descripcion prueba', 3),
+(6, 'sexta unidad' , 'descripción prueba', 3);
 
 -- --------------------------------------------------------
 
@@ -295,8 +295,8 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `organizacion_usuario`, `
 (5, 'Jorge', 'ESEI', 'alumno', 'Calle D Nº3 7ºD', 'jorge@gmail.com'),
 (6, 'hugo', 'ESEI', 'alumno', 'Calle D Nº3 7ºD', 'hugo@gmail.com'),
 (7, 'Laura', 'ESEI', 'alumno', 'Calle R Nº6 2N', 'laura@gmail.com'),
-(82, 'Andrea', 'ESEI', 'alumno', 'Calle R Nº6 2N', 'Andrea@gmail.com'),
-(114, 'Samuel', 'ESEI', 'alumno', 'Calle Santo Domingo', 'Samuel@gmail.com');
+(8, 'Andrea', 'ESEI', 'alumno', 'Calle R Nº6 2N', 'Andrea@gmail.com'),
+(9, 'Samuel', 'ESEI', 'alumno', 'Calle Santo Domingo', 'Samuel@gmail.com');
 
 -- --------------------------------------------------------
 

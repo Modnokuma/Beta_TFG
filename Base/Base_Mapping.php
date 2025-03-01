@@ -24,19 +24,20 @@ class Base_Mapping
     //$mysqli = new mysqli(,"my_user","my_password","my_db");
     function connection()
     {
+       
         if (isset(variables['TESTING'])) {
             /*echo 'estoy haciendo test';
             echo "BD: " .$this->bd_testing ."\n";
             echo "host: " .$this->host."\n";
             echo "usuario bd: " .$this->user_testing."\n";
             echo "pass: " .$this->pass_testing."\n";
-*/
-            $this->conn = new mysqli($this->host, $this->user_testing, $this->pass_testing, $this->bd_testing) or die('fallo conexion');
+            */
             
+            $this->conn = new mysqli($this->host, $this->user_testing, $this->pass_testing, $this->bd_testing) or die('fallo conexion');
+                
             return true;
-
         } else {
-        
+
             try {
                 $this->conn = new mysqli($this->host, $this->userbd, $this->passuserbd, $this->bd) or die('fallo conexion');
 

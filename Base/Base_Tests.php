@@ -1,6 +1,7 @@
 <?php
 
 include_once './Base/Base_Tests_Description.php';
+include './common/credentialsDB.php';
 include_once "./common/config.php";
 
 class Base_Tests
@@ -9,15 +10,19 @@ class Base_Tests
     protected $variables;
     protected $entidad;
     protected $estructura;
+    private $host = host;
+    private $bd_testing = bd_testing;
+    private $user_testing = user_testing;
+    private $pass_testing = pass_testing;
 
     public function __construct()
     {
         $description = 'base_test_description';
         $this->estructura = $description;
-        
     }
 
-    public function test_put($test){
+    public function test_put($test)
+    {
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, URL_test);
@@ -30,26 +35,26 @@ class Base_Tests
         $response = curl_exec($curl);
         curl_close($curl);
         return $response;
-    
     }
 
-    function test_get($test){
+    function test_get($test)
+    {
 
         $curl = curl_init();
         $salida = "?";
-        foreach ($test['variables'] as $key => $value){
-            $salida .= $key."=".$value."&";
-
+        foreach ($test['variables'] as $key => $value) {
+            $salida .= $key . "=" . $value . "&";
         }
-        curl_setopt($curl, CURLOPT_URL, URL_test.$salida);
+        curl_setopt($curl, CURLOPT_URL, URL_test . $salida);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-      
+
         $response = curl_exec($curl);
         curl_close($curl);
         return $response;
     }
 
-    function test_post($test){
+    function test_post($test)
+    {
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, URL_test);
@@ -59,10 +64,10 @@ class Base_Tests
         $response = curl_exec($curl);
         curl_close($curl);
         return $response;
-
     }
 
-    public function test_delete($test){
+    public function test_delete($test)
+    {
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, URL_test);
@@ -75,11 +80,11 @@ class Base_Tests
         $response = curl_exec($curl);
         curl_close($curl);
         return $response;
-    
     }
 
 
-    public function test_run($test){
+    public function test_run($test)
+    {
 
         switch ($test['variables']['action']) {
             case 'ADD':
@@ -95,43 +100,62 @@ class Base_Tests
                 return $this->test_delete($test);
                 break;
             default:
-                
+
                 break;
         }
-
     }
 
 
-   
-    public function test_exec(){
 
-        foreach (base_tests_description as $test){
+    public function test_exec()
+    {
+        
+        foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
-          
+
             $result = json_decode($result, true);
 
             echo "\n";
-            echo "Esperado : ".$test['mensaje']." || Devuelto : ".$result['code'];
-            if ($result['code'] == $test['mensaje']){
-               echo "  ||  CORRECTO";
-            }
-            else{
+            echo "Esperado : " . $test['mensaje'] . " || Devuelto : " . $result['code'];
+            if ($result['code'] == $test['mensaje']) {
+                echo "  ||  CORRECTO";
+            } else {
                 echo "  || INCORRECTO";
             }
-            
         }
 
         return true;
-
     }
 
 
     public function run()
     {
-
+        $this->reset_DB();
         return $this->test_exec();
     }
 
+    public function reset_DB()
+    {
+        $conexion = new mysqli($this->host, $this->user_testing, $this->pass_testing, $this->bd_testing) or die('fallo conexion');
+        // Obtener todas las tablas de la base de datos
+
+        $result =  $conexion->query("SHOW TABLES");
+        // Deshabilitar temporalmente las restricciones de clave foránea
+        $conexion->query("SET FOREIGN_KEY_CHECKS = 0");
+        // Iterar sobre las tablas
+        while ($row = $result->fetch_array()) {
+            $table = $row[0];
+            // Vaciar la tabla y resetear el contador AUTO_INCREMENT
+            $conexion->query("TRUNCATE TABLE $table");
+            $conexion->query("ALTER TABLE $table AUTO_INCREMENT = 1");
+        }
+
+        // Volver a habilitar las restricciones de clave foránea
+        $conexion->query("SET FOREIGN_KEY_CHECKS = 1");
+
+        $conexion->close();
+        return true;
+    }
 }
 
 

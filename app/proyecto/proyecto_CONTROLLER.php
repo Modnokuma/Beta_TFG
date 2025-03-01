@@ -7,7 +7,7 @@ class proyecto_CONTROLLER extends Base_CONTROLLER{
         parent::__construct();
 	}
 
-    function personalized_nombre_proyecto($data){
+    /*function personalized_nombre_proyecto($data){
 
         if (in_array($this->valores['nombre_proyecto'], $data)){
             return true;
@@ -18,7 +18,7 @@ class proyecto_CONTROLLER extends Base_CONTROLLER{
             $feedback['resources'] = false;
             return $feedback;
         }
-    }
+    }*/
 
 }
 
