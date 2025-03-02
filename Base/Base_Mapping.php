@@ -68,7 +68,6 @@ class Base_Mapping
             return $this->feedback;
         } else {
             //ejecutamos la query
-
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
@@ -110,7 +109,7 @@ class Base_Mapping
         } else {
 
             $result_query = $this->conn->query($this->query);
-
+            
             if ($result_query != true) {
 
                 $this->ok = false;
@@ -160,9 +159,9 @@ class Base_Mapping
             $this->construct_response();
             return $this->feedback;
         } else {
-
+            
             $result_query = $this->conn->query($queryPrueba);
-
+            
             if ($result_query != true) {
 
                 $this->ok = false;

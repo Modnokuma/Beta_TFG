@@ -19,7 +19,7 @@ class Base_Action_Validations
         $respuesta = true;
 
         foreach ($this->listaAtributos as $atributo) {
-          
+
 
             if (isset($this->valores[$atributo])) {
 
@@ -61,7 +61,7 @@ class Base_Action_Validations
 
                 // Antes de añadir un valor unique, comprueba que exista
                 if (isset($this->estructura['attributes'][$atributo]['unique']) && action == 'ADD') {
-                    
+
                     $resp = $this->unique_value_already_exists($atributo, $this->valores[$atributo]);
 
                     if ($resp !== true) {
@@ -73,7 +73,7 @@ class Base_Action_Validations
                 }
 
                 if (isset($this->estructura['attributes'][$atributo]['unique']) && action == 'EDIT') {
-                    
+
                     $resp = $this->edit_unique_value_already_exists($atributo, $this->valores[$atributo]);
 
                     if ($resp !== true) {
@@ -119,7 +119,7 @@ class Base_Action_Validations
         $entidad_service = $controlador . "_SERVICE";
         $service = new $entidad_service($this->estructura, 'SEARCH', array($campo => $valorvariable));
         $resultado = $service->SEARCH();
-        
+
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             return false;
@@ -132,29 +132,35 @@ class Base_Action_Validations
     {
         $controlador = variables['controlador'];
         include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
-
         $entidad_service = $controlador . "_SERVICE";
         $primaryKey = $this->listaAtributos[0];
         $currentId = $this->valores[$primaryKey];
-        
-       /* echo "campo : ".$campo;
+
+
+        /* echo "campo : ".$campo;
         echo ", valorvariable : ".$valorvariable;
         echo " , primaryKey : ".$primaryKey;
         echo " , currentId : ".$currentId;
         echo "\n";*/
-        $service = new $entidad_service($this->estructura, 'SEARCH_BY', array(
-            $campo => $valorvariable,
-            $primaryKey.'!=' => $currentId 
-        ));
-        
-        $resultado = $service->SEARCH_BY();
-        
-
-        if ($resultado['code'] === 'RECORDSET_DATOS') {
-            return true;
-        } else {
-            return false;
+        if ($primaryKey != $campo) {
+            $query = "SELECT COUNT(*) FROM " . $controlador . " WHERE " . $campo . " = '" . $valorvariable . "' AND " . $primaryKey . " != " . $currentId;
+            $service = new $entidad_service($this->estructura, 'SEARCH_BY', array());
+            $result_query = $service->ejecutarPersonalizedQuery($query);
+            // Verificar el resultado de la consulta
+            if ($result_query && $result_query->num_rows > 0) {
+                $rows = $result_query->fetch_assoc();
+                if (isset($rows['count'])) {
+                    $numApariciones = intval($rows['count']);
+                    if ($numApariciones == 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
         }
+
+        return true;
     }
 
     public function action_validate_pk_unique()

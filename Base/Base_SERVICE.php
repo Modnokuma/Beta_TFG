@@ -9,6 +9,7 @@ class Base_SERVICE
     public $estructura;
     public $accion;
     public $controlador;
+    public $prueba;
 
     function __construct($estructura, $action, $variables)
     {
@@ -27,10 +28,12 @@ class Base_SERVICE
         $this->controlador = variables['controlador'];
         $this->estructura = $estructura;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
-
         $this->inicializarRest();
     }
-
+    function ejecutarPersonalizedQuery($query)
+    {
+        return $this->model->personalized_query($query);
+    }
     function crearModelo($controlador)
     {
 
