@@ -109,19 +109,20 @@ class Base_Tests
 
     public function test_exec()
     {
-        
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
-
             $result = json_decode($result, true);
 
             echo "\n";
-            echo "Esperado : " . $test['mensaje'] . " || Devuelto : " . $result['code'];
+            echo "Tabla: " . $test['variables']['controlador'] . "\n";
+            echo "Acción: " . $test['variables']['action'] . "\n";
+            echo "Esperado: " . $test['mensaje'] . " || Devuelto: " . $result['code'];
             if ($result['code'] == $test['mensaje']) {
                 echo "  ||  CORRECTO";
             } else {
                 echo "  || INCORRECTO";
             }
+            echo "\n";
         }
 
         return true;
@@ -152,6 +153,8 @@ class Base_Tests
 
         // Volver a habilitar las restricciones de clave foránea
         $conexion->query("SET FOREIGN_KEY_CHECKS = 1");
+        $conexion->query("INSERT INTO `parametro` (`id_parametro`, `nombre_parametro`, `descripcion_parametro`, `tipo_parametro`, `formato_parametro`, `rango_desde_parametro`, `rango_hasta_parametro`) VALUES
+        (1, 'Masa', 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo', 'Tipo 1', '', '', '')");
 
         $conexion->close();
         return true;

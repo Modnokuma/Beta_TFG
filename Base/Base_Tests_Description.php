@@ -81,5 +81,91 @@ const base_tests_description = array(
             'controlador' => 'proyecto'
         ),
         'mensaje' => 'SQL_OK'
+    ),
+    'testAdd_parametro' => array(
+        'variables' => array(
+            'nombre_parametro' => 'Agua Douro',
+            'descripcion_parametro' => 'Agua recogida del rio Douro',
+            'tipo_parametro' => 'Liquido',
+            'formato_parametro' => 'L/min',
+            'rango_desde_parametro' => '0',
+            'rango_hasta_parametro' => '100',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'parametro'
+        ),
+        'mensaje' => 'SQL_OK'
+    ),
+    'testSearch_parametro' => array(
+        'variables' => array(
+            'TESTING' => true,
+            'action' => 'SEARCH',
+            'controlador' => 'parametro'
+        ),
+        'mensaje' => 'RECORDSET_DATOS'
+    ),
+    'testEdit_parametro' => array(
+        'variables' => array(
+            'id_parametro' => '2',
+            'nombre_parametro' => 'Agua Ebro',
+            'descripcion_parametro' => 'Agua recogida del rio Ebro',
+            'tipo_parametro' => 'Liquido',
+            'formato_parametro' => 'L/min',
+            'rango_desde_parametro' => '0',
+            'rango_hasta_parametro' => '100',
+            'TESTING' => true,
+            'action' => 'EDIT',
+            'controlador' => 'parametro'
+        ),
+        'mensaje' => 'SQL_OK'
+    ),
+    'testDelete_parametro' => array(
+        'variables' => array(
+            'id_parametro' => '2',
+            'TESTING' => true,
+            'action' => 'DELETE',
+            'controlador' => 'parametro'
+        ),
+        'mensaje' => 'SQL_OK'
+    ),
+    'testAdd_unidad' => array(
+        'variables' => array(
+            'nombre_unidad' => 'Kelvin',
+            'descripcion_unidad' => 'temperatura termodinámica',
+            'id_parametro' => '1',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'unidad'
+        ),
+        'mensaje' => 'SQL_OK'
+    ),
+    'testSearch_unidad' => array(
+        'variables' => array(
+            'TESTING' => true,
+            'action' => 'SEARCH',
+            'controlador' => 'unidad'
+        ),
+        'mensaje' => 'RECORDSET_DATOS'
+    ),
+    'testEdit_unidad' => array(
+        'variables' => array(
+            'id_unidad' => '1',
+            'nombre_unidad' => 'Farenheit',
+            'descripcion_unidad' => 'temperatura termodinámica',
+            'id_parametro' => '1',
+            'TESTING' => true,
+            'action' => 'EDIT',
+            'controlador' => 'unidad'
+        ),
+        'mensaje' => 'SQL_OK'
+    ),
+    'testDelete_unidad' => array(
+        'variables' => array(
+            'id_unidad' => '1',
+            'TESTING' => true,
+            'action' => 'DELETE',
+            'controlador' => 'unidad'
+        ),
+        'mensaje' => 'SQL_OK'
     )
 );
