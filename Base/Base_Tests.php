@@ -153,9 +153,13 @@ class Base_Tests
 
         // Volver a habilitar las restricciones de clave foránea
         $conexion->query("SET FOREIGN_KEY_CHECKS = 1");
+
+        // Metemos los datos necesarios para algunos test
         $conexion->query("INSERT INTO `parametro` (`id_parametro`, `nombre_parametro`, `descripcion_parametro`, `tipo_parametro`, `formato_parametro`, `rango_desde_parametro`, `rango_hasta_parametro`) VALUES
         (1, 'Masa', 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo', 'Tipo 1', '', '', '')");
-
+        $conexion->query("INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `organizacion_usuario`, `puesto_usuario`, `direccion_usuario`, `correo_usuario`) 
+        VALUES (1, 'Samuel', 'ESEI', 'alumno', 'Calle Santo Domingo', 'Samuel@gmail.com'),
+            (2, 'Javi', 'ESEI', 'profesor', 'Calle B Nº2 1ºC', 'javi@javi.es')");
         $conexion->close();
         return true;
     }

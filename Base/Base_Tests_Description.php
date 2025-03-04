@@ -23,7 +23,7 @@ const base_tests_description = array(
     ),
     'testEdit_usuario' => array(
         'variables' => array(
-            'id_usuario' => '1',
+            'id_usuario' => '3',
             'nombre_usuario' => 'DanielEdit',
             'organizacion_usuario' => 'ESEI',
             'puesto_usuario' => 'alumno',
@@ -37,7 +37,7 @@ const base_tests_description = array(
     ),
     'testDelete_usuario' => array(
         'variables' => array(
-            'id_usuario' => '1',
+            'id_usuario' => '3',
             'TESTING' => true,
             'action' => 'DELETE',
             'controlador' => 'usuario'
@@ -167,5 +167,43 @@ const base_tests_description = array(
             'controlador' => 'unidad'
         ),
         'mensaje' => 'SQL_OK'
-    )
+    ),
+    'testActionExistInAnotherEntity' => array(
+        'variables' => array(
+            'nombre_unidad' => 'Kelvin',
+            'descripcion_unidad' => 'temperatura termodinámica',
+            'id_parametro' => '2',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'unidad'
+        ),
+        'mensaje' => 'FOREIGN_KEY_ID_PARAMETRO_KO'
+    ),
+    'testActionUniqueValueAlreadyExists' => array(
+        'variables' => array(
+            'nombre_usuario' => 'Samuel',
+            'organizacion_usuario' => 'ESEI',
+            'puesto_usuario' => 'alumno',
+            'direccion_usuario' => 'Calle A Nº1 4ºD',
+            'correo_usuario' => 'sam@gmail.es',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'usuario'
+        ),
+        'mensaje' => 'NOMBRE_USUARIO_ALREADY_EXISTS_KO'
+    ),
+    'testEditUniqueValueAlreadyExists' => array(
+        'variables' => array(
+            'id_usuario' => '1',
+            'nombre_usuario' => 'Victor',
+            'organizacion_usuario' => 'ESEI',
+            'puesto_usuario' => 'alumno',
+            'direccion_usuario' => 'Calle A Nº1 4ºD',
+            'correo_usuario' => 'javi@javi.es',
+            'TESTING' => true,
+            'action' => 'EDIT',
+            'controlador' => 'usuario'
+        ),
+        'mensaje' => 'CORREO_USUARIO_ALREADY_EXISTS_KO'
+    ),
 );

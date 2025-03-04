@@ -143,13 +143,17 @@ class Base_Action_Validations
         echo " , currentId : ".$currentId;
         echo "\n";*/
         if ($primaryKey != $campo) {
-            $query = "SELECT COUNT(*) FROM " . $controlador . " WHERE " . $campo . " = '" . $valorvariable . "' AND " . $primaryKey . " != " . $currentId;
+            $query = "SELECT COUNT(*) as count FROM " . $controlador . " WHERE " . $campo . " = '" . $valorvariable . "' AND " . $primaryKey . " != " . $currentId;
             $service = new $entidad_service($this->estructura, 'SEARCH_BY', array());
             $result_query = $service->ejecutarPersonalizedQuery($query);
+            
             // Verificar el resultado de la consulta
             if ($result_query && $result_query->num_rows > 0) {
+               
                 $rows = $result_query->fetch_assoc();
+                
                 if (isset($rows['count'])) {
+                    
                     $numApariciones = intval($rows['count']);
                     if ($numApariciones == 0) {
                         return true;
