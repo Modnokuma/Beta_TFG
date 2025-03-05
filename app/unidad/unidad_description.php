@@ -221,14 +221,8 @@ $unidad_description =
         'associations' => array(
             'BelongsTo' => array(
                 'parametro' => array(
-                    'className' => 'parametro',
-                    'foreignKey' => 'id_parametro'
-                )
-            ),
-            'OneToMany' => array(
-                'entidad' => array(
-                    'attributes-own' => array('id_usuario'),
-                    'attributes-rel' => array('id_usuario')
+                    'attributes-own' => array('id_parametro'),
+                    'attributes-rel' => array('id_parametro')
                 )
             ),
         )

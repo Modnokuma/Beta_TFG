@@ -379,12 +379,11 @@ $parametro_description =
             )
         ),
         'associations' => array(
-            'HasMany' => array(
-                'Unidad' => array(
-                    'className' => 'Unidad',
-                    'foreignKey' => 'id_parametro',
-                    'dependent' => true
+            'OneToMany' => array(
+                'unidad' => array(
+                    'attributes-own' => array('id_parametro'),
+                    'attributes-rel' => array('id_unidad')
                 )
-            )
+            ),
         )
     );

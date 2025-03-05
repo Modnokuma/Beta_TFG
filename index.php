@@ -13,9 +13,8 @@ switch ($metodoHTTP){
     case 'PUT':
         // Se puede  usar $_PUT
         parse_str(file_get_contents("php://input"),$variables);
-        
         define ('variables', $variables);
-
+        var_dump($variables);
         define ('action', 'ADD');
         break;
     case 'DELETE':
@@ -37,11 +36,7 @@ switch ($metodoHTTP){
         $action = 'SEARCH';
         break;
     case 'OPTIONS':
-        parse_str(file_get_contents("php://input"),$variables);
-        define ('variables', $variables);
-        //$variables = $_GET;   
-        define ('action', 'SEARCH');     
-        $action = 'SEARCH';
+
         break;
     default: echo "Entro en el DEFAULT ";
         break;

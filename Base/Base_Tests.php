@@ -112,6 +112,7 @@ class Base_Tests
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
             $result = json_decode($result, true);
+            var_dump($result);
 
             echo "\n";
             echo "Tabla: " . $test['variables']['controlador'] . "\n";

@@ -37,11 +37,7 @@ class Base_Data_Validations
 
     public function null_test()
     {
-
-        if (action == 'DELETE') {
-            return false;
-        }
-
+        
         foreach ($this->listaAtributos as $atributo) {
 
             if (isset($this->estructura['attributes'][$atributo]['not_null'][action])){

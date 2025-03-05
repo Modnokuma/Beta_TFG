@@ -9,10 +9,6 @@ $proyecto_description =
                 'autoincrement' => true,
                 'unique' => true,
                 'type' => 'integer',
-                /*'foreign_key' => array(
-                    'table' => array('parametro', 'unidad'),
-                    'attribute' => array('id_parametro', 'id_unidad')
-                ),*/
                 'not_null' => array(
                     'ADD' => false,
                     'EDIT' => true,
