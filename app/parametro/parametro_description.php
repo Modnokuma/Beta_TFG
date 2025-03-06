@@ -387,3 +387,22 @@ $parametro_description =
         ),
 
     );
+
+
+    /*
+    // decia algo como esto. se recorre el onetomany y por cada uno se recoge la entidad y los atributos involucrados
+    
+            'OneToMany' => array(
+                array(
+                    'entity' => 'unidad', 
+                    'attributes-own' => array('id_parametro'),
+                    'attributes-rel' => array('id_parametro')
+                ),
+                array(
+                    'entity' => 'otraentidad', 
+                    'attributes-own' => array('id_otraentidad'),
+                    'attributes-rel' => array('id_otraentidad')
+                )
+            )
+
+    */
