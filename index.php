@@ -14,7 +14,6 @@ switch ($metodoHTTP){
         // Se puede  usar $_PUT
         parse_str(file_get_contents("php://input"),$variables);
         define ('variables', $variables);
-        var_dump($variables);
         define ('action', 'ADD');
         break;
     case 'DELETE':
@@ -31,7 +30,6 @@ switch ($metodoHTTP){
     case 'GET':
 
         define ('variables', $_GET);
-
         define ('action', 'SEARCH');     
         $action = 'SEARCH';
         break;

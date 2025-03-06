@@ -83,12 +83,49 @@ class Base_Action_Validations
                         return $feedback;
                     }
                 }
+
+                // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
+                if (isset($this->estructura['associations']['OneToMany']) && isset($this->estructura['attributes'][$atributo]['pk']) && action == 'DELETE') {
+                    
+                    $arrayEntidadesHijas = $this->estructura['associations']['OneToMany']['entity'];
+                    $arrayForeignKeys = $this->estructura['associations']['OneToMany']['attributes-rel'];
+                   
+
+                    foreach (array_combine($arrayEntidadesHijas, $arrayForeignKeys) as $entidad => $claveForanea) {
+                        $resp = $this->delete_parent_while_child_exist($this->valores[$atributo],$entidad,$claveForanea);
+
+                        if ($resp !== true) {
+                            $feedback['ok'] = false;
+                            $feedback['code'] = 'PARENT_HAS_CHILDREN_KO';
+                            $feedback['resources'] = true;
+                            return $feedback;
+                        }
+                    }
+                }
             }
         }
-
         return $respuesta;
     }
 
+    public function delete_parent_while_child_exist($pkPadre, $tablaHijo, $campoFkHijo)
+    {
+       
+        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_SERVICE.php";
+        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_description.php";
+        $descripcionHijo = $tablaHijo . '_description';
+        $estructuraHijo = $$descripcionHijo;
+
+        $servicioHijo = $tablaHijo . "_SERVICE";
+        $service = new $servicioHijo($estructuraHijo, 'SEARCH', array($campoFkHijo => $pkPadre));
+        $resultado = $service->SEARCH();
+
+        if ($resultado['code'] === 'RECORDSET_DATOS') {
+
+            return false;
+        } else {
+            return true;
+        }
+    }
     public function exist_in_other_entity($entidad, $campo, $valorvariable)
     {
 
@@ -136,24 +173,18 @@ class Base_Action_Validations
         $primaryKey = $this->listaAtributos[0];
         $currentId = $this->valores[$primaryKey];
 
-
-        /* echo "campo : ".$campo;
-        echo ", valorvariable : ".$valorvariable;
-        echo " , primaryKey : ".$primaryKey;
-        echo " , currentId : ".$currentId;
-        echo "\n";*/
         if ($primaryKey != $campo) {
             $query = "SELECT COUNT(*) as count FROM " . $controlador . " WHERE " . $campo . " = '" . $valorvariable . "' AND " . $primaryKey . " != " . $currentId;
             $service = new $entidad_service($this->estructura, 'SEARCH_BY', array());
             $result_query = $service->ejecutarPersonalizedQuery($query);
-            
+
             // Verificar el resultado de la consulta
             if ($result_query && $result_query->num_rows > 0) {
-               
+
                 $rows = $result_query->fetch_assoc();
-                
+
                 if (isset($rows['count'])) {
-                    
+
                     $numApariciones = intval($rows['count']);
                     if ($numApariciones == 0) {
                         return true;
@@ -167,8 +198,17 @@ class Base_Action_Validations
         return true;
     }
 
+
+
     public function action_validate_pk_unique()
     {
         return true;
     }
 }
+
+
+        /* echo "campo : ".$campo;
+        echo ", valorvariable : ".$valorvariable;
+        echo " , primaryKey : ".$primaryKey;
+        echo " , currentId : ".$currentId;
+        echo "\n";*/

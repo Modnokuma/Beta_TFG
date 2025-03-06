@@ -1,6 +1,6 @@
 <?php
 
-define('URL_test','http://localhost/webProjects/dani/Beta_TFG/index.php');
+define('URL_test','http://localhost/Proyectos/Beta_TFG/index.php');
 
 
 ?>

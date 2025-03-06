@@ -380,10 +380,10 @@ $parametro_description =
         ),
         'associations' => array(
             'OneToMany' => array(
-                'unidad' => array(
-                    'attributes-own' => array('id_parametro'),
-                    'attributes-rel' => array('id_unidad')
-                )
-            ),
-        )
+                'entity' => array('unidad'),
+                'attributes-own' => array('id_parametro'),
+                'attributes-rel' => array('id_parametro')
+            )
+        ),
+
     );

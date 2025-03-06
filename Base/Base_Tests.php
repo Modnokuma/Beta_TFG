@@ -112,7 +112,7 @@ class Base_Tests
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
             $result = json_decode($result, true);
-            var_dump($result);
+            //var_dump($result);
 
             echo "\n";
             echo "Tabla: " . $test['variables']['controlador'] . "\n";
@@ -161,6 +161,8 @@ class Base_Tests
         $conexion->query("INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `organizacion_usuario`, `puesto_usuario`, `direccion_usuario`, `correo_usuario`) 
         VALUES (1, 'Samuel', 'ESEI', 'alumno', 'Calle Santo Domingo', 'Samuel@gmail.com'),
             (2, 'Javi', 'ESEI', 'profesor', 'Calle B Nº2 1ºC', 'javi@javi.es')");
+        $conexion->query("INSERT INTO `unidad` (`id_unidad`, `nombre_unidad`, `descripcion_unidad`, `id_parametro`) VALUES
+        (1, 'Kg', 'Kilogramos, Unidad de peso y 1000 veces 1g', 1)");
         $conexion->close();
         return true;
     }

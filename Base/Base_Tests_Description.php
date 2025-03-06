@@ -149,7 +149,7 @@ const base_tests_description = array(
     ),
     'testEdit_unidad' => array(
         'variables' => array(
-            'id_unidad' => '1',
+            'id_unidad' => '2',
             'nombre_unidad' => 'Farenheit',
             'descripcion_unidad' => 'temperatura termodinámica',
             'id_parametro' => '1',
@@ -161,7 +161,7 @@ const base_tests_description = array(
     ),
     'testDelete_unidad' => array(
         'variables' => array(
-            'id_unidad' => '1',
+            'id_unidad' => '2',
             'TESTING' => true,
             'action' => 'DELETE',
             'controlador' => 'unidad'
@@ -206,4 +206,13 @@ const base_tests_description = array(
         ),
         'mensaje' => 'CORREO_USUARIO_ALREADY_EXISTS_KO'
     ),
+    'testDeleteStrongEntity' => array(
+        'variables' => array(
+            'id_parametro' => '1',
+            'TESTING' => true,
+            'action' => 'DELETE',
+            'controlador' => 'parametro'
+        ),
+        'mensaje' => 'PARENT_HAS_CHILDREN_KO'
+    )
 );
