@@ -146,12 +146,11 @@ $unidad_description =
                 )
             ),
             'id_parametro' => array(
-                'autoincrement' => true,
                 'type' => 'integer',
-                'foreign_key' => array(
+               /* 'foreign_key' => array(
                     'table' => array('parametro'),
                     'attribute' => array('id_parametro')
-                ),
+                ),*/
                 'not_null' => array(
                     'ADD' => true,
                     'EDIT' => true
@@ -193,10 +192,16 @@ $unidad_description =
         ),
         'associations' => array(
             'BelongsTo' => array(
-                'parametro' => array(
+                array(
+                    'entity' => 'unidad', 
+                    'attributes-own' => array('id_unidad','id_parametro'),
+                    'attributes-rel' => array('id_javi','id2_javi')
+                ),
+                array(
+                    'entity' => 'parametro', 
                     'attributes-own' => array('id_parametro'),
                     'attributes-rel' => array('id_parametro')
-                )
+                ),
             ),
         )
     );

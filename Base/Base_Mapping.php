@@ -58,7 +58,6 @@ class Base_Mapping
     public function execute_simple_query()
     {
 
-
         if (!($this->connection())) {
 
             $this->ok = false;
@@ -68,6 +67,7 @@ class Base_Mapping
             return $this->feedback;
         } else {
             //ejecutamos la query
+            
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
@@ -84,6 +84,9 @@ class Base_Mapping
                 if (action == 'ADD') {
                     //$lastid = $this->conn->query(SELECT LAST_INSERT_ID());
                     $this->resource = mysqli_insert_id($this->conn);
+                }
+                else{
+                    $this->resource = $this->query;
                 }
                 //llamamos al metodo que construye el mensaje
                 $this->construct_response();

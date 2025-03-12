@@ -84,7 +84,7 @@ class Base_Action_Validations
                     }
                 }
 
-                // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
+                /* Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
                 if (isset($this->estructura['associations']['OneToMany']) && isset($this->estructura['attributes'][$atributo]['pk']) && action == 'DELETE') {
                     
                     $arrayEntidadesHijas = $this->estructura['associations']['OneToMany']['entity'];
@@ -101,13 +101,13 @@ class Base_Action_Validations
                             return $feedback;
                         }
                     }
-                }
+                }*/
 
                 // Prueba
                 // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
                 if (isset($this->estructura['associations']['OneToMany']) && isset($this->estructura['attributes'][$atributo]['pk']) && action == 'DELETE') {
                     $array_valores_pk = [];
-
+                    
                     // metemos en un array los atributos que son pk
                     foreach ($this->listaAtributos as $aux) {
                         if (isset($this->estructura['attributes'][$aux]['pk'])) {
@@ -118,13 +118,13 @@ class Base_Action_Validations
                     // recorremos las relaciones One to Many
                     foreach ($this->estructura['associations']['OneToMany'] as $arrayFk) {
                         $entidadHija = $arrayFk['entity'];
-                        $arrayForeignKey = $arrayFk['attributes-rel'];
-                                       
-                        $resp = $this->delete_parent_while_child_exist($array_valores_pk[],$entidadHija,$arrayForeignKey);
+                        $arrayForeignKey = $arrayFk['attributes-rel'];             
+
+                        $resp = $this->delete_parent_while_child_exist($array_valores_pk,$entidadHija,$arrayForeignKey);
 
                         if ($resp !== true) {
                             $feedback['ok'] = false;
-                            $feedback['code'] = 'PARENT_HAS_CHILDREN_KO';
+                            $feedback['code'] = $atributo.'_HAS_CHILDREN_IN_'.$entidadHija.'_KO';
                             $feedback['resources'] = true;
                             return $feedback;
                         }
@@ -167,16 +167,15 @@ class Base_Action_Validations
 
         $servicioHijo = $tablaHijo . "_SERVICE";
         $array_busqueda = []; 
-
+        
         foreach (array_combine($camposFkHijo, $pksPadre) as $campoFkHijo => $pkPadre) {
             $array_busqueda[$campoFkHijo] = $pkPadre;
         }
 
-        $service = new $servicioHijo($estructuraHijo, 'SEARCH', $array_busqueda);
+        $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda);
         $resultado = $service->SEARCH();
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
-
             return false;
         } else {
             return true;

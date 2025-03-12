@@ -24,7 +24,6 @@ class Base_Validations
         $action_validations = new Base_Action_Validations($this->estructura, $this->valores, $this->listaAtributos);
         $respuesta_action_validations = $action_validations->action_validations();
 
-
         if ($respuesta_action_validations !== true) {
             return $respuesta_action_validations;
         }

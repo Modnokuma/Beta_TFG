@@ -133,7 +133,7 @@ const base_tests_description = array(
             'nombre_unidad' => 'Kelvin',
             'descripcion_unidad' => 'temperatura termodinámica',
             'id_parametro' => '1',
-            'TESTING' => true,
+            'TESTING' => false,
             'action' => 'ADD',
             'controlador' => 'unidad'
         ),
@@ -213,6 +213,6 @@ const base_tests_description = array(
             'action' => 'DELETE',
             'controlador' => 'parametro'
         ),
-        'mensaje' => 'PARENT_HAS_CHILDREN_KO'
+        'mensaje' => 'id_parametro_HAS_CHILDREN_IN_unidad_KO'
     )
 );
