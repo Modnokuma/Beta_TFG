@@ -24,7 +24,7 @@ class Mapping extends Base_Mapping
 
         foreach ($this->listaAtributos as $atributo) {
 
-            if ($this->estructura['attributes'][$atributo]['autoincrement']) {
+            if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
                 $i++;
                 continue;
             }
@@ -38,18 +38,20 @@ class Mapping extends Base_Mapping
 
         $this->query = $this->query . ") VALUES (";
         $i = 0;
-        
+
         foreach ($this->listaAtributos as $atributo) {
 
-            if ($this->estructura['attributes'][$atributo]['autoincrement']) {
+            if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
                 $i++;
                 continue;
             }
 
-            if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
-                $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
-            } else {
-                $this->query = $this->query . $this->valores[$atributo];
+            if ((isset($this->estructura['attributes'][$atributo]['type']))) {
+                if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
+                    $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
+                } else {
+                    $this->query = $this->query . $this->valores[$atributo];
+                }
             }
 
             if (++$i !== $total) {
@@ -71,11 +73,13 @@ class Mapping extends Base_Mapping
         foreach ($this->listaAtributos as $atributo) {
             $this->query = $this->query . $atributo . " = ";
 
-            if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
-                $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
-            } else {
-                $this->query = $this->query . $this->valores[$atributo];
-            }
+            if ((isset($this->estructura['attributes'][$atributo]['type']))) {
+                if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
+                    $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
+                } else {
+                    $this->query = $this->query . $this->valores[$atributo];
+                }
+            }            
 
             if (++$i !== $total) {
                 $this->query .= ", ";
@@ -84,7 +88,7 @@ class Mapping extends Base_Mapping
 
         $cadena = $this->construirWhereIgual($this->valores);
         $this->query = $this->query . " WHERE " . $cadena;
-        
+
 
         return $this->execute_simple_query();
     }
@@ -103,7 +107,7 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-        
+
         return $this->get_results_from_query();
     }
 
@@ -147,7 +151,7 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-        echo $this->query;
+        //echo $this->query;
         return $this->get_results_from_query();
     }
 
@@ -187,14 +191,14 @@ class Mapping extends Base_Mapping
             } else {
                 $cadena = $cadena . " AND ";
             }
-            
+
             // Manejar el operador !=
             if (strpos($clave, '!=') !== false) {
-                
+
                 $clave = str_replace('!=', '', $clave);
                 $cadena = $cadena . "(" . $clave . " != " . (is_string($valor) ? "'$valor'" : $valor) . ")";
             } else {
-                
+
                 $cadena = $cadena . "(" . $clave . " = " . (is_string($valor) ? "'$valor'" : $valor) . ")";
             }
         }

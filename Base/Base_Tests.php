@@ -109,6 +109,8 @@ class Base_Tests
 
     public function test_exec()
     {
+        $contadorPruebas = 0;
+        $contadorPruebasCorrectas = 0;
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
             $result = json_decode($result, true);
@@ -120,11 +122,21 @@ class Base_Tests
             echo "Esperado: " . $test['mensaje'] . " || Devuelto: " . $result['code'];
             if ($result['code'] == $test['mensaje']) {
                 echo "  ||  CORRECTO";
+                $contadorPruebasCorrectas++;
             } else {
                 echo "  || INCORRECTO";
             }
             echo "\n";
+            $contadorPruebas++;
         }
+
+        echo "\n";
+        echo "----------" . "\n";
+        echo "RESULTADOS" . "\n";
+        echo "----------" . "\n";
+        echo "Pruebas Realizadas: " . $contadorPruebas . "\n";
+        echo "Pruebas Correctas: " . $contadorPruebasCorrectas . "\n";
+        echo "Pruebas Incorrectas: " . ($contadorPruebas - $contadorPruebasCorrectas) . "\n";
 
         return true;
     }

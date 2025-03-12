@@ -8,26 +8,20 @@ $parametro_description =
                 'autoincrement' => true,
                 'type' => 'integer',
                 'not_null' => array(
-                    'ADD' => false,
                     'EDIT' => true,
                     'DELETE' => true,
-                    'SEARCH' => false
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                         ),
                         'EDIT' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                         )
@@ -45,7 +39,6 @@ $parametro_description =
 
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
 
@@ -54,16 +47,11 @@ $parametro_description =
                 )
             ),
             'nombre_parametro' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'string',
                 'not_null' => array(
                     'ADD' => true,
-                    'EDIT' => true,
-                    'DELETE' => false,
-                    'SEARCH' => false
+                    'EDIT' => true
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -79,7 +67,6 @@ $parametro_description =
 
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
@@ -99,7 +86,6 @@ $parametro_description =
 
                         ),
                         'SEARCH' => array(
-                            'min_size' =>  false,
                             'max_size' => 'MAX_SIZE_NOMBRE_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_PARAMETRO_KO',
 
@@ -108,16 +94,11 @@ $parametro_description =
                 )
             ),
             'descripcion_parametro' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'string',
                 'not_null' => array(
                     'ADD' => true,
-                    'EDIT' => true,
-                    'DELETE' => false,
-                    'SEARCH' => false
+                    'EDIT' => true
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -133,7 +114,6 @@ $parametro_description =
 
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
@@ -153,7 +133,6 @@ $parametro_description =
 
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 'MAX_SIZE_DESCRIPCION_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_PARAMETRO_KO',
 
@@ -162,16 +141,11 @@ $parametro_description =
                 )
             ),
             'tipo_parametro' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'string',
                 'not_null' => array(
                     'ADD' => true,
-                    'EDIT' => true,
-                    'DELETE' => false,
-                    'SEARCH' => false
+                    'EDIT' => true
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -187,7 +161,6 @@ $parametro_description =
 
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
@@ -207,7 +180,6 @@ $parametro_description =
 
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 'MAX_SIZE_TIPO_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_TIPO_PARAMETRO_KO',
 
@@ -216,8 +188,6 @@ $parametro_description =
                 )
             ),
             'formato_parametro' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'string',
                 'not_null' => array(
                     'ADD' => false,
@@ -225,7 +195,6 @@ $parametro_description =
                     'DELETE' => false,
                     'SEARCH' => false
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -270,8 +239,6 @@ $parametro_description =
                 )
             ),
             'rango_desde_parametro' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'numeric',
                 'not_null' => array(
                     'ADD' => false,
@@ -279,7 +246,6 @@ $parametro_description =
                     'DELETE' => false,
                     'SEARCH' => false
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -324,8 +290,6 @@ $parametro_description =
                 )
             ),
             'rango_hasta_parametro' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'numeric',
                 'not_null' => array(
                     'ADD' => false,
@@ -333,7 +297,6 @@ $parametro_description =
                     'DELETE' => false,
                     'SEARCH' => false
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -380,9 +343,11 @@ $parametro_description =
         ),
         'associations' => array(
             'OneToMany' => array(
-                'entity' => array('unidad'),
-                'attributes-own' => array('id_parametro'),
-                'attributes-rel' => array('id_parametro')
+                array(
+                    'entity' => 'unidad', 
+                    'attributes-own' => array('id_parametro'),
+                    'attributes-rel' => array('id_parametro')
+                )
             )
         ),
 

@@ -9,28 +9,22 @@ $unidad_description =
                 'autoincrement' => true,
                 'type' => 'integer',
                 'not_null' => array(
-                    'ADD' => false,
                     'EDIT' => true,
-                    'DELETE' => true,
-                    'SEARCH' => false
+                    'DELETE' => true
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
                         ),
                         'EDIT' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
@@ -50,7 +44,6 @@ $unidad_description =
                             
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 'MAX_SIZE_ID_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_ID_UNIDAD_KO',
                             
@@ -59,16 +52,11 @@ $unidad_description =
                 )
             ),
             'nombre_unidad' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'string',
                 'not_null' => array(
                     'ADD' => true,
-                    'EDIT' => true,
-                    'DELETE' => false,
-                    'SEARCH' => false
+                    'EDIT' => true
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -84,7 +72,6 @@ $unidad_description =
                             
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
@@ -104,7 +91,6 @@ $unidad_description =
                             
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 'MAX_SIZE_NOMBRE_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_NOMBRE_UNIDAD_KO',
                             
@@ -113,16 +99,11 @@ $unidad_description =
                 )
             ),
             'descripcion_unidad' => array(
-                'pk' => false,
-                'autoincrement' => false,
                 'type' => 'string',
                 'not_null' => array(
                     'ADD' => true,
-                    'EDIT' => true,
-                    'DELETE' => false,
-                    'SEARCH' => false
+                    'EDIT' => true
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
@@ -138,7 +119,6 @@ $unidad_description =
                             
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
@@ -158,7 +138,6 @@ $unidad_description =
                             
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 'MAX_SIZE_DESCRIPCION_UNIDAD_KO',
                             'exp_reg' => 'EXP_REG_DESCRIPCION_UNIDAD_KO',
                             
@@ -167,8 +146,7 @@ $unidad_description =
                 )
             ),
             'id_parametro' => array(
-                'pk' => false,
-                'autoincrement' => false,
+                'autoincrement' => true,
                 'type' => 'integer',
                 'foreign_key' => array(
                     'table' => array('parametro'),
@@ -176,20 +154,16 @@ $unidad_description =
                 ),
                 'not_null' => array(
                     'ADD' => true,
-                    'EDIT' => true,
-                    'DELETE' => false,
+                    'EDIT' => true
                 ),
-                'default_value' => false,
                 'rules' => array(
                     'validations' => array(
                         'ADD' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
                         ),
                         'EDIT' => array(
-                            'min_size' => false,
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
@@ -209,7 +183,6 @@ $unidad_description =
                             
                         ),
                         'SEARCH' => array(
-                            'min_size' => false,
                             'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
                             'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
                             
