@@ -116,6 +116,8 @@ class Base_Tests
             $result = $this->test_run($test);
             $result = json_decode($result, true);
 
+           
+
             echo "\n";
             echo "Tabla: " . $test['variables']['controlador'] . "\n";
             echo "Acción: " . $test['variables']['action'] . "\n";

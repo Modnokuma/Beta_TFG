@@ -17,9 +17,11 @@ class Base_Action_Validations
     public function action_validations()
     {
         $respuesta = true;
-
+        echo "entra en action_validations";
+        exit();
+        
         foreach ($this->listaAtributos as $atributo) {
-
+            
 
             if (isset($this->valores[$atributo])) {
 
@@ -41,14 +43,16 @@ class Base_Action_Validations
                 // foreign key (error si valor no esta en la otra tabla)
                 // si foreign key para un atributo
                 if ((isset($this->estructura['attributes'][$atributo]['foreign_key']))) {
-
+                    echo ("FOREIGN KEY"); 
+                    exit();
                     $array_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['table'];
                     $array_pk_tablas = $this->estructura['attributes'][$atributo]['foreign_key']['attribute'];
 
 
                     foreach (array_combine($array_tablas, $array_pk_tablas) as $tabla => $pk) {
                         $resp = $this->exist_in_other_entity($tabla, $pk, $this->valores[$atributo]);
-
+                        var_dump($resp);
+                        exit();
                         if ($resp !== true) {
 
                             $feedback['ok'] = false;

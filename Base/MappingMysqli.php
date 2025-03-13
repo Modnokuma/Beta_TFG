@@ -58,8 +58,8 @@ class Mapping extends Base_Mapping
                 $this->query .= ", ";
             }
         }
+       
         $this->query = $this->query . ")";
-
         return $this->execute_simple_query();
     }
 
