@@ -17,8 +17,6 @@ class Base_Action_Validations
     public function action_validations()
     {
         $respuesta = true;
-        echo "entra en action_validations";
-        exit();
         
         foreach ($this->listaAtributos as $atributo) {
             
