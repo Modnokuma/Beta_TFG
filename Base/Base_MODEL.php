@@ -32,7 +32,8 @@ class Base_MODEL extends Mapping
     }
 
     function SEARCH_BY()
-    {
+    {   
+       
         return $this->mapping_SEARCH_BY();
     }
 

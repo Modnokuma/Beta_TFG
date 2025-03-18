@@ -20,7 +20,10 @@ class Base_SERVICE
             $this->accion = action;
         }
         if ($variables !== '') {
+            
             $this->valores = $variables;
+            //echo "VALORES: ";
+            //var_dump($this->valores);
         } else {
             $this->valores = variables;
         }
@@ -93,7 +96,7 @@ class Base_SERVICE
     }
     function SEARCH_BY()
     {
-
+       
         return $this->model->SEARCH_BY();
     }
 

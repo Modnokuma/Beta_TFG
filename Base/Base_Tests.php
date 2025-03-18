@@ -112,34 +112,38 @@ class Base_Tests
     {
         $contadorPruebas = 0;
         $contadorPruebasCorrectas = 0;
+        $output = "";
+
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
             $result = json_decode($result, true);
 
-           
-
-            echo "\n";
-            echo "Tabla: " . $test['variables']['controlador'] . "\n";
-            echo "Acción: " . $test['variables']['action'] . "\n";
-            echo "Esperado: " . $test['mensaje'] . " || Devuelto: " . $result['code'];
+            $output .= "\n";
+            $output .= "Tabla: " . $test['variables']['controlador'] . "\n";
+            $output .= "Acción: " . $test['variables']['action'] . "\n";
+            $output .= "Esperado: " . $test['mensaje'] . " || Devuelto: " . $result['code'];
             if ($result['code'] == $test['mensaje']) {
-                echo "  ||  CORRECTO";
+                $output .= "  ||  CORRECTO";
                 $contadorPruebasCorrectas++;
             } else {
-                echo "  || INCORRECTO";
+                $output .= "  || INCORRECTO";
             }
-            echo "\n";
+            $output .= "\n";
             $contadorPruebas++;
         }
 
-        echo "\n";
-        echo "----------" . "\n";
-        echo "RESULTADOS" . "\n";
-        echo "----------" . "\n";
-        echo "Pruebas Realizadas: " . $contadorPruebas . "\n";
-        echo "Pruebas Correctas: " . $contadorPruebasCorrectas . "\n";
-        echo "Pruebas Incorrectas: " . ($contadorPruebas - $contadorPruebasCorrectas) . "\n";
+        $output .= "\n";
+        echo("----------" . "\n");
+        echo("RESULTADOS" . "\n");
+        echo("----------" . "\n");
+        echo("Pruebas Realizadas: " . $contadorPruebas . "\n");
+        echo("Pruebas Correctas: " . $contadorPruebasCorrectas . "\n");
+        echo("Pruebas Incorrectas: " . ($contadorPruebas - $contadorPruebasCorrectas) . "\n");
+        echo("----------" . "\n");
+        echo("DATOS " . "\n");
+        echo("----------" . "\n");
 
+        echo $output;
         return true;
     }
 

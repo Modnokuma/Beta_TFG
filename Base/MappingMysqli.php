@@ -58,7 +58,7 @@ class Mapping extends Base_Mapping
                 $this->query .= ", ";
             }
         }
-       
+
         $this->query = $this->query . ")";
         return $this->execute_simple_query();
     }
@@ -79,7 +79,7 @@ class Mapping extends Base_Mapping
                 } else {
                     $this->query = $this->query . $this->valores[$atributo];
                 }
-            }            
+            }
 
             if (++$i !== $total) {
                 $this->query .= ", ";
@@ -95,18 +95,33 @@ class Mapping extends Base_Mapping
 
     function mapping_SEARCH()
     {
+        $nuevos_valores = [];
 
         $this->query = "SELECT * FROM " . $this->tabla;
-
+        //var_dump($this->valores);
         $query = '';
+
         if (!empty($this->valores)) {
-            $query = $query . " WHERE (";
-            // se añadiria a la cadena de busqueda los valores
-            $query = $query . $this->construirWhereLike($this->valores);
-            $query = $query . " )";
+
+            // Para construir el where solo con los datos necesarios
+            foreach ($this->valores as $clave => $valor) {
+                if ($valor != '') {
+                    $nuevos_valores[$clave] = $valor;
+                }
+            }
+
+            // Si no tienes datos hace una busqueda vacia
+            if (!empty($nuevos_valores)) {
+                $query = $query . " WHERE (";
+                // se añadiria a la cadena de busqueda los valores
+                $query = $query . $this->construirWhereLike($nuevos_valores);
+                $query = $query . ")";
+            }
         }
 
         $this->query .= $query;
+
+        //echo $this->query;
 
         return $this->get_results_from_query();
     }
@@ -125,7 +140,7 @@ class Mapping extends Base_Mapping
                 $cadena = $cadena . " AND ";
             }
 
-            $cadena = $cadena . "(" . $clave . " LIKE " .  "'%" . $valor . "%' )";
+            $cadena = $cadena . "(" . $clave . " LIKE " .  "'%" . $valor . "%')";
         }
 
         return $cadena;
@@ -140,18 +155,26 @@ class Mapping extends Base_Mapping
 
     function mapping_SEARCH_BY()
     {
+        $nuevos_valores = [];
         $this->query = "SELECT * FROM " . $this->tabla;
         //var_dump($this->valores);
         $query = '';
         if (!empty($this->valores)) {
+            // Para construir el where solo con los datos necesarios
+            foreach ($this->valores as $clave => $valor) {
+                if ($valor != '') {
+                    $nuevos_valores[$clave] = $valor;
+                }
+            }
+
             $query = $query . " WHERE (";
-            // se añadiria a la cadena de busqueda los valores
-            $query = $query . $this->construirWhereIgualSearchBy($this->valores);
-            $query = $query . " )";
+            $query = $query . $this->construirWhereIgualSearchBy($nuevos_valores);
+            $query = $query . ")";
         }
 
         $this->query .= $query;
         //echo $this->query;
+
         return $this->get_results_from_query();
     }
 
@@ -183,7 +206,6 @@ class Mapping extends Base_Mapping
     {
         $cadena = '';
         $primero = true;
-        //echo "\n" .$valores;
 
         foreach ($valores as $clave => $valor) {
             if ($primero) {
@@ -192,15 +214,7 @@ class Mapping extends Base_Mapping
                 $cadena = $cadena . " AND ";
             }
 
-            // Manejar el operador !=
-            if (strpos($clave, '!=') !== false) {
-
-                $clave = str_replace('!=', '', $clave);
-                $cadena = $cadena . "(" . $clave . " != " . (is_string($valor) ? "'$valor'" : $valor) . ")";
-            } else {
-
-                $cadena = $cadena . "(" . $clave . " = " . (is_string($valor) ? "'$valor'" : $valor) . ")";
-            }
+            $cadena = $cadena . "(" . $clave . " = " . (is_string($valor) ? "'$valor'" : $valor) . ")";
         }
 
         return $cadena;

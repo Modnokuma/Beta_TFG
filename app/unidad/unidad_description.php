@@ -192,11 +192,11 @@ $unidad_description =
         ),
         'associations' => array(
             'BelongsTo' => array(
-                array(
+                /*array(
                     'entity' => 'unidad', 
                     'attributes-own' => array('id_unidad','id_parametro'),
                     'attributes-rel' => array('id_javi','id2_javi')
-                ),
+                ),*/
                 array(
                     'entity' => 'parametro', 
                     'attributes-own' => array('id_parametro'),

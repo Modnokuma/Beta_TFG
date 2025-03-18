@@ -1,6 +1,6 @@
 <?php
 const base_tests_description = array(
-   /* 'testAdd_usuario' => array(
+    'testAdd_usuario' => array(
         'variables' => array(
             'nombre_usuario' => 'Daniel',
             'organizacion_usuario' => 'ESEI',
@@ -127,7 +127,7 @@ const base_tests_description = array(
             'controlador' => 'parametro'
         ),
         'mensaje' => 'SQL_OK'
-    ),*/
+    ),
     'testAdd_unidad' => array(
         'variables' => array(
             'nombre_unidad' => 'Kelvin',
@@ -138,7 +138,7 @@ const base_tests_description = array(
             'controlador' => 'unidad'
         ),
         'mensaje' => 'SQL_OK'
-    ),/*
+    ),
     'testSearch_unidad' => array(
         'variables' => array(
             'TESTING' => true,
@@ -177,7 +177,7 @@ const base_tests_description = array(
             'action' => 'ADD',
             'controlador' => 'unidad'
         ),
-        'mensaje' => 'FOREIGN_KEY_ID_PARAMETRO_KO'
+        'mensaje' => 'FOREIGN_KEY_PARAMETRO_KO'
     ),
     'testActionUniqueValueAlreadyExists' => array(
         'variables' => array(
@@ -213,6 +213,6 @@ const base_tests_description = array(
             'action' => 'DELETE',
             'controlador' => 'parametro'
         ),
-        'mensaje' => 'id_parametro_HAS_CHILDREN_IN_unidad_KO'
-    )*/
+        'mensaje' => 'DELETE_PARENT_WHILE_CHILDREN_IN_unidad_KO'
+    )
 );
