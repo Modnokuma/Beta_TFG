@@ -36,7 +36,25 @@ class Base_Tests
         curl_close($curl);
         return $response;
     }
-
+    
+    public function test_search_by($test)
+    {
+        
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, URL_test);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'SEARCH_BY');
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($test['variables']));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
+        $response = curl_exec($curl);
+        //var_dump($response);
+        //exit();
+        
+        curl_close($curl);
+        return $response;
+    }
     function test_get($test)
     {
 
@@ -99,6 +117,10 @@ class Base_Tests
             case 'DELETE':
                 return $this->test_delete($test);
                 exit();
+                break;
+            case 'SEARCH_BY':
+               
+                return $this->test_search_by($test);
                 break;
             default:
 

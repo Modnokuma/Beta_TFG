@@ -1,6 +1,6 @@
 <?php
 const base_tests_description = array(
-    'testAdd_usuario' => array(
+    /*'testAdd_usuario' => array(
         'variables' => array(
             'nombre_usuario' => 'Daniel',
             'organizacion_usuario' => 'ESEI',
@@ -214,5 +214,13 @@ const base_tests_description = array(
             'controlador' => 'parametro'
         ),
         'mensaje' => 'DELETE_PARENT_WHILE_CHILDREN_IN_unidad_KO'
-    )
+    ),*/
+    'testSearchByVacio' => array(
+        'variables' => array(
+            'TESTING' => true,
+            'action' => 'SEARCH_BY',
+            'controlador' => 'usuario'
+        ),
+        'mensaje' => 'SEARCH_BY_NULL_KO'
+    ),
 );

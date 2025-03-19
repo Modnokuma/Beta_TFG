@@ -19,6 +19,7 @@ class Base_Data_Validations
 
     public function data_validations()
     {
+       
         $respuesta = true;
         $nulos = $this->null_test();
 
@@ -66,18 +67,21 @@ class Base_Data_Validations
 
     public function null_search_by()
     {
-        if (action == 'SEARCH_BY') {
+        
+        if (action == "SEARCH_BY") {
+            
             foreach ($this->listaAtributos as $atributo) {
                 if (isset($this->valores[$atributo])) {
                     return true;
                 }
             }
-        }
 
-        $feedback['ok'] = false;
-        $feedback['code'] = 'SEARCH_BY_NULL_KO';
-        $feedback['resources'] = false;
-        return $feedback;
+            $feedback['ok'] = false;
+            $feedback['code'] = 'SEARCH_BY_NULL_KO';
+            $feedback['resources'] = false;
+            return $feedback;
+        }
+        return true;
     }
 
     public function validations()
