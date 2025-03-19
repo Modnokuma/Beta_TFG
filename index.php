@@ -8,7 +8,6 @@ function responder($texto){
 
 $metodoHTTP = $_SERVER['REQUEST_METHOD'];
 
-
 switch ($metodoHTTP){
     case 'PUT':
         // Se puede  usar $_PUT
@@ -34,7 +33,10 @@ switch ($metodoHTTP){
         $action = 'SEARCH';
         break;
     case 'OPTIONS':
-
+        parse_str(file_get_contents("php://input"),$variables);
+        define ('variables', $variables);
+        define ('action', 'SEARCH_BY');     
+        $action = 'SEARCH_BY';
         break;
     default: echo "Entro en el DEFAULT ";
         break;
