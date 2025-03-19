@@ -17,67 +17,33 @@ class Base_Action_Validations
     public function action_validations()
     {
         $respuesta = true;
-        $array_pks = [];
 
-        //Metemos en un array los atributos que son pk
-        foreach ($this->listaAtributos as $aux) {
-            //echo "AUX: ".$aux;
+        $resp = $this->action_validate_pks();
 
-            if (isset($this->estructura['attributes'][$aux]['pk'])  && isset($this->valores[$aux])) {
-                //echo "AUX: ".$aux;
-                //echo "VALORES: ".$this->valores[$aux];
-                $array_pks[$aux] = $this->valores[$aux];
-            }
+        if ($resp !== true) {
+            return $resp;
         }
 
-        // Pk, comprobar si existe en la base de datos 
-        if ((action == 'ADD') and (count($array_pks) > 0)) {
-            $resp = $this->action_validate_pks($array_pks);
-
-            if ($resp !== true) {
-                return $resp;
-            }
+        $resp = $this->unique_validations();
+        if ($resp !== true) {
+            return $resp;
         }
 
-        // Comprobaciones de atributos unique
-        foreach ($this->listaAtributos as $atributo) {
-
-            if (isset($this->valores[$atributo])) {
-                if (isset($this->estructura['attributes'][$atributo]['unique'])) {
-                    $resp = $this->unique_validations($atributo);
-
-                    if ($resp !== true) {
-                        return $resp;
-                    }
-                }
-            }
+        $resp = $this->exist_in_other_entity();
+        if ($resp !== true) {
+            return $resp;
         }
 
-        // foreign key (error si valor no esta en la otra tabla)
-        // si foreign key para un atributo
-        if ((isset($this->estructura['associations']['BelongsTo'])) && (action == 'ADD' || action == 'EDIT')) {
-
-            $array_valores_fk = [];
-
-            foreach ($this->estructura['associations']['BelongsTo'] as $arrayFk) {
-                $tablaFk = $arrayFk['entity'];
-                $array_campos_fk_rel = $arrayFk['attributes-rel'];
-                $array_campos_fk_own = $arrayFk['attributes-own'];
-
-
-                // Recorremos los campos fk y metemos en un array los valores
-                foreach ($array_campos_fk_own as $campoFk) {
-                    $array_valores_fk[] = $this->valores[$campoFk];
-                }
-
-                $resp = $this->exist_in_other_entity($tablaFk, $array_campos_fk_rel, $array_valores_fk);
-
-                if ($resp !== true) {
-                    return $resp;
-                }
-            }
+        $resp = $this->delete_parent_while_child_exist();
+        if ($resp !== true) {
+            return $resp;
         }
 
+        return $respuesta;
+    }
+
+    public function delete_parent_while_child_exist()
+    {
         // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
         if (isset($this->estructura['associations']['OneToMany']) && action == 'DELETE') {
 
@@ -93,19 +59,118 @@ class Base_Action_Validations
                     $array_valores_pk[] = $this->valores[$campoFk];
                 }
 
-                $resp = $this->delete_parent_while_child_exist($array_valores_pk, $entidadHija, $arrayForeignKey);
+                include_once "./app/" . $entidadHija . "/" . $entidadHija . "_SERVICE.php";
+                include_once "./app/" . $entidadHija . "/" . $entidadHija . "_description.php";
+                $descripcionHijo = $entidadHija . '_description';
+                $estructuraHijo = $$descripcionHijo;
 
-                if ($resp !== true) {
-                    return $resp;
+                $servicioHijo = $entidadHija . "_SERVICE";
+                $array_busqueda = [];
+
+                foreach (array_combine($arrayForeignKey, $array_valores_pk) as $campoFkHijo => $pkPadre) {
+                    $array_busqueda[$campoFkHijo] = $pkPadre;
+                }
+
+                $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda);
+                $resultado = $service->SEARCH_BY();
+
+                if ($resultado['code'] === 'RECORDSET_DATOS') {
+                    $feedback['ok'] = false;
+                    $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $entidadHija . '_KO';
+                    $feedback['resources'] = true;
+                    return $feedback;
+                } else {
+                    return true;
                 }
             }
         }
-
-        return $respuesta;
+        return true;
     }
 
 
-    public function delete_parent_while_child_exist($pksPadre, $tablaHijo, $camposFkHijo)
+    public function exist_in_other_entity()
+    {
+        // FK (error si el valor no esta en la otra tabla)
+        if ((isset($this->estructura['associations']['BelongsTo'])) && (action == 'ADD' || action == 'EDIT')) {
+
+            $array_valores_fk = [];
+
+            foreach ($this->estructura['associations']['BelongsTo'] as $arrayFk) {
+                $tablaFk = $arrayFk['entity'];
+                $array_campos_fk_rel = $arrayFk['attributes-rel'];
+                $array_campos_fk_own = $arrayFk['attributes-own'];
+
+
+                // Recorremos los campos fk y metemos en un array los valores
+                foreach ($array_campos_fk_own as $campoFk) {
+                    $array_valores_fk[] = $this->valores[$campoFk];
+                }
+
+                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_SERVICE.php";
+                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_description.php";
+
+                $nombreestructura = $tablaFk . '_description';
+                $contenidoestructura = $$nombreestructura;
+
+                foreach (array_combine($array_campos_fk_rel, $array_valores_fk) as $campoFk => $valorFk) {
+                    $array_busqueda[$campoFk] = $valorFk;
+                }
+
+                $entidad_service = $tablaFk . "_SERVICE";
+                $service = new $entidad_service($contenidoestructura, 'SEARCH_BY', $array_busqueda);
+                $resultado = $service->SEARCH_BY();
+
+
+                if ($resultado['code'] === 'RECORDSET_DATOS') {
+                    return true;
+                } else {
+                    $feedback['ok'] = false;
+                    $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($tablaFk) . '_KO';
+                    $feedback['resources'] = true;
+                    return $feedback;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public function action_validate_pks()
+    {
+        $array_pks = [];
+
+        //Metemos en un array los atributos que son pk
+        foreach ($this->listaAtributos as $aux) {
+            if (isset($this->estructura['attributes'][$aux]['pk'])  && isset($this->valores[$aux])) {
+                $array_pks[$aux] = $this->valores[$aux];
+            }
+        }
+
+        // Pk, comprobar si existe en la base de datos 
+        if ((action == 'ADD') and (count($array_pks) > 0)) {
+
+            $controlador = variables['controlador'];
+            include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+            $entidad_service = $controlador . "_SERVICE";
+
+            $service = new $entidad_service($this->estructura, 'SEARCH_BY', $array_pks);
+            $resultado = $service->SEARCH_BY();
+
+
+            if ($resultado['code'] === 'RECORDSET_VACIO') {
+                return true;
+            } else {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'PK_ALREADY_EXISTS_KO';
+                $feedback['resources'] = true;
+                return $feedback;
+            }
+        }
+
+        return true;
+    }
+
+    /*public function delete_parent_while_child_exist($pksPadre, $tablaHijo, $camposFkHijo)
     {
 
         include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_SERVICE.php";
@@ -127,15 +192,15 @@ class Base_Action_Validations
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             $feedback['ok'] = false;
             //$feedback['code'] = $atributo . '_HAS_CHILDREN_IN_' . $entidadHija . '_KO';
-            $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_'.$tablaHijo.'_KO';
+            $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $tablaHijo . '_KO';
             $feedback['resources'] = true;
             return $feedback;
         } else {
             return true;
         }
-    }
+    }*/
 
-    public function exist_in_other_entity($entidad, $array_campos_fk, $array_valores_fk)
+    /*public function exist_in_other_entity($entidad, $array_campos_fk, $array_valores_fk)
     {
 
         include_once "./app/" . $entidad . "/" . $entidad . "_SERVICE.php";
@@ -157,32 +222,40 @@ class Base_Action_Validations
             return true;
         } else {
             $feedback['ok'] = false;
-            $feedback['code'] = 'FOREIGN_KEY_'.strtoupper($entidad).'_KO';
+            $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($entidad) . '_KO';
             $feedback['resources'] = true;
             return $feedback;
         }
-    }
+    }*/
 
-    public function unique_validations($atributo)
+    public function unique_validations()
     {
-        // Antes de añadir un valor unique, comprueba que exista
-        if (action == 'ADD') {
-            $resp = $this->unique_value_already_exists($atributo, $this->valores[$atributo]);
+        // Comprobaciones de atributos unique
+        foreach ($this->listaAtributos as $atributo) {
 
-            if ($resp !== true) {
-                $feedback['ok'] = false;
-                $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
-                $feedback['resources'] = true;
-                return $feedback;
-            }
-        } else if (action == 'EDIT') {
-            $resp = $this->edit_unique_value_already_exists($atributo, $this->valores[$atributo]);
+            if (isset($this->valores[$atributo])) {
+                if (isset($this->estructura['attributes'][$atributo]['unique'])) {
+                    // Antes de añadir un valor unique, comprueba que exista
+                    if (action == 'ADD') {
+                        $resp = $this->unique_value_already_exists($atributo, $this->valores[$atributo]);
 
-            if ($resp !== true) {
-                $feedback['ok'] = false;
-                $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
-                $feedback['resources'] = true;
-                return $feedback;
+                        if ($resp !== true) {
+                            $feedback['ok'] = false;
+                            $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
+                            $feedback['resources'] = true;
+                            return $feedback;
+                        }
+                    } else if (action == 'EDIT') {
+                        $resp = $this->edit_unique_value_already_exists($atributo, $this->valores[$atributo]);
+
+                        if ($resp !== true) {
+                            $feedback['ok'] = false;
+                            $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
+                            $feedback['resources'] = true;
+                            return $feedback;
+                        }
+                    }
+                }
             }
         }
 
@@ -243,7 +316,7 @@ class Base_Action_Validations
     }
 
 
-    public function action_validate_pks($array_pks)
+    /*public function action_validate_pks($array_pks)
     {
         $controlador = variables['controlador'];
         include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
@@ -261,7 +334,7 @@ class Base_Action_Validations
             $feedback['resources'] = true;
             return $feedback;
         }
-    }
+    }*/
 }
 
 
