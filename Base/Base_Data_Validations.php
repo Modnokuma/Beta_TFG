@@ -26,6 +26,12 @@ class Base_Data_Validations
             return $nulos;
         }
 
+        $search_by = $this->null_search_by();
+
+        if ($search_by !== true) {
+            return $search_by;
+        }
+
         $validaciones = $this->validations();
 
         if ($validaciones !== true) {
@@ -37,11 +43,11 @@ class Base_Data_Validations
 
     public function null_test()
     {
-        
+
         foreach ($this->listaAtributos as $atributo) {
 
-            if (isset($this->estructura['attributes'][$atributo]['not_null'][action])){
-                
+            if (isset($this->estructura['attributes'][$atributo]['not_null'][action])) {
+
                 if (!($this->estructura['attributes'][$atributo]['not_null'][action])) {
                     continue;
                 } else {
@@ -52,12 +58,26 @@ class Base_Data_Validations
                         return $feedback;
                     }
                 }
-        
             }
-        
         }
 
         return false;
+    }
+
+    public function null_search_by()
+    {
+        if (action == 'SEARCH_BY') {
+            foreach ($this->listaAtributos as $atributo) {
+                if (isset($this->valores[$atributo])) {
+                    return true;
+                }
+            }
+        }
+
+        $feedback['ok'] = false;
+        $feedback['code'] = 'SEARCH_BY_NULL_KO';
+        $feedback['resources'] = false;
+        return $feedback;
     }
 
     public function validations()
@@ -68,11 +88,11 @@ class Base_Data_Validations
 
                 if (isset($this->valores[$atributo])) {
 
-                    if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])){
+                    if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
                         $nomval = $this->estructura['attributes'][$atributo]['rules']['validations'][action];
-                        foreach($nomval as $key => $value){
-                            $test = 'validate_'.$key;
-                            
+                        foreach ($nomval as $key => $value) {
+                            $test = 'validate_' . $key;
+
                             $resultado = $this->$test($atributo, $this->valores[$atributo]);
 
                             if ($resultado !== true) {
@@ -80,9 +100,7 @@ class Base_Data_Validations
                             }
                         }
                     }
-
                 }
-
             }
         }
         return true;
@@ -105,7 +123,7 @@ class Base_Data_Validations
         return true;
     }
 
-  
+
     public function validate_max_size($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
@@ -145,11 +163,11 @@ class Base_Data_Validations
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
             //echo ('return ' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'] . ';');
             $method = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
-            
-            $personalized = eval('return $this->objetoentidad->' .$method . ';');
-        
+
+            $personalized = eval('return $this->objetoentidad->' . $method . ';');
+
             if ($personalized !== true) {
-                
+
                 return $personalized;
             }
         }
