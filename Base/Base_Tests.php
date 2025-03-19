@@ -43,15 +43,13 @@ class Base_Tests
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, URL_test);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'SEARCH_BY');
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'OPTIONS');
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($test['variables']));
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json'
         ]);
         $response = curl_exec($curl);
-        //var_dump($response);
-        //exit();
-        
+                
         curl_close($curl);
         return $response;
     }
@@ -116,7 +114,6 @@ class Base_Tests
                 break;
             case 'DELETE':
                 return $this->test_delete($test);
-                exit();
                 break;
             case 'SEARCH_BY':
                
