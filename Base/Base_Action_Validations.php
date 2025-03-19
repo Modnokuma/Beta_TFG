@@ -42,99 +42,6 @@ class Base_Action_Validations
         return $respuesta;
     }
 
-    public function delete_parent_while_child_exist()
-    {
-        // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
-        if (isset($this->estructura['associations']['OneToMany']) && action == 'DELETE') {
-
-            $array_valores_pk = [];
-
-            // Recorremos las relaciones One to Many
-            foreach ($this->estructura['associations']['OneToMany'] as $arrayFk) {
-                $entidadHija = $arrayFk['entity'];
-                $arrayForeignKey = $arrayFk['attributes-rel'];
-
-                // Metemos en un array los valores de la pk de la entidad fuerte
-                foreach ($arrayForeignKey as $campoFk) {
-                    $array_valores_pk[] = $this->valores[$campoFk];
-                }
-
-                include_once "./app/" . $entidadHija . "/" . $entidadHija . "_SERVICE.php";
-                include_once "./app/" . $entidadHija . "/" . $entidadHija . "_description.php";
-                $descripcionHijo = $entidadHija . '_description';
-                $estructuraHijo = $$descripcionHijo;
-
-                $servicioHijo = $entidadHija . "_SERVICE";
-                $array_busqueda = [];
-
-                foreach (array_combine($arrayForeignKey, $array_valores_pk) as $campoFkHijo => $pkPadre) {
-                    $array_busqueda[$campoFkHijo] = $pkPadre;
-                }
-
-                $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda);
-                $resultado = $service->SEARCH_BY();
-
-                if ($resultado['code'] === 'RECORDSET_DATOS') {
-                    $feedback['ok'] = false;
-                    $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $entidadHija . '_KO';
-                    $feedback['resources'] = true;
-                    return $feedback;
-                } else {
-                    return true;
-                }
-            }
-        }
-        return true;
-    }
-
-
-    public function exist_in_other_entity()
-    {
-        // FK (error si el valor no esta en la otra tabla)
-        if ((isset($this->estructura['associations']['BelongsTo'])) && (action == 'ADD' || action == 'EDIT')) {
-
-            $array_valores_fk = [];
-
-            foreach ($this->estructura['associations']['BelongsTo'] as $arrayFk) {
-                $tablaFk = $arrayFk['entity'];
-                $array_campos_fk_rel = $arrayFk['attributes-rel'];
-                $array_campos_fk_own = $arrayFk['attributes-own'];
-
-
-                // Recorremos los campos fk y metemos en un array los valores
-                foreach ($array_campos_fk_own as $campoFk) {
-                    $array_valores_fk[] = $this->valores[$campoFk];
-                }
-
-                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_SERVICE.php";
-                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_description.php";
-
-                $nombreestructura = $tablaFk . '_description';
-                $contenidoestructura = $$nombreestructura;
-
-                foreach (array_combine($array_campos_fk_rel, $array_valores_fk) as $campoFk => $valorFk) {
-                    $array_busqueda[$campoFk] = $valorFk;
-                }
-
-                $entidad_service = $tablaFk . "_SERVICE";
-                $service = new $entidad_service($contenidoestructura, 'SEARCH_BY', $array_busqueda);
-                $resultado = $service->SEARCH_BY();
-
-
-                if ($resultado['code'] === 'RECORDSET_DATOS') {
-                    return true;
-                } else {
-                    $feedback['ok'] = false;
-                    $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($tablaFk) . '_KO';
-                    $feedback['resources'] = true;
-                    return $feedback;
-                }
-            }
-        }
-        return true;
-    }
-
-
     public function action_validate_pks()
     {
         $array_pks = [];
@@ -170,64 +77,7 @@ class Base_Action_Validations
         return true;
     }
 
-    /*public function delete_parent_while_child_exist($pksPadre, $tablaHijo, $camposFkHijo)
-    {
-
-        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_SERVICE.php";
-        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_description.php";
-        $descripcionHijo = $tablaHijo . '_description';
-        $estructuraHijo = $$descripcionHijo;
-
-        $servicioHijo = $tablaHijo . "_SERVICE";
-        $array_busqueda = [];
-
-        foreach (array_combine($camposFkHijo, $pksPadre) as $campoFkHijo => $pkPadre) {
-            $array_busqueda[$campoFkHijo] = $pkPadre;
-        }
-
-
-        $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda);
-        $resultado = $service->SEARCH_BY();
-
-        if ($resultado['code'] === 'RECORDSET_DATOS') {
-            $feedback['ok'] = false;
-            //$feedback['code'] = $atributo . '_HAS_CHILDREN_IN_' . $entidadHija . '_KO';
-            $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $tablaHijo . '_KO';
-            $feedback['resources'] = true;
-            return $feedback;
-        } else {
-            return true;
-        }
-    }*/
-
-    /*public function exist_in_other_entity($entidad, $array_campos_fk, $array_valores_fk)
-    {
-
-        include_once "./app/" . $entidad . "/" . $entidad . "_SERVICE.php";
-        include_once "./app/" . $entidad . "/" . $entidad . "_description.php";
-
-        $nombreestructura = $entidad . '_description';
-        $contenidoestructura = $$nombreestructura;
-
-        foreach (array_combine($array_campos_fk, $array_valores_fk) as $campoFk => $valorFk) {
-            $array_busqueda[$campoFk] = $valorFk;
-        }
-
-        $entidad_service = $entidad . "_SERVICE";
-        $service = new $entidad_service($contenidoestructura, 'SEARCH_BY', $array_busqueda);
-        $resultado = $service->SEARCH_BY();
-
-
-        if ($resultado['code'] === 'RECORDSET_DATOS') {
-            return true;
-        } else {
-            $feedback['ok'] = false;
-            $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($entidad) . '_KO';
-            $feedback['resources'] = true;
-            return $feedback;
-        }
-    }*/
-
+    
     public function unique_validations()
     {
         // Comprobaciones de atributos unique
@@ -315,6 +165,154 @@ class Base_Action_Validations
         return true;
     }
 
+    public function exist_in_other_entity()
+    {
+        // FK (error si el valor no esta en la otra tabla)
+        if ((isset($this->estructura['associations']['BelongsTo'])) && (action == 'ADD' || action == 'EDIT')) {
+
+            $array_valores_fk = [];
+
+            foreach ($this->estructura['associations']['BelongsTo'] as $arrayFk) {
+                $tablaFk = $arrayFk['entity'];
+                $array_campos_fk_rel = $arrayFk['attributes-rel'];
+                $array_campos_fk_own = $arrayFk['attributes-own'];
+
+
+                // Recorremos los campos fk y metemos en un array los valores
+                foreach ($array_campos_fk_own as $campoFk) {
+                    $array_valores_fk[] = $this->valores[$campoFk];
+                }
+
+                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_SERVICE.php";
+                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_description.php";
+
+                $nombreestructura = $tablaFk . '_description';
+                $contenidoestructura = $$nombreestructura;
+
+                foreach (array_combine($array_campos_fk_rel, $array_valores_fk) as $campoFk => $valorFk) {
+                    $array_busqueda[$campoFk] = $valorFk;
+                }
+
+                $entidad_service = $tablaFk . "_SERVICE";
+                $service = new $entidad_service($contenidoestructura, 'SEARCH_BY', $array_busqueda);
+                $resultado = $service->SEARCH_BY();
+
+
+                if ($resultado['code'] === 'RECORDSET_DATOS') {
+                    return true;
+                } else {
+                    $feedback['ok'] = false;
+                    $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($tablaFk) . '_KO';
+                    $feedback['resources'] = true;
+                    return $feedback;
+                }
+            }
+        }
+        return true;
+    }
+
+    public function delete_parent_while_child_exist()
+    {
+        // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
+        if (isset($this->estructura['associations']['OneToMany']) && action == 'DELETE') {
+
+            $array_valores_pk = [];
+
+            // Recorremos las relaciones One to Many
+            foreach ($this->estructura['associations']['OneToMany'] as $arrayFk) {
+                $entidadHija = $arrayFk['entity'];
+                $arrayForeignKey = $arrayFk['attributes-rel'];
+
+                // Metemos en un array los valores de la pk de la entidad fuerte
+                foreach ($arrayForeignKey as $campoFk) {
+                    $array_valores_pk[] = $this->valores[$campoFk];
+                }
+
+                include_once "./app/" . $entidadHija . "/" . $entidadHija . "_SERVICE.php";
+                include_once "./app/" . $entidadHija . "/" . $entidadHija . "_description.php";
+                $descripcionHijo = $entidadHija . '_description';
+                $estructuraHijo = $$descripcionHijo;
+
+                $servicioHijo = $entidadHija . "_SERVICE";
+                $array_busqueda = [];
+
+                foreach (array_combine($arrayForeignKey, $array_valores_pk) as $campoFkHijo => $pkPadre) {
+                    $array_busqueda[$campoFkHijo] = $pkPadre;
+                }
+
+                $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda);
+                $resultado = $service->SEARCH_BY();
+
+                if ($resultado['code'] === 'RECORDSET_DATOS') {
+                    $feedback['ok'] = false;
+                    $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $entidadHija . '_KO';
+                    $feedback['resources'] = true;
+                    return $feedback;
+                } else {
+                    return true;
+                }
+            }
+        }
+        return true;
+    }
+
+    /*public function delete_parent_while_child_exist($pksPadre, $tablaHijo, $camposFkHijo)
+    {
+
+        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_SERVICE.php";
+        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_description.php";
+        $descripcionHijo = $tablaHijo . '_description';
+        $estructuraHijo = $$descripcionHijo;
+
+        $servicioHijo = $tablaHijo . "_SERVICE";
+        $array_busqueda = [];
+
+        foreach (array_combine($camposFkHijo, $pksPadre) as $campoFkHijo => $pkPadre) {
+            $array_busqueda[$campoFkHijo] = $pkPadre;
+        }
+
+
+        $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda);
+        $resultado = $service->SEARCH_BY();
+
+        if ($resultado['code'] === 'RECORDSET_DATOS') {
+            $feedback['ok'] = false;
+            //$feedback['code'] = $atributo . '_HAS_CHILDREN_IN_' . $entidadHija . '_KO';
+            $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $tablaHijo . '_KO';
+            $feedback['resources'] = true;
+            return $feedback;
+        } else {
+            return true;
+        }
+    }*/
+
+    /*public function exist_in_other_entity($entidad, $array_campos_fk, $array_valores_fk)
+    {
+
+        include_once "./app/" . $entidad . "/" . $entidad . "_SERVICE.php";
+        include_once "./app/" . $entidad . "/" . $entidad . "_description.php";
+
+        $nombreestructura = $entidad . '_description';
+        $contenidoestructura = $$nombreestructura;
+
+        foreach (array_combine($array_campos_fk, $array_valores_fk) as $campoFk => $valorFk) {
+            $array_busqueda[$campoFk] = $valorFk;
+        }
+
+        $entidad_service = $entidad . "_SERVICE";
+        $service = new $entidad_service($contenidoestructura, 'SEARCH_BY', $array_busqueda);
+        $resultado = $service->SEARCH_BY();
+
+
+        if ($resultado['code'] === 'RECORDSET_DATOS') {
+            return true;
+        } else {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($entidad) . '_KO';
+            $feedback['resources'] = true;
+            return $feedback;
+        }
+    }*/
 
     /*public function action_validate_pks($array_pks)
     {
