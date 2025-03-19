@@ -177,7 +177,7 @@ const base_tests_description = array(
             'action' => 'ADD',
             'controlador' => 'unidad'
         ),
-        'mensaje' => 'FOREIGN_KEY_PARAMETRO_KO'
+        'mensaje' => 'FOREIGN_KEY_VALUES_NOT_IN_parametro_KO'
     ),
     'testActionUniqueValueAlreadyExists' => array(
         'variables' => array(
@@ -190,7 +190,7 @@ const base_tests_description = array(
             'action' => 'ADD',
             'controlador' => 'usuario'
         ),
-        'mensaje' => 'NOMBRE_USUARIO_ALREADY_EXISTS_KO'
+        'mensaje' => 'nombre_usuario_ALREADY_EXISTS_KO'
     ),
     'testEditUniqueValueAlreadyExists' => array(
         'variables' => array(
@@ -204,7 +204,7 @@ const base_tests_description = array(
             'action' => 'EDIT',
             'controlador' => 'usuario'
         ),
-        'mensaje' => 'CORREO_USUARIO_ALREADY_EXISTS_KO'
+        'mensaje' => 'correo_usuario_ALREADY_EXISTS_KO'
     ),
     'testDeleteStrongEntity' => array(
         'variables' => array(
@@ -223,5 +223,18 @@ const base_tests_description = array(
             
         ),
         'mensaje' => 'SEARCH_BY_NULL_KO'
+    ),
+    'testDefaultValues' => array(
+        'variables' => array(
+            'id_usuario' => '2',
+            'nombre_usuario' => 'Manuel',
+            'organizacion_usuario' => 'ESEI',
+            'direccion_usuario' => 'Calle A Nº1 4ºD',
+            'correo_usuario' => 'javi@javi.es',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'usuario'
+        ),
+        'mensaje' => 'SQL_OK'
     ),
 );

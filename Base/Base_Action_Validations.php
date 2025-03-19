@@ -91,7 +91,7 @@ class Base_Action_Validations
 
                         if ($resp !== true) {
                             $feedback['ok'] = false;
-                            $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
+                            $feedback['code'] =  $atributo. '_ALREADY_EXISTS_KO';
                             $feedback['resources'] = true;
                             return $feedback;
                         }
@@ -100,7 +100,7 @@ class Base_Action_Validations
 
                         if ($resp !== true) {
                             $feedback['ok'] = false;
-                            $feedback['code'] =  strtoupper($atributo) . '_ALREADY_EXISTS_KO';
+                            $feedback['code'] =  $atributo. '_ALREADY_EXISTS_KO';
                             $feedback['resources'] = true;
                             return $feedback;
                         }
@@ -123,7 +123,7 @@ class Base_Action_Validations
         $entidad_service = $controlador . "_SERVICE";
         $service = new $entidad_service($this->estructura, 'SEARCH_BY', array($campo => $valorvariable));
         $resultado = $service->SEARCH_BY();
-        //var_dump($resultado);
+        
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             return false;
@@ -202,7 +202,7 @@ class Base_Action_Validations
                     return true;
                 } else {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($tablaFk) . '_KO';
+                    $feedback['code'] = 'FOREIGN_KEY_VALUES_NOT_IN_' . $tablaFk . '_KO';
                     $feedback['resources'] = true;
                     return $feedback;
                 }

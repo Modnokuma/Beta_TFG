@@ -20,7 +20,7 @@ class Base_SERVICE
             $this->accion = action;
         }
         if ($variables !== '') {
-            
+
             $this->valores = $variables;
             //echo "VALORES: ";
             //var_dump($this->valores);
@@ -65,7 +65,11 @@ class Base_SERVICE
 
             if (!isset($this->valores[$atributo])) {
                 //Aqui deberiamos comprobar si tiene un valor predeterminado. Hacerlo en un futuro.
-                $this->valores[$atributo] = '';
+                if (isset($this->estructura['attributes'][$atributo]['default_value'])) {
+                    $this->valores[$atributo] = $this->estructura['attributes'][$atributo]['default_value'];
+                } else {
+                    $this->valores[$atributo] = '';
+                }
             }
 
             //echo $_POST[$atributo];
@@ -96,7 +100,7 @@ class Base_SERVICE
     }
     function SEARCH_BY()
     {
-       
+
         return $this->model->SEARCH_BY();
     }
 

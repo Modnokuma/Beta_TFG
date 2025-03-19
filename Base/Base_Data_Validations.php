@@ -19,7 +19,7 @@ class Base_Data_Validations
 
     public function data_validations()
     {
-       
+
         $respuesta = true;
         $nulos = $this->null_test();
 
@@ -53,10 +53,13 @@ class Base_Data_Validations
                     continue;
                 } else {
                     if ((!(isset($this->valores[$atributo]))) || ($this->valores[$atributo] == '')) {
-                        $feedback['ok'] = false;
-                        $feedback['code'] = $atributo . '_is_null_KO';
-                        $feedback['resources'] = false;
-                        return $feedback;
+                        
+                        if (!isset($this->estructura['attributes'][$atributo]['default_value'])) {
+                            $feedback['ok'] = false;
+                            $feedback['code'] = $atributo . '_is_null_KO';
+                            $feedback['resources'] = false;
+                            return $feedback;
+                        }
                     }
                 }
             }
@@ -67,9 +70,9 @@ class Base_Data_Validations
 
     public function null_search_by()
     {
-        
+
         if (action == "SEARCH_BY") {
-            
+
             foreach ($this->listaAtributos as $atributo) {
                 if (isset($this->valores[$atributo])) {
                     return true;
