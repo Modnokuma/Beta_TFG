@@ -20,10 +20,7 @@ class Base_SERVICE
             $this->accion = action;
         }
         if ($variables !== '') {
-
             $this->valores = $variables;
-            //echo "VALORES: ";
-            //var_dump($this->valores);
         } else {
             $this->valores = variables;
         }
@@ -33,10 +30,12 @@ class Base_SERVICE
         $this->listaAtributos = array_keys($this->estructura['attributes']);
         $this->inicializarRest();
     }
+
     function ejecutarPersonalizedQuery($query)
     {
         return $this->model->personalized_query($query);
     }
+    
     function crearModelo($controlador)
     {
 
@@ -57,7 +56,6 @@ class Base_SERVICE
         return $this->model;
     }
 
-    //
     function rellenarModelo($listaAtributos)
     {
 
@@ -72,13 +70,10 @@ class Base_SERVICE
                 }
             }
 
-            //echo $_POST[$atributo];
             $this->model->valores[$atributo] = $this->valores[$atributo];
         }
 
         $this->model->listaAtributos = $this->listaAtributos;
-        //$this->model->listaValores = array_slice(array_values($_POST), 1); // El primero es controlador por eso nos lo cargamos
-
     }
 
     function ADD()

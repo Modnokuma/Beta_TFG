@@ -12,8 +12,6 @@ class Base_Validations
 
     public function validations()
     {
-        
-
         $respuesta = true;
 
         $data_validations = new Base_Data_Validations($this->estructura, $this->valores, $this->listaAtributos, $this);

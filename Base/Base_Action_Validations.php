@@ -77,7 +77,7 @@ class Base_Action_Validations
         return true;
     }
 
-    
+
     public function unique_validations()
     {
         // Comprobaciones de atributos unique
@@ -91,7 +91,7 @@ class Base_Action_Validations
 
                         if ($resp !== true) {
                             $feedback['ok'] = false;
-                            $feedback['code'] =  $atributo. '_ALREADY_EXISTS_KO';
+                            $feedback['code'] =  $atributo . '_ALREADY_EXISTS_KO';
                             $feedback['resources'] = true;
                             return $feedback;
                         }
@@ -100,7 +100,7 @@ class Base_Action_Validations
 
                         if ($resp !== true) {
                             $feedback['ok'] = false;
-                            $feedback['code'] =  $atributo. '_ALREADY_EXISTS_KO';
+                            $feedback['code'] =  $atributo . '_ALREADY_EXISTS_KO';
                             $feedback['resources'] = true;
                             return $feedback;
                         }
@@ -123,7 +123,7 @@ class Base_Action_Validations
         $entidad_service = $controlador . "_SERVICE";
         $service = new $entidad_service($this->estructura, 'SEARCH_BY', array($campo => $valorvariable));
         $resultado = $service->SEARCH_BY();
-        
+
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             return false;
@@ -255,89 +255,4 @@ class Base_Action_Validations
         }
         return true;
     }
-
-    /*public function delete_parent_while_child_exist($pksPadre, $tablaHijo, $camposFkHijo)
-    {
-
-        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_SERVICE.php";
-        include_once "./app/" . $tablaHijo . "/" . $tablaHijo . "_description.php";
-        $descripcionHijo = $tablaHijo . '_description';
-        $estructuraHijo = $$descripcionHijo;
-
-        $servicioHijo = $tablaHijo . "_SERVICE";
-        $array_busqueda = [];
-
-        foreach (array_combine($camposFkHijo, $pksPadre) as $campoFkHijo => $pkPadre) {
-            $array_busqueda[$campoFkHijo] = $pkPadre;
-        }
-
-
-        $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda);
-        $resultado = $service->SEARCH_BY();
-
-        if ($resultado['code'] === 'RECORDSET_DATOS') {
-            $feedback['ok'] = false;
-            //$feedback['code'] = $atributo . '_HAS_CHILDREN_IN_' . $entidadHija . '_KO';
-            $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $tablaHijo . '_KO';
-            $feedback['resources'] = true;
-            return $feedback;
-        } else {
-            return true;
-        }
-    }*/
-
-    /*public function exist_in_other_entity($entidad, $array_campos_fk, $array_valores_fk)
-    {
-
-        include_once "./app/" . $entidad . "/" . $entidad . "_SERVICE.php";
-        include_once "./app/" . $entidad . "/" . $entidad . "_description.php";
-
-        $nombreestructura = $entidad . '_description';
-        $contenidoestructura = $$nombreestructura;
-
-        foreach (array_combine($array_campos_fk, $array_valores_fk) as $campoFk => $valorFk) {
-            $array_busqueda[$campoFk] = $valorFk;
-        }
-
-        $entidad_service = $entidad . "_SERVICE";
-        $service = new $entidad_service($contenidoestructura, 'SEARCH_BY', $array_busqueda);
-        $resultado = $service->SEARCH_BY();
-
-
-        if ($resultado['code'] === 'RECORDSET_DATOS') {
-            return true;
-        } else {
-            $feedback['ok'] = false;
-            $feedback['code'] = 'FOREIGN_KEY_' . strtoupper($entidad) . '_KO';
-            $feedback['resources'] = true;
-            return $feedback;
-        }
-    }*/
-
-    /*public function action_validate_pks($array_pks)
-    {
-        $controlador = variables['controlador'];
-        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
-        $entidad_service = $controlador . "_SERVICE";
-        //var_dump($array_pks);
-        $service = new $entidad_service($this->estructura, 'SEARCH_BY', $array_pks);
-        $resultado = $service->SEARCH_BY();
-        var_dump($resultado);
-
-        if ($resultado['code'] === 'RECORDSET_VACIO') {
-            return true;
-        } else {
-            $feedback['ok'] = false;
-            $feedback['code'] = 'PK_ALREADY_EXISTS_KO';
-            $feedback['resources'] = true;
-            return $feedback;
-        }
-    }*/
 }
-
-
-        /* echo "campo : ".$campo;
-        echo ", valorvariable : ".$valorvariable;
-        echo " , primaryKey : ".$primaryKey;
-        echo " , currentId : ".$currentId;
-        echo "\n";*/

@@ -20,19 +20,11 @@ class Base_Mapping
     private $pass_testing = pass_testing;
     public $rows = array();
 
-
-    //$mysqli = new mysqli(,"my_user","my_password","my_db");
     function connection()
     {
        
         if (isset(variables['TESTING'])) {
-            /*echo 'estoy haciendo test';
-            echo "BD: " .$this->bd_testing ."\n";
-            echo "host: " .$this->host."\n";
-            echo "usuario bd: " .$this->user_testing."\n";
-            echo "pass: " .$this->pass_testing."\n";
-            */
-            
+            //conexion a la base de datos de pruebas            
             $this->conn = new mysqli($this->host, $this->user_testing, $this->pass_testing, $this->bd_testing) or die('fallo conexion');
                 
             return true;
@@ -54,7 +46,6 @@ class Base_Mapping
     }
 
     // Metodo para ejecutar funciones de ADD/EDIT/DELETE
-
     public function execute_simple_query()
     {
 
@@ -66,8 +57,8 @@ class Base_Mapping
             $this->construct_response();
             return $this->feedback;
         } else {
-            //ejecutamos la query
-            
+
+            //Ejecutamos la query            
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
@@ -98,7 +89,6 @@ class Base_Mapping
     }
 
     // Metodo para hacer un SEARCH
-
     public function get_results_from_query()
     {
 
@@ -151,7 +141,6 @@ class Base_Mapping
 
 
     // Metodo para ejecutar una query personalizada
-
     public function personalized_query($queryPrueba)
     {
 

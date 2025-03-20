@@ -42,8 +42,6 @@ switch ($metodoHTTP){
         break;
  }
 
-//var_dump(variables);
-       
 $controlador = variables['controlador'];
 
 include "./app/".$controlador."/".$controlador."_CONTROLLER.php";

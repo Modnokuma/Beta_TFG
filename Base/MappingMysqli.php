@@ -98,7 +98,6 @@ class Mapping extends Base_Mapping
         $nuevos_valores = [];
 
         $this->query = "SELECT * FROM " . $this->tabla;
-        //var_dump($this->valores);
         $query = '';
 
         if (!empty($this->valores)) {
@@ -121,8 +120,6 @@ class Mapping extends Base_Mapping
 
         $this->query .= $query;
 
-        //echo $this->query;
-
         return $this->get_results_from_query();
     }
 
@@ -130,7 +127,6 @@ class Mapping extends Base_Mapping
     {
         $cadena = '';
         $primero = true;
-
 
         foreach ($valores as $clave => $valor) {
 
@@ -157,7 +153,7 @@ class Mapping extends Base_Mapping
     {
         $nuevos_valores = [];
         $this->query = "SELECT * FROM " . $this->tabla;
-        //var_dump($this->valores);
+
         $query = '';
         if (!empty($this->valores)) {
             // Para construir el where solo con los datos necesarios
@@ -173,7 +169,6 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-        //echo $this->query;
 
         return $this->get_results_from_query();
     }
@@ -184,7 +179,6 @@ class Mapping extends Base_Mapping
         $primero = true;
 
         foreach ($valores as $clave => $valor) {
-            //recorre todo el array y el que no este vacio es la clave que hay que poner?
 
             if (in_array($clave, $this->clavesPrimarias)) {
 
@@ -193,7 +187,7 @@ class Mapping extends Base_Mapping
                 } else {
                     $cadena = $cadena . " AND ";
                 }
-                //is_string($valor) ? $valor = "'$valor'" : $valor;
+               
                 ($this->estructura['attributes'][$clave]['type'] == 'integer') ? $valor  : $valor = "'$valor'";
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
             }
@@ -219,25 +213,7 @@ class Mapping extends Base_Mapping
 
         return $cadena;
     }
-    /*
-    function sameUserExists()
-    {
-        $queryPrueba = "SELECT COUNT(*) as count FROM usuario WHERE nombre_usuario = '" . $this->valores['nombre_usuario'] . "'";
-        $result_query = $this->personalized_query($queryPrueba);
-
-        $rows = $result_query->fetch_all(MYSQLI_ASSOC);
-        $numApariciones = intval($rows[0]['count']);
-
-        if ($numApariciones > 0) {
-            $feedback['ok'] = false;
-            $feedback['code'] = 'USERNAME_ALREADY_EXISTS_KO';
-            $feedback['resources'] = $queryPrueba;
-            return $feedback;
-        }
-
-        return true;
-    }
-*/
+   
     function foreignKeyExists($table, $foreignKey, $value)
     {
 
@@ -255,21 +231,6 @@ class Mapping extends Base_Mapping
             return true;
         }
 
-        return $result_query;
-
-        /*$stmt = $this->conexion->prepare($query);
-        if ($stmt === false) {
-            throw new Exception('Failed to prepare statement: ' . $this->conexion->error);
-        }
-        
-        $stmt->execute();
-
-        // resultado
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-
-        $stmt->close();
-
-        return $row['count'] > 0;*/
+        return $result_query;        
     }
 }

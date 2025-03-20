@@ -53,7 +53,7 @@ class Base_Data_Validations
                     continue;
                 } else {
                     if ((!(isset($this->valores[$atributo]))) || ($this->valores[$atributo] == '')) {
-                        
+
                         if (!isset($this->estructura['attributes'][$atributo]['default_value'])) {
                             $feedback['ok'] = false;
                             $feedback['code'] = $atributo . '_is_null_KO';
@@ -168,7 +168,6 @@ class Base_Data_Validations
     public function validate_personalized($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
-            //echo ('return ' . $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'] . ';');
             $method = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
 
             $personalized = eval('return $this->objetoentidad->' . $method . ';');
