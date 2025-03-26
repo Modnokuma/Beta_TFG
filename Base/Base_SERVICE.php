@@ -14,28 +14,16 @@ class Base_SERVICE
     function __construct($estructura, $action, $variables)
     {
 
-        if ($action !== '') {
-            $this->accion = $action;
-        } else {
-            $this->accion = action;
-        }
-        if ($variables !== '') {
-            $this->valores = $variables;
-        } else {
-            $this->valores = variables;
-        }
-
+        $this->accion = $action;
+        $this->valores = $variables;
+        
         $this->controlador = variables['controlador'];
         $this->estructura = $estructura;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
-        $this->inicializarRest();
+        //$this->inicializarRest();
+        $this->model = $this->crearModelo($this->controlador); // crear en base service en base al nombre de la clase instanciada
     }
 
-    function ejecutarPersonalizedQuery($query)
-    {
-        return $this->model->personalized_query($query);
-    }
-    
     function crearModelo($controlador)
     {
 
@@ -52,6 +40,8 @@ class Base_SERVICE
         }
 
         $this->model->estructura = $this->estructura;
+        $this->model->tabla = $controlador; 
+        // aqui deberiamos rellenar el atributo $this->model->clavesPrimarias con el array de PK  
 
         return $this->model;
     }
@@ -106,15 +96,10 @@ class Base_SERVICE
         return $this->model->DELETE();
     }
 
-    function otraaction()
+    function ejecutarPersonalizedQuery($query)
     {
 
-        return 'llegue a otra accion del service';
-    }
+        return $this->model->personalized_query($query);
 
-    function same_user()
-    {
-
-        return $this->model->same_user();
     }
 }

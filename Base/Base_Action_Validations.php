@@ -68,7 +68,7 @@ class Base_Action_Validations
                 return true;
             } else {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'PK_ALREADY_EXISTS_KO';
+                $feedback['code'] = 'PK_ALREADY_EXISTS_IN_'.$controlador.'KO';
                 $feedback['resources'] = true;
                 return $feedback;
             }
@@ -142,7 +142,7 @@ class Base_Action_Validations
 
         if ($primaryKey != $campo) {
             $query = "SELECT COUNT(*) as count FROM " . $controlador . " WHERE " . $campo . " = '" . $valorvariable . "' AND " . $primaryKey . " != " . $currentId;
-            $service = new $entidad_service($this->estructura, 'SEARCH_BY', array());
+            $service = new $entidad_service(array(), '', array());
             $result_query = $service->ejecutarPersonalizedQuery($query);
 
             // Verificar el resultado de la consulta

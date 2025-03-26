@@ -5,8 +5,8 @@
 const estructura_generica = {
     attributes_list: [], //array atributos (obligatorio)
     columnas_visibles_tabla : [], //array columnas visibles (obligatorio)
-    columnas_modificadas_tabla: [], //array de atributos a cambiar formato presencial
-    attributes: { // conjunto de descripciones de atributos de la entidad
+    columnas_modificadas_tabla: [], //array de atributos a cambiar formato en la tabla de datos (No obligatorio, solo si se cambia formato informacion en tabla)
+    attributes: { // conjunto de descripciones de atributos de la entidad (obligatorio)
         nombredeatributo :{ // clave con el nombre del atributo
             html: { //indicación de elemento en html para mostrar este campo
                 tag: 'tag html', //tag html (select, input, textarea, .....)
@@ -26,11 +26,11 @@ const estructura_generica = {
                     min_size: [8, "nombredeatributo_min_size_KO"], // funcion atomica tamaño minimo, tiene el parametro de tamaño minimo del atributo (el que sea) y el codigo de error a devolver. No obligatorio sino se comprueba el tamaño minimo
                     max_size: [68, "nombredeatributo_max_size_KO"], // funcion atomica tamaño maximo, tiene el parametro de tamaño maximo del atributo (el que sea) y el codigo de error a devolver. No obligatorio sino se comprueba el tamaño maximo
                     format: ["expresionregular", "nombredeatributo_format_KO"], // funcion atomica formato de valor, tiene el parametro de expresión regular del valor del atributo (el que sea) y el codigo de error a devolver. No obligatorio sino se comprueba el formato
-                    no_file: true, // funcion atomica no existe fichero. no obligatorio segun accion
-                    file_type :["application/pdf"], // funcion atomica tipo mime fichero. No obligatorio si no se comprueba tipo de fichero
-                    max_size_file: 2000, // funcion atomica tamaño maximo fichero. No obligatorio si no se comprueba tamaño maximo fichero
-                    format_name_file: "expresionregular", // funcion atomica formato nombre fichero. No obligatorio sino se comprueba el formato del nombre y extension
-                    personalized: ["personalized_validation_nombreatributo($id, $extravalues"], // funcion personalizada. corresponde con un metodo en la clase entidad correspondiente, para ejecutarla deben existir las variables parametro de la funcion (id, valor, extravalues). No obligatorio sino hay funciones de validacioin personalizadas
+                    no_file: "nuevo_nombredeatributo_no_file_KO", // funcion atomica no existe fichero. no obligatorio segun accion
+                    file_type :["application/pdf","nuevo_nombredeatributo_file_type_KO"], // funcion atomica tipo mime fichero. No obligatorio si no se comprueba tipo de fichero
+                    max_size_file: [2000, "nuevo_nombredeatributo_max_size_file_KO"], // funcion atomica tamaño maximo fichero. No obligatorio si no se comprueba tamaño maximo fichero
+                    format_name_file: ["expresionregular","nuevo_nombredeatributo_format_name_file_KO"], // funcion atomica formato nombre fichero. No obligatorio sino se comprueba el formato del nombre y extension
+                    personalized: "personalized_validation_nombreatributo($extravalues)", // funcion personalizada. corresponde con un metodo en la clase entidad correspondiente, para ejecutarla deben existir las variables parametro de la funcion (id, valor, extravalues). No obligatorio sino hay funciones de validacioin personalizadas
                 }    
             }
         }, // fin de este atributo y se rellena para los siguientes
@@ -48,6 +48,7 @@ const estructura_persona = {
                 type: 'text',
             },
             is_pk: true,
+            is_not_null: true,
             component_visible_size: 9,
             validation_rules: {
                 ADD:{
@@ -71,6 +72,7 @@ const estructura_persona = {
                 tag: 'input',
                 type: 'text',
             },
+            is_not_null: true,
             validation_rules: {
                 ADD:{
                     min_size : [9, 'nombre_persona_min_size_KO'],
@@ -93,16 +95,8 @@ const estructura_persona = {
                 tag: 'input',
                 type: 'text',
             },
-            is_pk: false,
-            is_autoincrement: false,
             is_not_null: true,
-            rules: {
-                validations:{
-
-                },
-                errors:{
-
-                }
+            validation_rules: {
             }
         },
         fechaNacimiento_persona: {
@@ -110,18 +104,12 @@ const estructura_persona = {
                 tag: 'input',
                 type: 'date',
             },
+            is_not_null: true,
             validation_rules: {
-                    ADD:{
-                        min_size: [10,],
-                        personalize: ["",],
-                    },
-                errors:{
-                    ADD:{
-                        min_size: 'KO_min_size_fechaNacimiento_persona',
-                        personalize: 'KO_fechananterioractual_fechaNacimiento_persona',
-                    }
-
-                }
+                ADD:{
+                    min_size: [10, 'fechaNacimiento_persona_min_size_KO'],
+                    personalize: "personalized_validation_fechaNacimiento_persona(arrayatributosvalores)",
+                },
             }
         },
         direccion_persona: {
@@ -130,13 +118,8 @@ const estructura_persona = {
                 cols: 100,
                 rows: 10
             },
-            rules: {
-                validations:{
-
-                },
-                errors:{
-
-                }
+            is_not_null: true,
+            validation_rules: {
             }
         },
         telefono_persona: {
@@ -144,16 +127,8 @@ const estructura_persona = {
                 tag: 'input',
                 type: 'text',
             },
-            is_pk: false,
-            is_autoincrement: false,
             is_not_null: true,
-            rules: {
-                validations:{
-
-                },
-                errors:{
-
-                }
+            validation_rules: {
             }
         },
         email_persona: {
@@ -161,16 +136,8 @@ const estructura_persona = {
                 tag: 'input',
                 type: 'text',
             },
-            is_pk: false,
-            is_autoincrement: false,
             is_not_null: true,
-            rules: {
-                validations:{
-
-                },
-                errors:{
-
-                }
+            validation_rules: {
             }
         },
         foto_persona: {
@@ -178,27 +145,13 @@ const estructura_persona = {
                 tag: 'input',
                 type: 'file',
             },
-            is_pk: false,
-            is_autoincrement: false,
             is_not_null: true,
-            extra_properties:{
-
-            },
-            rules: {
-                validations:{
-                    ADD:{
-                        no_file: true, 
-                        file_type :["application/pdf"],
-                        max_size_file: 2000,
-                    },
+            validation_rules: {
+                ADD:{
+                    no_file: "nuevo_foto_persona_no_file_KO", 
+                    file_type :["application/pdf", "nuevo_foto_persona_file_type_KO"],
+                    max_size_file: [2000, "nuevo_foto_persona_max_size_file_KO"],
                 },
-                errors:{
-                    ADD:{
-                        no_file: "KO_no_file_nuevo_foto_persona",
-                        file_type : "KO_file_type_nuevo_foto_persona",
-                        max_size_file: "KO_max_size_file_nuevo_foto_persona",
-                    }
-                }
             }
         },
     },

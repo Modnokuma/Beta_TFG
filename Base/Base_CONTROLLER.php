@@ -27,8 +27,16 @@ class Base_CONTROLLER extends Base_Validations
             //  Si existen errores
             responder($respuesta_validations);
         }
+
+        if (method_exists(get_class($this),"data_attribute_personalize")){
+
+            $this->data_attribute_personalize();
         
-        $service = new $controlador($this->estructura,'','');
+        }
+        
+        
+        $service = new $controlador($this->estructura,action,$this->valores);
+
         $accion = action;
         
         responder($service->$accion());

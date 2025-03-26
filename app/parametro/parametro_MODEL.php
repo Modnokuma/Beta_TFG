@@ -8,9 +8,9 @@ class parametro_MODEL EXTENDS Base_MODEL{
     public $foranea;
 
     function __construct(){
-        $this->tabla='parametro';
+        
         $this->clavesPrimarias=array('id_parametro');
-        $this->foranea=array();    
+        
     }
     
 
