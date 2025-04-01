@@ -58,7 +58,8 @@ class Base_Mapping
             return $this->feedback;
         } else {
 
-            //Ejecutamos la query            
+            //Ejecutamos la query
+            
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
@@ -143,7 +144,7 @@ class Base_Mapping
     // Metodo para ejecutar una query personalizada
     public function personalized_query($queryPrueba)
     {
-
+        
         if (!($this->connection())) {
 
             $this->ok = false;
@@ -153,7 +154,6 @@ class Base_Mapping
         } else {
             
             $result_query = $this->conn->query($queryPrueba);
-            
             if ($result_query != true) {
 
                 $this->ok = false;

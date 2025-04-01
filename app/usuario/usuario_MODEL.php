@@ -8,9 +8,9 @@ class usuario_MODEL EXTENDS Base_MODEL{
     public $foranea;
 
     function __construct(){
-        $this->tabla='usuario';
-        $this->clavesPrimarias=array('id_usuario');
-        $this->foranea=array();    
+      
+         //$this->clavesPrimarias=array('id_usuario');
+        
     }
     
 

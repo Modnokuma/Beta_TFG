@@ -8,11 +8,11 @@ class parametro_CONTROLLER extends Base_CONTROLLER{
         parent::__construct();
 	}
 
-    function data_attribute_personalize(){
+    /*function data_attribute_personalize(){
 
         $this->valores['nombre_parametro'] = 'Masa';
 
-    }
+    }*/
 
 }
 

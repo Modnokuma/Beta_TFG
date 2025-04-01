@@ -34,12 +34,13 @@ class Base_Tests
         ]);
         $response = curl_exec($curl);
         curl_close($curl);
+        
         return $response;
     }
-    
+
     public function test_search_by($test)
     {
-        
+
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, URL_test);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -49,11 +50,11 @@ class Base_Tests
             'Content-Type: application/json'
         ]);
         $response = curl_exec($curl);
-                
+
         curl_close($curl);
         return $response;
     }
-    
+
     function test_get($test)
     {
 
@@ -80,6 +81,7 @@ class Base_Tests
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($test['variables']));
         $response = curl_exec($curl);
         curl_close($curl);
+        
         return $response;
     }
 
@@ -134,8 +136,13 @@ class Base_Tests
 
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
+            //var_dump($result);
             $result = json_decode($result, true);
-
+           
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                echo "Error al decodificar JSON: " . json_last_error_msg();
+            }
+            //exit();
             $output .= "\n";
             $output .= "Tabla: " . $test['variables']['controlador'] . "\n";
             $output .= "Acción: " . $test['variables']['action'] . "\n";
@@ -151,15 +158,15 @@ class Base_Tests
         }
 
         $output .= "\n";
-        echo("----------" . "\n");
-        echo("RESULTADOS" . "\n");
-        echo("----------" . "\n");
-        echo("Pruebas Realizadas: " . $contadorPruebas . "\n");
-        echo("Pruebas Correctas: " . $contadorPruebasCorrectas . "\n");
-        echo("Pruebas Incorrectas: " . ($contadorPruebas - $contadorPruebasCorrectas) . "\n");
-        echo("----------" . "\n");
-        echo("DATOS " . "\n");
-        echo("----------" . "\n");
+        echo ("----------" . "\n");
+        echo ("RESULTADOS" . "\n");
+        echo ("----------" . "\n");
+        echo ("Pruebas Realizadas: " . $contadorPruebas . "\n");
+        echo ("Pruebas Correctas: " . $contadorPruebasCorrectas . "\n");
+        echo ("Pruebas Incorrectas: " . ($contadorPruebas - $contadorPruebasCorrectas) . "\n");
+        echo ("----------" . "\n");
+        echo ("DATOS " . "\n");
+        echo ("----------" . "\n");
 
         echo $output;
         return true;
@@ -192,13 +199,16 @@ class Base_Tests
         $conexion->query("SET FOREIGN_KEY_CHECKS = 1");
 
         // Metemos los datos necesarios para algunos test
-        $conexion->query("INSERT INTO `parametro` (`id_parametro`, `nombre_parametro`, `descripcion_parametro`, `tipo_parametro`, `formato_parametro`, `rango_desde_parametro`, `rango_hasta_parametro`) VALUES
-        (1, 'Masa', 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo', 'Tipo 1', '', '', '')");
+        $conexion->query("INSERT INTO `parametro` (`id_parametro`, `nombre_parametro`, `descripcion_parametro`, `tipo_parametro`, `formato_parametro`, `rango_desde_parametro`, `rango_hasta_parametro`)
+         VALUES (1, 'Masa', 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo', 'Tipo 1', '', '', '')");
+        
         $conexion->query("INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `organizacion_usuario`, `puesto_usuario`, `direccion_usuario`, `correo_usuario`) 
         VALUES (1, 'Samuel', 'ESEI', 'alumno', 'Calle Santo Domingo', 'Samuel@gmail.com'),
-            (2, 'Javi', 'ESEI', 'profesor', 'Calle B Nº2 1ºC', 'javi@javi.es')");
+               (2, 'Javi', 'ESEI', 'profesor', 'Calle B Nº2 1ºC', 'javi@javi.es')");
+        
         $conexion->query("INSERT INTO `unidad` (`id_unidad`, `nombre_unidad`, `descripcion_unidad`, `id_parametro`) VALUES
         (1, 'Kg', 'Kilogramos, Unidad de peso y 1000 veces 1g', 1)");
+        
         $conexion->close();
         return true;
     }

@@ -8,13 +8,15 @@ class Base_Data_Validations
     protected $valores;
     protected $listaAtributos;
     protected $objetoentidad;
+    protected $controlador;
 
-    public function __construct($estructura, $valores, $listaAtributos, $entidad)
+    public function __construct($estructura, $valores, $listaAtributos, $entidad, $controlador)
     {
         $this->estructura = $estructura;
         $this->valores = $valores;
         $this->listaAtributos = $listaAtributos;
         $this->objetoentidad = $entidad;
+        $this->controlador = $controlador;
     }
 
     public function data_validations()

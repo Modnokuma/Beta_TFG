@@ -8,9 +8,9 @@ class proyecto_MODEL EXTENDS Base_MODEL{
     public $foranea;
 
     function __construct(){
-        $this->tabla='proyecto';
-        $this->clavesPrimarias=array('id_proyecto');
-        $this->foranea=array();    
+       
+        //$this->clavesPrimarias=array('id_proyecto');
+       
     }
     
 

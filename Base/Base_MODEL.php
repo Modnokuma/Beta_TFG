@@ -7,6 +7,7 @@ class Base_MODEL extends Mapping
 
     public $valores = array();
     public $listaAtributos = array(); // Atributos del modelo
+    public $clavesPrimarias = array(); // Claves primarias del modelo
 
     function EDIT()
     {
@@ -32,8 +33,8 @@ class Base_MODEL extends Mapping
     }
 
     function SEARCH_BY()
-    {   
-       
+    {
+
         return $this->mapping_SEARCH_BY();
     }
 

@@ -11,15 +11,21 @@ class Base_SERVICE
     public $controlador;
     public $prueba;
 
-    function __construct($estructura, $action, $variables)
+    function __construct($estructura, $action, $variables, $controlador)
     {
-
-        $this->accion = $action;
-        $this->valores = $variables;
         
-        $this->controlador = variables['controlador'];
+        $this->accion = $action;
+        
+        //¡¡  echo "accion: ".action. "\n";
+        //  echo "variables: ".var_dump($variables). "\n";
+        //  echo "estructura: ".var_dump($estructura). "\n";
+        $this->valores = $variables;
+
+        $this->controlador = $controlador;
+        // echo "controlador: " . $this->controlador . "\n";
         $this->estructura = $estructura;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
+        
         //$this->inicializarRest();
         $this->model = $this->crearModelo($this->controlador); // crear en base service en base al nombre de la clase instanciada
     }
@@ -40,7 +46,7 @@ class Base_SERVICE
         }
 
         $this->model->estructura = $this->estructura;
-        $this->model->tabla = $controlador; 
+        $this->model->tabla = $controlador;
         // aqui deberiamos rellenar el atributo $this->model->clavesPrimarias con el array de PK  
 
         return $this->model;
@@ -48,7 +54,7 @@ class Base_SERVICE
 
     function rellenarModelo($listaAtributos)
     {
-
+        $clavesPrimarias = array();
         foreach ($listaAtributos as $atributo) {
 
             if (!isset($this->valores[$atributo])) {
@@ -59,10 +65,15 @@ class Base_SERVICE
                     $this->valores[$atributo] = '';
                 }
             }
+            //Si el atributo es una PK, lo guardamos en el array de claves primarias
+            if (isset($this->estructura['attributes'][$atributo]['pk']) && isset($this->valores[$atributo])) {
+                $clavesPrimarias[$atributo] = $this->valores[$atributo];
+            }
 
             $this->model->valores[$atributo] = $this->valores[$atributo];
         }
 
+        $this->model->clavesPrimarias = $clavesPrimarias;
         $this->model->listaAtributos = $this->listaAtributos;
     }
 
@@ -98,8 +109,7 @@ class Base_SERVICE
 
     function ejecutarPersonalizedQuery($query)
     {
-
+        
         return $this->model->personalized_query($query);
-
     }
 }

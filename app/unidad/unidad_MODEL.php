@@ -8,9 +8,9 @@ class unidad_MODEL EXTENDS Base_MODEL{
     public $foranea;
 
     function __construct(){
-        $this->tabla='unidad';
-        $this->clavesPrimarias=array('id_unidad');
-        $this->foranea=array('id_parametro');    
+        
+         //$this->clavesPrimarias=array('id_unidad');
+       
     }
     
 

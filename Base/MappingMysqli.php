@@ -153,7 +153,6 @@ class Mapping extends Base_Mapping
     {
         $nuevos_valores = [];
         $this->query = "SELECT * FROM " . $this->tabla;
-
         $query = '';
         if (!empty($this->valores)) {
             // Para construir el where solo con los datos necesarios
@@ -179,9 +178,10 @@ class Mapping extends Base_Mapping
         $primero = true;
 
         foreach ($valores as $clave => $valor) {
-
-            if (in_array($clave, $this->clavesPrimarias)) {
-
+            //echo  $clave . " = " . $valor . "\n";
+            
+            if (array_key_exists($clave, $this->clavesPrimarias)) {
+               
                 if ($primero) {
                     $primero = false;
                 } else {

@@ -14,28 +14,28 @@ class Base_CONTROLLER extends Base_Validations
         
         $controlador .= "_SERVICE";
         $description = variables['controlador'] . '_description';
-
+       
         // Inicializar las propiedades heredadas
         $this->estructura = $$description;
         $this->valores = variables;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
-
+        $this->controlador = variables['controlador'];
         
         $respuesta_validations = $this->validations();
-
+       
         if (is_array($respuesta_validations)) {
             //  Si existen errores
             responder($respuesta_validations);
         }
-
-        if (method_exists(get_class($this),"data_attribute_personalize")){
+        
+        /*if (method_exists(get_class($this),"data_attribute_personalize")){
 
             $this->data_attribute_personalize();
         
-        }
-        
-        
-        $service = new $controlador($this->estructura,action,$this->valores);
+        }*/
+       
+
+        $service = new $controlador($this->estructura, action ,$this->valores, variables['controlador']);
 
         $accion = action;
         
