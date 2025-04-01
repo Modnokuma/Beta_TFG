@@ -109,7 +109,6 @@ class Base_SERVICE
 
     function ejecutarPersonalizedQuery($query)
     {
-        
         return $this->model->personalized_query($query);
     }
 }

@@ -16,8 +16,9 @@ class Mapping extends Base_Mapping
     function __construct() {}
 
     function mapping_ADD()
-    {
+        {
 
+        
         $this->query = "INSERT INTO " . $this->tabla . " ( ";
         $total = count($this->listaAtributos);
         $i = 0;

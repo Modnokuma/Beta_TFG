@@ -35,7 +35,7 @@ class Base_CONTROLLER extends Base_Validations
         }*/
        
 
-        $service = new $controlador($this->estructura, action ,$this->valores, variables['controlador']);
+        $service = new $controlador($this->estructura, action ,$this->valores, $this->controlador);
 
         $accion = action;
         
