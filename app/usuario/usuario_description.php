@@ -288,7 +288,7 @@ $usuario_description =
                         )
                     )
                 )
-            )/*,
+            ),
             'foto_usuario' => array(
                 'pk' => false,
                 'autoincrement' => false,
@@ -344,7 +344,7 @@ $usuario_description =
                         )
                     )
                 )
-            )*/
+            )
         )
     );
 

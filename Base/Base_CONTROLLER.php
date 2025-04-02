@@ -6,7 +6,7 @@ class Base_CONTROLLER extends Base_Validations
 {
     public function __construct()
     {
-
+        
         $controlador = variables['controlador'];
 
         $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
@@ -48,6 +48,7 @@ class Base_CONTROLLER extends Base_Validations
         
         }*/
         
+        // creo una instancia del service. no despistarse al llamarse la variable controlador
         $service = new $controlador($this->estructura, action ,$this->valores, $this->controlador);
 
         $accion = action;
