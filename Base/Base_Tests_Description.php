@@ -7,6 +7,7 @@ const base_tests_description = array(
             'puesto_usuario' => 'alumno',
             'direccion_usuario' => 'Calle A Nº1 4ºD',
             'correo_usuario' => 'a@a.es',
+            'foto_usuario' => '',
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'usuario'

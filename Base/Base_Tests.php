@@ -136,7 +136,7 @@ class Base_Tests
 
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
-            //var_dump($result);
+            
             $result = json_decode($result, true);
            
             if (json_last_error() !== JSON_ERROR_NONE) {
