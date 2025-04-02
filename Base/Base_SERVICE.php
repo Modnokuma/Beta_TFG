@@ -20,9 +20,7 @@ class Base_SERVICE
         //  echo "variables: ".var_dump($variables). "\n";
         //  echo "estructura: ".var_dump($estructura). "\n";
         $this->valores = $variables;
-
         $this->controlador = $controlador;
-        // echo "controlador: " . $this->controlador . "\n";
         $this->estructura = $estructura;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
         
@@ -34,7 +32,17 @@ class Base_SERVICE
     {
 
         //controlador es el nombre de la tabla
-        include_once "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
+        
+        $modelFile = "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
+        
+        if (!file_exists($modelFile)) {
+            $controlador = "Base";
+            include_once "./Base/Base_MODEL.php";
+        } else {
+
+            include_once $modelFile;
+        }
+
         $modelo = $controlador . "_MODEL";
         $this->model = new $modelo;
 

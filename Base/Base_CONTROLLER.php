@@ -9,10 +9,24 @@ class Base_CONTROLLER extends Base_Validations
 
         $controlador = variables['controlador'];
 
-        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+        $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+        // echo "serviceFile: " . $serviceFile . "\n";
         include_once "./app/" . $controlador . "/" . $controlador . "_description.php";
+        // echo "Ruta completa: " . realpath($serviceFile) . "\n";
+        // Comprobar si los archivos existen antes de incluirlos
+        if (!file_exists($serviceFile)) {
+            // echo "El archivo $serviceFile no existe.\n";
+            $controlador = "Base_SERVICE";
+            include_once "./Base/Base_SERVICE.php";
+        } else {
+            // echo "El archivo $serviceFile  existe.\n";
+            $controlador .= "_SERVICE";
+            // echo "controlador: " . $controlador . "\n";
+            include_once $serviceFile;
+        }
+
         
-        $controlador .= "_SERVICE";
+        
         $description = variables['controlador'] . '_description';
        
         // Inicializar las propiedades heredadas
@@ -33,8 +47,7 @@ class Base_CONTROLLER extends Base_Validations
             $this->data_attribute_personalize();
         
         }*/
-       
-
+        
         $service = new $controlador($this->estructura, action ,$this->valores, $this->controlador);
 
         $accion = action;
