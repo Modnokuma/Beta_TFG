@@ -15,41 +15,32 @@ class Base_SERVICE
     {
         
         $this->accion = $action;
-        
-        //¡¡  echo "accion: ".action. "\n";
-        //  echo "variables: ".var_dump($variables). "\n";
-        //  echo "estructura: ".var_dump($estructura). "\n";
         $this->valores = $variables;
         $this->controlador = $controlador;
         $this->estructura = $estructura;
         $this->listaAtributos = array_keys($this->estructura['attributes']);
         
-        //$this->inicializarRest();
-        $this->model = $this->crearModelo($this->controlador); // crear en base service en base al nombre de la clase instanciada
+        // crear en base service en base al nombre de la clase instanciada
+        $this->model = $this->crearModelo($this->controlador); 
     }
 
     function crearModelo($controlador)
     {
 
-        //controlador es el nombre de la tabla
-        
         $modelFile = "./app/" . $controlador . "/" . $controlador . "_MODEL.php";
         
         if (!file_exists($modelFile)) {
-            $controlador = "Base";
+            $entidad_modelo = "Base_MODEL";
             include_once "./Base/Base_MODEL.php";
         } else {
-
+            $entidad_modelo = $controlador . "_MODEL";
             include_once $modelFile;
         }
 
-        $modelo = $controlador . "_MODEL";
-        $this->model = new $modelo;
-
+        $this->model = new $entidad_modelo;
 
         //Si existe la lista de atributos de la entidad se llama a este metodo
         if (isset($this->listaAtributos)) {
-
             $this->rellenarModelo($this->listaAtributos);
         }
 

@@ -20,21 +20,21 @@ class Base_Action_Validations
         $respuesta = true;
 
         $resp = $this->action_validate_pks();
-        
+
         if ($resp !== true) {
             return $resp;
         }
-      
+
         $resp = $this->unique_validations();
         if ($resp !== true) {
             return $resp;
         }
-         
+
         $resp = $this->exist_in_other_entity();
         if ($resp !== true) {
             return $resp;
         }
-       
+
         $resp = $this->delete_parent_while_child_exist();
         if ($resp !== true) {
             return $resp;
@@ -53,31 +53,35 @@ class Base_Action_Validations
                 $array_pks[$aux] = $this->valores[$aux];
             }
         }
-
+        
         // Pk, comprobar si existe en la base de datos 
         if ((action == 'ADD') and (count($array_pks) > 0)) {
 
             $controlador = variables['controlador'];
-            include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
-            $entidad_service = $controlador . "_SERVICE";
+            $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+
+            if (!file_exists($serviceFile)) {
+                $entidad_service = "Base_SERVICE";
+                include_once "./Base/Base_SERVICE.php";
+            } else {
+                $entidad_service = $controlador . "_SERVICE";
+                include_once $serviceFile;
+            }
 
             $service = new $entidad_service($this->estructura, 'SEARCH_BY', $array_pks, $this->controlador);
             $resultado = $service->SEARCH_BY();
-
 
             if ($resultado['code'] === 'RECORDSET_VACIO') {
                 return true;
             } else {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'PK_ALREADY_EXISTS_IN_'.$controlador.'KO';
+                $feedback['code'] = 'PK_ALREADY_EXISTS_IN_' . $controlador . 'KO';
                 $feedback['resources'] = true;
                 return $feedback;
             }
         }
-
         return true;
     }
-
 
     public function unique_validations()
     {
@@ -119,12 +123,18 @@ class Base_Action_Validations
     {
 
         $controlador = variables['controlador'];
-        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+        $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
 
-        $entidad_service = $controlador . "_SERVICE";
+        if (!file_exists($serviceFile)) {
+            $entidad_service = "Base_SERVICE";
+            include_once "./Base/Base_SERVICE.php";
+        } else {
+            $entidad_service = $controlador . "_SERVICE";
+            include_once $serviceFile;
+        }
+
         $service = new $entidad_service($this->estructura, 'SEARCH_BY', array($campo => $valorvariable), $this->controlador);
         $resultado = $service->SEARCH_BY();
-
 
         if ($resultado['code'] === 'RECORDSET_DATOS') {
             return false;
@@ -135,17 +145,24 @@ class Base_Action_Validations
 
     public function edit_unique_value_already_exists($campo, $valorvariable)
     {
+
         $controlador = variables['controlador'];
-        include_once "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";        
-        $entidad_service = $controlador . "_SERVICE";    
-    
-    
+        $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
+
+        if (!file_exists($serviceFile)) {
+            $entidad_service = "Base_SERVICE";
+            include_once "./Base/Base_SERVICE.php";
+        } else {
+            $entidad_service = $controlador . "_SERVICE";
+            include_once $serviceFile;
+        }
+
         $primaryKey = $this->listaAtributos[0];
         $currentId = $this->valores[$primaryKey];
-        
+
         if ($primaryKey != $campo) {
             $query = "SELECT COUNT(*) as count FROM " . $controlador . " WHERE " . $campo . " = '" . $valorvariable . "' AND " . $primaryKey . " != " . $currentId;
-            
+
             $service = new $entidad_service($this->estructura, '', array(), $this->controlador);
             $result_query = $service->ejecutarPersonalizedQuery($query);
 
@@ -186,20 +203,28 @@ class Base_Action_Validations
                     $array_valores_fk[] = $this->valores[$campoFk];
                 }
 
-                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_SERVICE.php";
-                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_description.php";
+                // Comprobamos que el servicio de la entidad fk existe
+                $serviceFile = "./app/" . $tablaFk . "/" . $tablaFk . "_SERVICE.php";
+                if (!file_exists($serviceFile)) {
+                    $entidad_service = "Base_SERVICE";
+                    include_once "./Base/Base_SERVICE.php";
+                } else {
+                    $entidad_service = $tablaFk . "_SERVICE";
+                    include_once $serviceFile;
+                }
 
+                // Incluimos la descripcion y la estructura
+                include_once "./app/" . $tablaFk . "/" . $tablaFk . "_description.php";
                 $nombreestructura = $tablaFk . '_description';
                 $contenidoestructura = $$nombreestructura;
 
+                // Recorremos los campos fk y metemos en un array los valores
                 foreach (array_combine($array_campos_fk_rel, $array_valores_fk) as $campoFk => $valorFk) {
                     $array_busqueda[$campoFk] = $valorFk;
                 }
 
-                $entidad_service = $tablaFk . "_SERVICE";
                 $service = new $entidad_service($contenidoestructura, 'SEARCH_BY', $array_busqueda, $tablaFk);
                 $resultado = $service->SEARCH_BY();
-
 
                 if ($resultado['code'] === 'RECORDSET_DATOS') {
                     return true;
@@ -231,19 +256,28 @@ class Base_Action_Validations
                     $array_valores_pk[] = $this->valores[$campoFk];
                 }
 
-                include_once "./app/" . $entidadHija . "/" . $entidadHija . "_SERVICE.php";
+                // Comprobamos que el servicio de la entidad hija existe
+                $serviceFile = "./app/" . $entidadHija . "/" . $entidadHija . "_SERVICE.php";
+                if (!file_exists($serviceFile)) {
+                    $entidad_service = "Base_SERVICE";
+                    include_once "./Base/Base_SERVICE.php";
+                } else {
+                    $entidad_service = $entidadHija . "_SERVICE";
+                    include_once $serviceFile;
+                }
+
+                // Incluimos la descripcion y la estructura
                 include_once "./app/" . $entidadHija . "/" . $entidadHija . "_description.php";
                 $descripcionHijo = $entidadHija . '_description';
                 $estructuraHijo = $$descripcionHijo;
 
-                $servicioHijo = $entidadHija . "_SERVICE";
+                // Recorremos los campos fk y metemos en un array los valores
                 $array_busqueda = [];
-
                 foreach (array_combine($arrayForeignKey, $array_valores_pk) as $campoFkHijo => $pkPadre) {
                     $array_busqueda[$campoFkHijo] = $pkPadre;
                 }
 
-                $service = new $servicioHijo($estructuraHijo, 'SEARCH_BY', $array_busqueda, $entidadHija);
+                $service = new $entidad_service($estructuraHijo, 'SEARCH_BY', $array_busqueda, $entidadHija);
                 $resultado = $service->SEARCH_BY();
 
                 if ($resultado['code'] === 'RECORDSET_DATOS') {

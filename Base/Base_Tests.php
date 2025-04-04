@@ -136,13 +136,12 @@ class Base_Tests
 
         foreach (base_tests_description as $test) {
             $result = $this->test_run($test);
-            
             $result = json_decode($result, true);
            
             if (json_last_error() !== JSON_ERROR_NONE) {
                 echo "Error al decodificar JSON: " . json_last_error_msg();
             }
-            //exit();
+            
             $output .= "\n";
             $output .= "Tabla: " . $test['variables']['controlador'] . "\n";
             $output .= "Acción: " . $test['variables']['action'] . "\n";

@@ -225,17 +225,18 @@ const base_tests_description = array(
         ),
         'mensaje' => 'SEARCH_BY_NULL_KO'
     ),
+
     'testDefaultValues' => array(
         'variables' => array(
-            'id_usuario' => '2',
+            'id_usuario' => '4',
             'nombre_usuario' => 'Manuel',
             'organizacion_usuario' => 'ESEI',
             'direccion_usuario' => 'Calle A Nº1 4ºD',
-            'correo_usuario' => 'javi@javi.es',
+            'correo_usuario' => 'manuel@gmail.es',
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'usuario'
         ),
         'mensaje' => 'SQL_OK'
-    ),
+    )
 );

@@ -289,62 +289,55 @@ $usuario_description =
                     )
                 )
             ),
-            'foto_usuario' => array(
-                'pk' => false,
-                'autoincrement' => false,
-                'type' => 'file', // los fichero siempre se almacenan en ./fileuploaded/files_{nombreatributo}/               
-                'unique' => true,
-                'not_null' => array(
-                    'ADD' => true,
-                    'EDIT' => true,
-                    'DELETE' => false,
-                    'SEARCH' => false
-                ),
-                'default_value' => false,
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
-                            'min_size' => 6,  //a@m.com
-                            'max_size' => 45,
-                            'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', //posiblemente
-                            'personalized' => 'personalized_correo_usuario()'
+            // 'foto_usuario' => array(
+            //     'type' => 'file', // los fichero siempre se almacenan en ./fileuploaded/files_{nombreatributo}/               
+            //     'unique' => true,
+            //     'not_null' => array(
+            //         'ADD' => true,
+            //         'EDIT' => true
+            //     ),
+            //     'rules' => array(
+            //         'validations' => array(
+            //             'ADD' => array(
+            //                 'min_size' => 6,  //a@m.com
+            //                 'max_size' => 45,
+            //              //   'exp_reg' => '/.*/', //posiblemente
+            //                 'personalized' => 'personalized_correo_usuario()',
                             
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 6,
-                            'max_size' => 45,
-                            'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',  //posiblemente
+            //             ),
+            //             'EDIT' => array(
+            //                 'min_size' => 6,
+            //                 'max_size' => 45,
+            //                 'exp_reg' => '/.*/',  //posiblemente
                            
-                        ),
-                        'SEARCH' => array(
-                            'min_size' => false,
-                            'max_size' => 45,
-                            'exp_reg' => '/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/',  //posiblemente
+            //             ),
+            //             'SEARCH' => array(
+            //                 'max_size' => 45,
+            //                 'exp_reg' => '/.*/',  //posiblemente
                            
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
+            //             )
+            //         ),
+            //         'error' => array(
+            //             'ADD' => array(
+            //                 'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
+            //                 'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
+            //                 'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
+            //             ),
+            //             'EDIT' => array(
+            //                 'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
+            //                 'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
+            //                 'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
                             
-                        ),
-                        'SEARCH' => array(
-                            'min_size' => false,
-                            'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
+            //             ),
+            //             'SEARCH' => array(
+            //                 'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
+            //                 'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
                            
-                        )
-                    )
-                )
-            )
+            //             )
+            //         )
+            //     )
+            // )
         )
     );
 

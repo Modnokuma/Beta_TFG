@@ -23,6 +23,12 @@ class Base_Data_Validations
     {
 
         $respuesta = true;
+
+        // $controller_exist = $this->controller_exists();
+        // if ($controller_exist !== true) {
+        //     return $controller_exist;
+        // }
+
         $nulos = $this->null_test();
 
         if (!is_bool($nulos)) {
@@ -43,6 +49,16 @@ class Base_Data_Validations
 
         return $respuesta;
     }
+
+    // public function controller_exists(){
+    //     if($this->controlador == ''){
+    //         $feedback['ok'] = false;
+    //         $feedback['code'] = 'CONTROLLER_NOT_EXISTS';
+    //         $feedback['resources'] = false;
+    //         return $feedback;
+    //     }
+    //     return true;
+    // }
 
     public function null_test()
     {
