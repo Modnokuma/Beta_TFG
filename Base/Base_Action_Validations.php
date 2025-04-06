@@ -43,6 +43,19 @@ class Base_Action_Validations
         return $respuesta;
     }
 
+    public function verificarYIncluirArchivo($rutaArchivo, $clase)
+    {
+        if (file_exists($rutaArchivo)) {
+            include_once $rutaArchivo;
+            $entidad_service = $clase . "_SERVICE";
+        } else {
+            include_once "./Base/Base_SERVICE.php";
+            $entidad_service = "Base_SERVICE";
+        }
+        return $entidad_service;
+    }
+
+
     public function action_validate_pks()
     {
         $array_pks = [];
@@ -53,10 +66,10 @@ class Base_Action_Validations
                 $array_pks[$aux] = $this->valores[$aux];
             }
         }
-        
+
         // Pk, comprobar si existe en la base de datos 
         if ((action == 'ADD') and (count($array_pks) > 0)) {
-
+            echo "Entre" . "\n";
             $controlador = variables['controlador'];
             $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
 

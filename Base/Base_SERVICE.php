@@ -39,7 +39,7 @@ class Base_SERVICE
 
         $this->model = new $entidad_modelo;
 
-        //Si existe la lista de atributos de la entidad se llama a este metodo
+        //Si existe la lista de atributos de la entidad se rellana el model
         if (isset($this->listaAtributos)) {
             $this->rellenarModelo($this->listaAtributos);
         }
