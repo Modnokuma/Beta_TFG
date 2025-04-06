@@ -1,10 +1,10 @@
 <?php
 
-include_once './Base/Base_Tests_Description.php';
+include_once './Tests/Tests_Description.php';
 include './common/credentialsDB.php';
 include_once "./common/config.php";
 
-class Base_Tests
+class Tests
 {
     protected $accion;
     protected $variables;
@@ -17,7 +17,7 @@ class Base_Tests
 
     public function __construct()
     {
-        $description = 'base_test_description';
+        $description = 'test_description';
         $this->estructura = $description;
     }
 
@@ -134,7 +134,7 @@ class Base_Tests
         $contadorPruebasCorrectas = 0;
         $output = "";
 
-        foreach (base_tests_description as $test) {
+        foreach (tests_description as $test) {
             $result = $this->test_run($test);
             $result = json_decode($result, true);
            

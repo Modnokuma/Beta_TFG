@@ -1,11 +1,11 @@
 <?php
 
-include_once "./Base/Base_Tests.php";
-include_once "./Base/Base_Tests_Description.php";
+include_once "./Tests/Tests.php";
+include_once "./Tests/Tests_Description.php";
 
             
             // Ejecutar las pruebas
-            $test = new Base_Tests();
+            $test = new Tests();
             $test->run()
 
 

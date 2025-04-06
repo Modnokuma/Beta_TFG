@@ -1,5 +1,5 @@
 <?php
-const base_tests_description = array(
+const tests_description = array(
     'testAdd_usuario' => array(
         'variables' => array(
             'nombre_usuario' => 'Daniel',
