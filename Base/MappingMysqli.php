@@ -89,14 +89,12 @@ class Mapping extends Base_Mapping
         $cadena = $this->construirWhereIgual($this->valores);
         $this->query = $this->query . " WHERE " . $cadena;
 
-
         return $this->execute_simple_query();
     }
 
     function mapping_SEARCH()
     {
         $nuevos_valores = [];
-
         $this->query = "SELECT * FROM " . $this->tabla;
         $query = '';
 
@@ -119,7 +117,6 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-
         return $this->get_results_from_query();
     }
 
@@ -168,7 +165,6 @@ class Mapping extends Base_Mapping
         }
 
         $this->query .= $query;
-
         return $this->get_results_from_query();
     }
 
@@ -178,8 +174,6 @@ class Mapping extends Base_Mapping
         $primero = true;
 
         foreach ($valores as $clave => $valor) {
-            //echo  $clave . " = " . $valor . "\n";
-            
             if (array_key_exists($clave, $this->clavesPrimarias)) {
                
                 if ($primero) {

@@ -11,9 +11,7 @@ $metodoHTTP = $_SERVER['REQUEST_METHOD'];
 
 switch ($metodoHTTP) {
     case 'PUT':
-
         // Se puede  usar $_PUT
-
         parse_str(file_get_contents("php://input"), $variables);
         define('variables', $variables);
         define('action', 'ADD');
@@ -27,7 +25,7 @@ switch ($metodoHTTP) {
         $action = 'DELETE';
         break;
     case 'POST':
-        //si no datos avisar pq no sabemos que editar. HACER EN VALIDACIONES DATOS
+        //si no datos avisar pq no sabemos que editar. HACER EN VALIDACIONES DATOS ()
         define('variables', $_POST);
         define('action', 'EDIT');
         $action = 'EDIT';
@@ -54,7 +52,7 @@ switch ($metodoHTTP) {
 }
 
 // no se envia un controlador desde el front
-if (!isset(variables['controlador'])){
+if (!isset(variables['controlador'])) {
     $feedback['ok'] = false;
     $feedback['code'] = 'CONTROLLER_NOT_EXISTS_KO';
     $feedback['resources'] = false;
