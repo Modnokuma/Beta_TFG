@@ -108,7 +108,7 @@ const estructura_persona = {
             validation_rules: {
                 ADD:{
                     min_size: [10, 'fechaNacimiento_persona_min_size_KO'],
-                    personalize: "personalized_validation_fechaNacimiento_persona(arrayatributosvalores)",
+                    personalize: ["personalized_validation_fechaNacimiento_persona(arrayatributosvalores)"],
                 },
             }
         },

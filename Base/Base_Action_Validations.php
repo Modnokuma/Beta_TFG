@@ -55,6 +55,14 @@ class Base_Action_Validations
         return $entidad_service;
     }
 
+    /*
+    * 
+    * action_validate_pks()
+    * test pk values dont exit in entity for ADD
+    * @param nothing
+    * @return true if correct false if error
+    * 
+    */
 
     public function action_validate_pks()
     {
@@ -69,7 +77,7 @@ class Base_Action_Validations
 
         // Pk, comprobar si existe en la base de datos 
         if ((action == 'ADD') and (count($array_pks) > 0)) {
-            echo "Entre" . "\n";
+
             $controlador = variables['controlador'];
             $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
 

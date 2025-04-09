@@ -1,6 +1,11 @@
 <?php
+
+const tests_preparation = [
+    'add1'
+]:
+
 const tests_description = array(
-    'testAdd_usuario' => array(
+    /*'testAdd_usuario' => array(
         'variables' => array(
             'nombre_usuario' => 'Daniel',
             'organizacion_usuario' => 'ESEI',
@@ -13,7 +18,22 @@ const tests_description = array(
             'controlador' => 'usuario'
         ),
         'mensaje' => 'SQL_OK'
-    ),
+    ),*/
+    'testAdd_usuario' => [
+        'variables' => [
+            'id_usuario' => 67,
+            'nombre_usuario' => 'Daniel',
+            'organizacion_usuario' => 'ESEI',
+            'puesto_usuario' => 'alumno',
+            'direccion_usuario' => 'Calle A Nº1 4ºD',
+            'correo_usuario' => 'a@a.es',
+            'foto_usuario' => '',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'usuario'
+        ],
+        'mensaje' => 'SQL_OK'
+    ],
     'testSearch_usuario' => array(
         'variables' => array(
             'TESTING' => true,
