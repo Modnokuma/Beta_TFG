@@ -1,12 +1,65 @@
 <?php
 
 const tests_preparation = [
-    'add1'
-]:
+    'Add_parametro' => [
+        'variables' => [
+            'id_parametro' => 1,
+            'nombre_parametro' => 'Masa',
+            'descripcion_parametro' => 'Magnitud física que expresa la inercia o resistencia al cambio de movimiento de un cuerpo',
+            'tipo_parametro' => 'Solido',
+            'formato_parametro' => 'Kg',
+            'rango_desde_parametro' => '0',
+            'rango_hasta_parametro' => '100000',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'parametro'
+        ],
+        'mensaje' => 'SQL_OK'
+    ],
+    'Add_usuario' => [
+        'variables' => [
+            'id_usuario' => 1,
+            'nombre_usuario' => 'Samuel',
+            'organizacion_usuario' => 'ESEI',
+            'puesto_usuario' => 'alumno',
+            'direccion_usuario' => 'Calle Santo Domingo',
+            'correo_usuario' => 'Samuel@gmail.com',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'usuario'
+        ],
+        'mensaje' => 'SQL_OK'
+    ],
+    'Add_usuario2' => [
+        'variables' => [
+            'id_usuario' => 2,
+            'nombre_usuario' => 'Javi',
+            'organizacion_usuario' => 'ESEI',
+            'puesto_usuario' => 'profesor',
+            'direccion_usuario' =>  'Calle B Nº2 1ºC',
+            'correo_usuario' => 'javi@javi.es',
+            'TESTING' => true,
+            'action' => 'ADD',
+            'controlador' => 'usuario'
+        ],
+        'mensaje' => 'SQL_OK'
+    ],
+    'Add_unidad' => [
+        'variables' => [
+            'id_unidad' => 2,
+            'nombre_unidad' => 'Kg',
+            'descripcion_unidad' => 'Kilogramos, Unidad de peso y 1000 veces 1g',
+            'id_parametro' => 1,
+            'action' => 'ADD',
+            'controlador' => 'unidad'
+        ],
+        'mensaje' => 'SQL_OK'
+    ],
+];
 
-const tests_description = array(
-    /*'testAdd_usuario' => array(
-        'variables' => array(
+const tests_description = [
+    /*'testAdd_usuario' => [
+        'variables' => [
             'nombre_usuario' => 'Daniel',
             'organizacion_usuario' => 'ESEI',
             'puesto_usuario' => 'alumno',
@@ -16,9 +69,9 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'usuario'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),*/
+   ],*/
     'testAdd_usuario' => [
         'variables' => [
             'id_usuario' => 67,
@@ -34,16 +87,16 @@ const tests_description = array(
         ],
         'mensaje' => 'SQL_OK'
     ],
-    'testSearch_usuario' => array(
-        'variables' => array(
+    'testSearch_usuario' => [
+        'variables' => [
             'TESTING' => true,
             'action' => 'SEARCH',
             'controlador' => 'usuario'
-        ),
+       ],
         'mensaje' => 'RECORDSET_DATOS'
-    ),
-    'testEdit_usuario' => array(
-        'variables' => array(
+   ],
+    'testEdit_usuario' => [
+        'variables' => [
             'id_usuario' => '3',
             'nombre_usuario' => 'DanielEdit',
             'organizacion_usuario' => 'ESEI',
@@ -53,58 +106,58 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'EDIT',
             'controlador' => 'usuario'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testDelete_usuario' => array(
-        'variables' => array(
+   ],
+    'testDelete_usuario' => [
+        'variables' => [
             'id_usuario' => '3',
             'TESTING' => true,
             'action' => 'DELETE',
             'controlador' => 'usuario'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testAdd_proyecto' => array(
-        'variables' => array(
+   ],
+    'testAdd_proyecto' => [
+        'variables' => [
             'nombre_proyecto' => 'DOU',
             'descripcion_proyecto' => 'Potabilidad del agua del Douro',
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'proyecto'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testSearch_proyecto' => array(
-        'variables' => array(
+   ],
+    'testSearch_proyecto' => [
+        'variables' => [
             'TESTING' => true,
             'action' => 'SEARCH',
             'controlador' => 'proyecto'
-        ),
+       ],
         'mensaje' => 'RECORDSET_DATOS'
-    ),
-    'testEdit_proyecto' => array(
-        'variables' => array(
+   ],
+    'testEdit_proyecto' => [
+        'variables' => [
             'id_proyecto' => '1',
             'nombre_proyecto' => 'DOU',
             'descripcion_proyecto' => 'Caudal del agua del Douro',
             'TESTING' => true,
             'action' => 'EDIT',
             'controlador' => 'proyecto'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testDelete_proyecto' => array(
-        'variables' => array(
+   ],
+    'testDelete_proyecto' => [
+        'variables' => [
             'id_proyecto' => '1',
             'TESTING' => true,
             'action' => 'DELETE',
             'controlador' => 'proyecto'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testAdd_parametro' => array(
-        'variables' => array(
+   ],
+    'testAdd_parametro' => [
+        'variables' => [
             'nombre_parametro' => 'Agua Douro',
             'descripcion_parametro' => 'Agua recogida del rio Douro',
             'tipo_parametro' => 'Liquido',
@@ -114,19 +167,19 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'parametro'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testSearch_parametro' => array(
-        'variables' => array(
+   ],
+    'testSearch_parametro' => [
+        'variables' => [
             'TESTING' => true,
             'action' => 'SEARCH',
             'controlador' => 'parametro'
-        ),
+       ],
         'mensaje' => 'RECORDSET_DATOS'
-    ),
-    'testEdit_parametro' => array(
-        'variables' => array(
+   ],
+    'testEdit_parametro' => [
+        'variables' => [
             'id_parametro' => '2',
             'nombre_parametro' => 'Agua Ebro',
             'descripcion_parametro' => 'Agua recogida del rio Ebro',
@@ -137,39 +190,39 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'EDIT',
             'controlador' => 'parametro'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testDelete_parametro' => array(
-        'variables' => array(
+   ],
+    'testDelete_parametro' => [
+        'variables' => [
             'id_parametro' => '2',
             'TESTING' => true,
             'action' => 'DELETE',
             'controlador' => 'parametro'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testAdd_unidad' => array(
-        'variables' => array(
+   ],
+    'testAdd_unidad' => [
+        'variables' => [
             'nombre_unidad' => 'Kelvin',
             'descripcion_unidad' => 'temperatura termodinámica',
             'id_parametro' => '1',
             'TESTING' => false,
             'action' => 'ADD',
             'controlador' => 'unidad'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testSearch_unidad' => array(
-        'variables' => array(
+   ],
+    'testSearch_unidad' => [
+        'variables' => [
             'TESTING' => true,
             'action' => 'SEARCH',
             'controlador' => 'unidad'
-        ),
+       ],
         'mensaje' => 'RECORDSET_DATOS'
-    ),
-    'testEdit_unidad' => array(
-        'variables' => array(
+   ],
+    'testEdit_unidad' => [
+        'variables' => [
             'id_unidad' => '2',
             'nombre_unidad' => 'Farenheit',
             'descripcion_unidad' => 'temperatura termodinámica',
@@ -177,31 +230,31 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'EDIT',
             'controlador' => 'unidad'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testDelete_unidad' => array(
-        'variables' => array(
+   ],
+    'testDelete_unidad' => [
+        'variables' => [
             'id_unidad' => '2',
             'TESTING' => true,
             'action' => 'DELETE',
             'controlador' => 'unidad'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    ),
-    'testActionExistInAnotherEntity' => array(
-        'variables' => array(
+   ],
+    'testActionExistInAnotherEntity' => [
+        'variables' => [
             'nombre_unidad' => 'Kelvin',
             'descripcion_unidad' => 'temperatura termodinámica',
             'id_parametro' => '2',
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'unidad'
-        ),
+       ],
         'mensaje' => 'FOREIGN_KEY_VALUES_NOT_IN_parametro_KO'
-    ),
-    'testActionUniqueValueAlreadyExists' => array(
-        'variables' => array(
+   ],
+    'testActionUniqueValueAlreadyExists' => [
+        'variables' => [
             'nombre_usuario' => 'Samuel',
             'organizacion_usuario' => 'ESEI',
             'puesto_usuario' => 'alumno',
@@ -210,11 +263,11 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'usuario'
-        ),
+       ],
         'mensaje' => 'nombre_usuario_ALREADY_EXISTS_KO'
-    ),
-    'testEditUniqueValueAlreadyExists' => array(
-        'variables' => array(
+   ],
+    'testEditUniqueValueAlreadyExists' => [
+        'variables' => [
             'id_usuario' => '1',
             'nombre_usuario' => 'Victor',
             'organizacion_usuario' => 'ESEI',
@@ -224,30 +277,30 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'EDIT',
             'controlador' => 'usuario'
-        ),
+       ],
         'mensaje' => 'correo_usuario_ALREADY_EXISTS_KO'
-    ),
-    'testDeleteStrongEntity' => array(
-        'variables' => array(
+   ],
+    'testDeleteStrongEntity' => [
+        'variables' => [
             'id_parametro' => '1',
             'TESTING' => true,
             'action' => 'DELETE',
             'controlador' => 'parametro'
-        ),
+       ],
         'mensaje' => 'DELETE_PARENT_WHILE_CHILDREN_IN_unidad_KO'
-    ),
-    'testSearchByVacio' => array(
-        'variables' => array(
+   ],
+    'testSearchByVacio' => [
+        'variables' => [
             'TESTING' => true,
             'action' => 'SEARCH_BY',
             'controlador' => 'usuario',
             
-        ),
+       ],
         'mensaje' => 'SEARCH_BY_NULL_KO'
-    ),
+   ],
 
-    'testDefaultValues' => array(
-        'variables' => array(
+    'testDefaultValues' => [
+        'variables' => [
             'id_usuario' => '4',
             'nombre_usuario' => 'Manuel',
             'organizacion_usuario' => 'ESEI',
@@ -256,7 +309,7 @@ const tests_description = array(
             'TESTING' => true,
             'action' => 'ADD',
             'controlador' => 'usuario'
-        ),
+       ],
         'mensaje' => 'SQL_OK'
-    )
-);
+   ]
+];

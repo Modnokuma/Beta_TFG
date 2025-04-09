@@ -139,7 +139,7 @@ class Base_Data_Validations
 
                 if (strlen($valor) < $minSize) {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'MIN_SIZE_' . strtoupper($atributo) . '_KO';
+                    $feedback['code'] = 'min_size_' . $atributo . '_KO';
                     $feedback['resources'] = false;
                     return $feedback;
                 }
@@ -157,7 +157,7 @@ class Base_Data_Validations
 
                 if (strlen($valor) > $maxSize) {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'MAX_SIZE_' . strtoupper($atributo) . '_KO';
+                    $feedback['code'] = 'max_size_' . $atributo . '_KO';
                     $feedback['resources'] = false;
                     return $feedback;
                 }
@@ -174,7 +174,7 @@ class Base_Data_Validations
 
                 if (!preg_match($expReg, $valor)) {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'EXP_REG_' . strtoupper($atributo) . '_KO';
+                    $feedback['code'] = 'exp_reg_' . $atributo . '_KO';
                     $feedback['resources'] = false;
                     return $feedback;
                 }
