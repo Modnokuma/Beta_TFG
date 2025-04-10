@@ -1,212 +1,212 @@
 <?php
 $usuario_description =
-    array(
+    [
         'entity' => 'usuario',
-        'attributes' => array(
-            'id_usuario' => array(
+        'attributes' => [
+            'id_usuario' => [
                 'pk' => true,
                 //'autoincrement' => true,
                 'type' => 'integer',
-                'not_null' => array(
+                'not_null' => [
                     'EDIT' => true,
                     'DELETE' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/', //'/^[0-9]+$/', 
                            
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                           
-                        )
-                    )
-                )
-            ),
-            'nombre_usuario' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'nombre_usuario' => [
                 'type' => 'string',
                 'unique' => true,
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/', // empieza por letra y puede contener numeros, guiones y guiones bajos
                             // 'personalized' => 'validarDesdeParametro($atributo)'
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 25,
                             'exp_reg' => '/^([a-zA-Z][a-zA-Z0-9_-]+)?$/',
                            
-                        )
-                    )
-                )
-            ),
-            'organizacion_usuario' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'organizacion_usuario' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 3,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 3,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
-                        )
-                    )
-                )
-            ),
-            'puesto_usuario' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'puesto_usuario' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
+                ],
                 'default_value' => 'alumno',
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 6,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 6,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
-                        )
-                    )
-                )
-            ),
-            'direccion_usuario' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'direccion_usuario' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 10,
                             'max_size' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]+$/',
                            
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 10,
                             'max_size' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]+$/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]*$/',
                             
-                        )
-                    )
-                )
-            ),
-            'correo_usuario' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'correo_usuario' => [
                 'type' => 'string',                
                 'unique' => true,
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 6,  //a@m.com
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', //posiblemente
                             'personalized' => 'personalized_correo_usuario()'
                             
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 6,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',  //posiblemente
                            
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 45,
                             'exp_reg' => '/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/',  //posiblemente
                            
-                        )
-                    )
-                )
-            ),
-            // 'foto_usuario' => array(
+                        ]
+                    ]
+                ]
+            ],
+            // 'foto_usuario' => [
             //     'type' => 'file', // los fichero siempre se almacenan en ./fileuploaded/files_{nombreatributo}/               
             //     'unique' => true,
-            //     'not_null' => array(
+            //     'not_null' => [
             //         'ADD' => true,
             //         'EDIT' => true
-            //     ),
-            //     'rules' => array(
-            //         'validations' => array(
-            //             'ADD' => array(
+            //     ],
+            //     'rules' => [
+            //         'validations' => [
+            //             'ADD' => [
             //                 'min_size' => 6,  //a@m.com
             //                 'max_size' => 45,
             //              //   'exp_reg' => '/.*/', //posiblemente
             //                 'personalized' => 'personalized_correo_usuario()',
                             
-            //             ),
-            //             'EDIT' => array(
+            //             ],
+            //             'EDIT' => [
             //                 'min_size' => 6,
             //                 'max_size' => 45,
             //                 'exp_reg' => '/.*/',  //posiblemente
                            
-            //             ),
-            //             'SEARCH' => array(
+            //             ],
+            //             'SEARCH' => [
             //                 'max_size' => 45,
             //                 'exp_reg' => '/.*/',  //posiblemente
                            
-            //             )
-            //         )
-            //     )
-            // )
-        )
-    );
+            //             ]
+            //         ]
+            //     ]
+            // ]
+        ]
+    ];
 
 
     /*

@@ -1,238 +1,238 @@
 <?php
 $parametro_description =
-    array(
+    [
         'entity' => 'parametro',
-        'attributes' => array(
-            'id_parametro' => array(
+        'attributes' => [
+            'id_parametro' => [
                 'pk' => true,
                 'autoincrement' => true,
                 'type' => 'integer',
-                'not_null' => array(
+                'not_null' => [
                     'EDIT' => true,
                     'DELETE' => true,
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
-                        )
-                    )
-                )
-            ),
-            'nombre_parametro' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'nombre_parametro' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
-                        )
-                    )
-                )
-            ),
-            'descripcion_parametro' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'descripcion_parametro' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 1,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 1,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
-                        )
-                    )
-                )
-            ),
-            'tipo_parametro' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'tipo_parametro' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 1,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 1,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
-                        )
-                    )
-                )
-            ),
-            'formato_parametro' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'formato_parametro' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => false,
                     'EDIT' => false,
                     'DELETE' => false,
                     'SEARCH' => false
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        )
-                    )
-                )
-            ),
-            'rango_desde_parametro' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'rango_desde_parametro' => [
                 'type' => 'numeric',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => false,
                     'EDIT' => false,
                     'DELETE' => false,
                     'SEARCH' => false
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        )
-                    )
-                )
-            ),
-            'rango_hasta_parametro' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'rango_hasta_parametro' => [
                 'type' => 'numeric',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => false,
                     'EDIT' => false,
                     'DELETE' => false,
                     'SEARCH' => false
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
-                        )
-                    )
-                )
-            )
-        ),
-        'associations' => array(
-            'OneToMany' => array(
-                array(
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'associations' => [
+            'OneToMany' => [
+                [
                     'entity' => 'unidad', 
-                    'attributes-own' => array('id_parametro'),
-                    'attributes-rel' => array('id_parametro')
-                )
-            )
-        ),
+                    'attributes-own' => ['id_parametro'],
+                    'attributes-rel' => ['id_parametro']
+                ]
+            ]
+        ],
 
-    );
+    ];
 
 
     /*
     // decia algo como esto. se recorre el onetomany y por cada uno se recoge la entidad y los atributos involucrados
     
-            'OneToMany' => array(
-                array(
+            'OneToMany' => [
+                [
                     'entity' => 'unidad', 
-                    'attributes-own' => array('id_parametro'),
-                    'attributes-rel' => array('id_parametro')
-                ),
-                array(
+                    'attributes-own' => ['id_parametro'],
+                    'attributes-rel' => ['id_parametro']
+                ],
+                [
                     'entity' => 'otraentidad', 
-                    'attributes-own' => array('id_otraentidad'),
-                    'attributes-rel' => array('id_otraentidad')
-                )
-            )
+                    'attributes-own' => ['id_otraentidad'],
+                    'attributes-rel' => ['id_otraentidad']
+                ]
+            ]
 
     */

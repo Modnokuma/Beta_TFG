@@ -1,94 +1,94 @@
 <?php
 
 $proyecto_description =
-    array(
+    [
         'entity' => 'proyecto',
-        'attributes' => array(
-            'id_proyecto' => array(
+        'attributes' => [
+            'id_proyecto' => [
                 'pk' => true,
                 'autoincrement' => true,
                 'unique' => true,
                 'type' => 'integer',
-                'not_null' => array(
+                'not_null' => [
                     'EDIT' => true,
                     'DELETE' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
 
-                        )
-                    )
-                )
-            ),
-            'nombre_proyecto' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'nombre_proyecto' => [
                 'unique' => true,
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            //'personalized' => "personalized_nombre_proyecto(Array('Javi','Dani'))"
-                        ),
-                        'EDIT' => array(
+                            //'personalized' => "personalized_nombre_proyecto(['Javi','Dani'])"
+                        ],
+                        'EDIT' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
-                        )
-                    )
-                )
-            ),
-            'descripcion_proyecto' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'descripcion_proyecto' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 7,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 1,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
 
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
-                        )
-                    )
-                )
-            ),
-        )
-    );
+                        ]
+                    ]
+                ]
+            ],
+        ]
+    ];

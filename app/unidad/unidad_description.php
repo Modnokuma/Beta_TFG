@@ -1,131 +1,131 @@
 <?php
 
 $unidad_description =
-    array(
+    [
         'entity' => 'unidad',
-        'attributes' => array(
-            'id_unidad' => array(
+        'attributes' => [
+            'id_unidad' => [
                 'pk' => true,
                 'autoincrement' => true,
                 'type' => 'integer',
-                'not_null' => array(
+                'not_null' => [
                     'EDIT' => true,
                     'DELETE' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
-                        )
-                    )
-                )
-            ),
-            'nombre_unidad' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'nombre_unidad' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
-                        )
-                    )
-                )
-            ),
-            'descripcion_unidad' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'descripcion_unidad' => [
                 'type' => 'string',
-                'not_null' => array(
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'min_size' => 1,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'min_size' => 1,
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
                             
-                        ),
-                        'SEARCH' => array(
+                        ],
+                        'SEARCH' => [
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
-                        )
-                    )
-                )
-            ),
-            'id_parametro' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'id_parametro' => [
                 'type' => 'integer',
-               /* 'foreign_key' => array(
-                    'table' => array('parametro'),
-                    'attribute' => array('id_parametro')
-                ),*/
-                'not_null' => array(
+               /* 'foreign_key' => [
+                    'table' => ['parametro'],
+                    'attribute' => ['id_parametro']
+                ],*/
+                'not_null' => [
                     'ADD' => true,
                     'EDIT' => true
-                ),
-                'rules' => array(
-                    'validations' => array(
-                        'ADD' => array(
+                ],
+                'rules' => [
+                    'validations' => [
+                        'ADD' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
-                        ),
-                        'EDIT' => array(
+                        ],
+                        'EDIT' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                             
-                        )
-                    )
-                )
-            )
-        ),
-        'associations' => array(
-            'BelongsTo' => array(
-                /*array(
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'associations' => [
+            'BelongsTo' => [
+                /*[
                     'entity' => 'unidad', 
-                    'attributes-own' => array('id_unidad','id_parametro'),
-                    'attributes-rel' => array('id_javi','id2_javi')
-                ),*/
-                array(
+                    'attributes-own' => ['id_unidad','id_parametro'],
+                    'attributes-rel' => ['id_javi','id2_javi']
+                ],*/
+                [
                     'entity' => 'parametro', 
-                    'attributes-own' => array('id_parametro'),
-                    'attributes-rel' => array('id_parametro')
-                ),
-            ),
-        )
-    );
+                    'attributes-own' => ['id_parametro'],
+                    'attributes-rel' => ['id_parametro']
+                ],
+            ],
+        ]
+    ];
