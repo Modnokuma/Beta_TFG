@@ -30,25 +30,6 @@ $proyecto_description =
                             'exp_reg' => '/.*/',
 
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_ID_PROYECTO_KO',
-                            'max_size' => 'MAX_SIZE_ID_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PROYECTO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_ID_PROYECTO_KO',
-                            'max_size' => 'MAX_SIZE_ID_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PROYECTO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_ID_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PROYECTO_KO',
-
-                        )
                     )
                 )
             ),
@@ -78,25 +59,6 @@ $proyecto_description =
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_PROYECTO_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_PROYECTO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_PROYECTO_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_PROYECTO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_NOMBRE_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_PROYECTO_KO',
-
-                        )
                     )
                 )
             ),
@@ -123,25 +85,6 @@ $proyecto_description =
                         'SEARCH' => array(
                             'max_size' => 255,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_DESCRIPCION_PROYECTO_KO',
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_PROYECTO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_DESCRIPCION_PROYECTO_KO',
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_PROYECTO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_PROYECTO_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_PROYECTO_KO',
 
                         )
                     )

@@ -28,25 +28,6 @@ $usuario_description =
                             'exp_reg' => '/.*/',
                           
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_ID_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_ID_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_ID_USUARIO_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_ID_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_ID_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_ID_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_ID_USUARIO_KO',
-                            
-                        )
                     )
                 )
             ),
@@ -76,25 +57,6 @@ $usuario_description =
                             'exp_reg' => '/^([a-zA-Z][a-zA-Z0-9_-]+)?$/',
                            
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                           
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_NOMBRE_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_USUARIO_KO',
-                            
-                        )
                     )
                 )
             ),
@@ -121,25 +83,6 @@ $usuario_description =
                         'SEARCH' => array(
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_ORGANIZACION_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_ORGANIZACION_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_ORGANIZACION_USUARIO_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_ORGANIZACION_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_ORGANIZACION_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_ORGANIZACION_USUARIO_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_ORGANIZACION_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_ORGANIZACION_USUARIO_KO',
                             
                         )
                     )
@@ -171,25 +114,6 @@ $usuario_description =
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_PUESTO_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_PUESTO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_PUESTO_USUARIO_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_PUESTO_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_PUESTO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_PUESTO_USUARIO_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_PUESTO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_PUESTO_USUARIO_KO',
-                            
-                        )
                     )
                 )
             ),
@@ -217,25 +141,6 @@ $usuario_description =
                             'max_size' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]*$/',
                             
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_DIRECCION_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_PUESTO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_DIRECCION_USUARIO_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_DIRECCION_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_DIRECCION_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_DIRECCION_USUARIO_KO',
-                           
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_DIRECCION_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_DIRECCION_USUARIO_KO',
-                          
                         )
                     )
                 )
@@ -267,25 +172,6 @@ $usuario_description =
                             'exp_reg' => '/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/',  //posiblemente
                            
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
-                           
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
-                            'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-                            'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
-                           
-                        )
                     )
                 )
             ),
@@ -314,25 +200,6 @@ $usuario_description =
             //             'SEARCH' => array(
             //                 'max_size' => 45,
             //                 'exp_reg' => '/.*/',  //posiblemente
-                           
-            //             )
-            //         ),
-            //         'error' => array(
-            //             'ADD' => array(
-            //                 'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
-            //                 'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-            //                 'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
-                           
-            //             ),
-            //             'EDIT' => array(
-            //                 'min_size' => 'MIN_SIZE_CORREO_USUARIO_KO',
-            //                 'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-            //                 'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
-                            
-            //             ),
-            //             'SEARCH' => array(
-            //                 'max_size' => 'MAX_SIZE_CORREO_USUARIO_KO',
-            //                 'exp_reg' => 'EXP_REG_CORREO_USUARIO_KO',
                            
             //             )
             //         )

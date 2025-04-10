@@ -29,25 +29,6 @@ $unidad_description =
                             'exp_reg' => '/.*/',
                             
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_ID_UNIDAD_KO',
-                            'max_size' => 'MAX_SIZE_ID_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_ID_UNIDAD_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_ID_UNIDAD_KO',
-                            'max_size' => 'MAX_SIZE_ID_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_ID_UNIDAD_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_ID_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_ID_UNIDAD_KO',
-                            
-                        )
                     )
                 )
             ),
@@ -74,25 +55,6 @@ $unidad_description =
                         'SEARCH' => array(
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_UNIDAD_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_UNIDAD_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_UNIDAD_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_UNIDAD_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_NOMBRE_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_UNIDAD_KO',
                             
                         )
                     )
@@ -123,25 +85,6 @@ $unidad_description =
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
                             
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_DESCRIPCION_UNIDAD_KO',
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_UNIDAD_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_DESCRIPCION_UNIDAD_KO',
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_UNIDAD_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_UNIDAD_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_UNIDAD_KO',
-                            
-                        )
                     )
                 )
             ),
@@ -165,25 +108,6 @@ $unidad_description =
                         'EDIT' => array(
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
-                            
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_ID_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-                            
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_ID_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-                            
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
                             
                         )
                     )

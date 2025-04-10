@@ -25,24 +25,6 @@ $parametro_description =
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_ID_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_ID_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_ID_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_ID_PARAMETRO_KO',
-
-                        )
                     )
                 )
             ),
@@ -69,25 +51,6 @@ $parametro_description =
                         'SEARCH' => array(
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_PARAMETRO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_NOMBRE_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_NOMBRE_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_PARAMETRO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_NOMBRE_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_NOMBRE_PARAMETRO_KO',
 
                         )
                     )
@@ -118,25 +81,6 @@ $parametro_description =
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
 
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_DESCRIPCION_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_PARAMETRO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_DESCRIPCION_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_PARAMETRO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_DESCRIPCION_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_DESCRIPCION_PARAMETRO_KO',
-
-                        )
                     )
                 )
             ),
@@ -163,25 +107,6 @@ $parametro_description =
                         'SEARCH' => array(
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_TIPO_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_TIPO_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_TIPO_PARAMETRO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_TIPO_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_TIPO_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_TIPO_PARAMETRO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'max_size' => 'MAX_SIZE_TIPO_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_TIPO_PARAMETRO_KO',
 
                         )
                     )
@@ -215,26 +140,6 @@ $parametro_description =
                             'exp_reg' => '/.*/',
 
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_FORMATO_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_FORMATO_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_FORMATO_PARAMETRO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_FORMATO_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_FORMATO_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_FORMATO_PARAMETRO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'min_size' => false,
-                            'max_size' => 'MAX_SIZE_FORMATO_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_FORMATO_PARAMETRO_KO',
-
-                        )
                     )
                 )
             ),
@@ -266,26 +171,6 @@ $parametro_description =
                             'exp_reg' => '/.*/',
 
                         )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_RANGO_DESDE_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_RANGO_DESDE_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_RANGO_DESDE_PARAMETRO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_RANGO_DESDE_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_RANGO_DESDE_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_RANGO_DESDE_PARAMETRO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'min_size' => false,
-                            'max_size' => 'MAX_SIZE_RANGO_DESDE_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_RANGO_DESDE_PARAMETRO_KO',
-
-                        )
                     )
                 )
             ),
@@ -315,26 +200,6 @@ $parametro_description =
                             'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
-
-                        )
-                    ),
-                    'error' => array(
-                        'ADD' => array(
-                            'min_size' => 'MIN_SIZE_RANGO_HASTA_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_RANGO_HASTA_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_RANGO_HASTA_PARAMETRO_KO',
-
-                        ),
-                        'EDIT' => array(
-                            'min_size' => 'MIN_SIZE_RANGO_HASTA_PARAMETRO_KO',
-                            'max_size' => 'MAX_SIZE_RANGO_HASTA_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_RANGO_HASTA_PARAMETRO_KO',
-
-                        ),
-                        'SEARCH' => array(
-                            'min_size' => false,
-                            'max_size' => 'MAX_SIZE_RANGO_HASTA_PARAMETRO_KO',
-                            'exp_reg' => 'EXP_REG_RANGO_HASTA_PARAMETRO_KO',
 
                         )
                     )
