@@ -88,7 +88,6 @@ class Base_Data_Validations
 
     public function null_search_by()
     {
-
         if (action == "SEARCH_BY") {
 
             foreach ($this->listaAtributos as $atributo) {
@@ -98,7 +97,7 @@ class Base_Data_Validations
             }
 
             $feedback['ok'] = false;
-            $feedback['code'] = 'SEARCH_BY_NULL_KO';
+            $feedback['code'] = 'search_by_null_KO';
             $feedback['resources'] = false;
             return $feedback;
         }

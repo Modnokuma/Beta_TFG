@@ -96,7 +96,7 @@ class Base_Action_Validations
                 return true;
             } else {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'PK_ALREADY_EXISTS_IN_' . $controlador . 'KO';
+                $feedback['code'] = 'pk_already_exists_in_' . $controlador . 'KO';
                 $feedback['resources'] = true;
                 return $feedback;
             }
@@ -117,7 +117,7 @@ class Base_Action_Validations
 
                         if ($resp !== true) {
                             $feedback['ok'] = false;
-                            $feedback['code'] =  $atributo . '_ALREADY_EXISTS_KO';
+                            $feedback['code'] =  $atributo . '_already_exists_KO';
                             $feedback['resources'] = true;
                             return $feedback;
                         }
@@ -126,7 +126,7 @@ class Base_Action_Validations
 
                         if ($resp !== true) {
                             $feedback['ok'] = false;
-                            $feedback['code'] =  $atributo . '_ALREADY_EXISTS_KO';
+                            $feedback['code'] =  $atributo . '_already_exists_KO';
                             $feedback['resources'] = true;
                             return $feedback;
                         }
@@ -251,7 +251,7 @@ class Base_Action_Validations
                     return true;
                 } else {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'FOREIGN_KEY_VALUES_NOT_IN_' . $tablaFk . '_KO';
+                    $feedback['code'] = 'foreign_key_values_not_in_' . $tablaFk . '_KO';
                     $feedback['resources'] = true;
                     return $feedback;
                 }
@@ -303,7 +303,7 @@ class Base_Action_Validations
 
                 if ($resultado['code'] === 'RECORDSET_DATOS') {
                     $feedback['ok'] = false;
-                    $feedback['code'] = 'DELETE_PARENT_WHILE_CHILDREN_IN_' . $entidadHija . '_KO';
+                    $feedback['code'] = 'delete_parent_while_children_in_' . $entidadHija . '_KO';
                     $feedback['resources'] = true;
                     return $feedback;
                 } else {

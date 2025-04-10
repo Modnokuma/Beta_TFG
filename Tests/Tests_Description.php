@@ -251,7 +251,7 @@ const tests_description = [
             'action' => 'ADD',
             'controlador' => 'unidad'
        ],
-        'mensaje' => 'FOREIGN_KEY_VALUES_NOT_IN_parametro_KO'
+        'mensaje' => 'foreign_key_values_not_in_parametro_KO'
    ],
     'testActionUniqueValueAlreadyExists' => [
         'variables' => [
@@ -264,7 +264,7 @@ const tests_description = [
             'action' => 'ADD',
             'controlador' => 'usuario'
        ],
-        'mensaje' => 'nombre_usuario_ALREADY_EXISTS_KO'
+        'mensaje' => 'nombre_usuario_already_exists_KO'
    ],
     'testEditUniqueValueAlreadyExists' => [
         'variables' => [
@@ -278,7 +278,7 @@ const tests_description = [
             'action' => 'EDIT',
             'controlador' => 'usuario'
        ],
-        'mensaje' => 'correo_usuario_ALREADY_EXISTS_KO'
+        'mensaje' => 'correo_usuario_already_exists_KO'
    ],
     'testDeleteStrongEntity' => [
         'variables' => [
@@ -287,7 +287,7 @@ const tests_description = [
             'action' => 'DELETE',
             'controlador' => 'parametro'
        ],
-        'mensaje' => 'DELETE_PARENT_WHILE_CHILDREN_IN_unidad_KO'
+        'mensaje' => 'delete_parent_while_children_in_unidad_KO'
    ],
     'testSearchByVacio' => [
         'variables' => [
@@ -296,7 +296,7 @@ const tests_description = [
             'controlador' => 'usuario',
             
        ],
-        'mensaje' => 'SEARCH_BY_NULL_KO'
+        'mensaje' => 'search_by_null_KO'
    ],
 
     'testDefaultValues' => [
