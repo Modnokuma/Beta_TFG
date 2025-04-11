@@ -56,12 +56,11 @@ class Base_Action_Validations
     }
 
     /*
-    * 
     * action_validate_pks()
-    * test pk values dont exit in entity for ADD
-    * @param nothing
-    * @return true if correct false if error
-    * 
+    * test pk values dont exist in an entity for ADD.
+    *
+    * @param void No parameters required.
+    * @return boolean|array true if correct, feedback object with details if not.
     */
 
     public function action_validate_pks()
@@ -104,6 +103,13 @@ class Base_Action_Validations
         return true;
     }
 
+    /*
+    * unique_validations()
+    * Validates that unique values do not repeat in an entity for ADD/EDIT
+    *
+    * @param void No parameters required.
+    * @return boolean|array true if correct, feedback object with details if not.
+    */
     public function unique_validations()
     {
         // Comprobaciones de atributos unique
@@ -139,7 +145,14 @@ class Base_Action_Validations
     }
 
 
-
+    /*
+    * unique_value_already_exists($campo, $valorvariable)
+    * Verifies if a given value already exists in the database for a field marked as unique. Only for ADD action.
+    *
+    * @param string $campo Name of the field to check.
+    * @param mixed $valorvariable Value to check for existence.
+    * @return boolean True if the value does not exist, false if it already exists.
+    */
     public function unique_value_already_exists($campo, $valorvariable)
     {
 
@@ -164,6 +177,14 @@ class Base_Action_Validations
         }
     }
 
+    /*
+    * edit_unique_value_already_exists($campo, $valorvariable)
+    * Verifies if a given value already exists in the database for a field marked as unique. Only for EDIT action.
+    *
+    * @param string $campo Name of the field to check.
+    * @param mixed $valorvariable Value to check for existence.
+    * @return boolean True if the value does not exist, false if it already exists.
+    */
     public function edit_unique_value_already_exists($campo, $valorvariable)
     {
 
@@ -207,6 +228,13 @@ class Base_Action_Validations
         return true;
     }
 
+    /*
+    * exist_in_other_entity()
+    * Verifies if a foreign key value exists in their corresponding parent entities.
+    *
+    * @param void No parameters required.
+    * @return boolean|array True if the foreign key exists, feedback object with details if not.
+    */
     public function exist_in_other_entity()
     {
         // FK (error si el valor no esta en la otra tabla)
@@ -260,6 +288,13 @@ class Base_Action_Validations
         return true;
     }
 
+    /*
+    * delete_parent_while_child_exist()
+    * Verifies that you cant delete a parent entity while it has children entities.
+    *
+    * @param void No parameters required.
+    * @return boolean|array True if there are no child entities, feedback object with details if not.
+    */
     public function delete_parent_while_child_exist()
     {
         // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil
