@@ -1,5 +1,13 @@
 <?php
-
+/*
+* Base_Action_Validations
+* This class is responsible for validating actions on entities, such as adding, editing, or deleting records.
+*
+* @var array $estructura Structure of the entity.
+* @var array $valores key-value pairs that represent the values of the entity's attributes.
+* @var array $listaAtributos List of attributes of the entity.
+* @var string $controlador Controller name for the entity.
+*/
 class Base_Action_Validations
 {
     protected $estructura;
@@ -7,6 +15,16 @@ class Base_Action_Validations
     protected $listaAtributos;
     protected $controlador;
 
+    /*
+    * __construct($estructura, $valores, $listaAtributos, $controlador)
+    *
+    * Initializes a new instance of the class with the provided parameters.
+    *
+    * @param array $estructura Structure of the entity.
+    * @param array $valores Values to be validated against the entity.
+    * @param array $listaAtributos List of attributes of the entity.
+    * @param string $controlador Name of the controller associated with the entity.
+    */
     public function __construct($estructura, $valores, $listaAtributos, $controlador)
     {
         $this->estructura = $estructura;
@@ -15,6 +33,13 @@ class Base_Action_Validations
         $this->controlador = $controlador;
     }
 
+    /*
+    * action_validations()
+    * Verifies if a file exists and includes it. If not, includes the base service.
+    *
+    * @param void No parameters required.
+    * @return boolean True if every validation is passed. Feedback object with details if not.
+    */
     public function action_validations()
     {
         $respuesta = true;
@@ -43,6 +68,14 @@ class Base_Action_Validations
         return $respuesta;
     }
 
+    /*
+    * verificarYIncluirArchivo($rutaArchivo, $clase)
+    * Verifies if a file exists and includes it. If not, includes the base service.
+    *
+    * @param string $rutaArchivo Path to the file to check.
+    * @param string $clase Class name to include.
+    * @return string The name of the service class included.
+    */
     public function verificarYIncluirArchivo($rutaArchivo, $clase)
     {
         if (file_exists($rutaArchivo)) {
