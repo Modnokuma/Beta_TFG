@@ -1,7 +1,7 @@
 
 # Beta_TFG
 
-Este proyecto es una aplicación web diseñada para gestionar entidades relacionadas con proyectos, parámetros, usuarios y unidades. Incluye funcionalidades de validación, operaciones CRUD (Crear, Leer, Actualizar, Eliminar) y pruebas automatizadas.
+Este proyecto es una aplicación diseñada para gestionar entidades relacionadas con proyectos, parámetros, usuarios y unidades. Incluye funcionalidades de validación, operaciones CRUD (Crear, Leer, Actualizar, Eliminar) y pruebas automatizadas.
 
 ## Estructura del Proyecto
 
