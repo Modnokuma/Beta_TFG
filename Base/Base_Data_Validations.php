@@ -1,15 +1,33 @@
 <?php
-
-
+/*
+* Base_Data_Validations
+* This class is responsible for validating the data of entities, ensuring that the provided values comply with the defined rules and constraints.
+*
+* @var array $estructura Structure of the entity.
+* @var array $valores Key-value pairs representing the values of the entity's attributes.
+* @var array $listaAtributos List of attributes of the entity.
+* @var object $objetoentidad Object representing the entity being validated.
+* @var string $controlador Controller name for the entity.
+*/
 class Base_Data_Validations
 {
-
     protected $estructura;
     protected $valores;
     protected $listaAtributos;
     protected $objetoentidad;
     protected $controlador;
 
+    /*
+    * __construct($estructura, $valores, $listaAtributos, $entidad, $controlador)
+    *
+    * Initializes a new instance of the class with the provided parameters.
+    *
+    * @param array $estructura Structure of the entity.
+    * @param array $valores Values to be validated against the entity.
+    * @param array $listaAtributos List of attributes of the entity.
+    * @param object $entidad Object representing the entity being validated.
+    * @param string $controlador Name of the controller associated with the entity.
+    */
     public function __construct($estructura, $valores, $listaAtributos, $entidad, $controlador)
     {
         $this->estructura = $estructura;
@@ -19,6 +37,13 @@ class Base_Data_Validations
         $this->controlador = $controlador;
     }
 
+    /*
+    * data_validations()
+    * Executes all data validation checks, including null checks, search validations, and custom rules.
+    *
+    * @param void No parameters required.
+    * @return boolean|array True if all validations pass, or a feedback object with details if not.
+    */
     public function data_validations()
     {
 
@@ -86,6 +111,13 @@ class Base_Data_Validations
         return false;
     }
 
+    /*
+    * null_search_by()
+    * Ensures that at least one attribute is provided for a SEARCH_BY action.
+    *
+    * @param void No parameters required.
+    * @return boolean|array True if at least one attribute is provided, or a feedback object with details if not.
+    */
     public function null_search_by()
     {
         if (action == "SEARCH_BY") {
@@ -104,6 +136,13 @@ class Base_Data_Validations
         return true;
     }
 
+    /*
+    * validations()
+    * Applies all validation rules defined for the entity's attributes, such as size constraints and regular expressions.
+    *
+    * @param void No parameters required.
+    * @return boolean|array True if all validations pass, or a feedback object with details if not.
+    */
     public function validations()
     {
         if (action != 'DELETE') {
@@ -130,6 +169,14 @@ class Base_Data_Validations
         return true;
     }
 
+    /*
+    * validate_min_size($atributo, $valor)
+    * Validates that the length of a given attribute's value meets the minimum size requirement.
+    *
+    * @param string $atributo Name of the attribute to validate.
+    * @param mixed $valor Value of the attribute to validate.
+    * @return boolean|array True if the value meets the minimum size, or a feedback object with details if not.
+    */
     public function validate_min_size($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
@@ -147,7 +194,14 @@ class Base_Data_Validations
         return true;
     }
 
-
+    /*
+    * validate_max_size($atributo, $valor)
+    * Validates that the length of a given attribute's value does not exceed the maximum size requirement.
+    *
+    * @param string $atributo Name of the attribute to validate.
+    * @param mixed $valor Value of the attribute to validate.
+    * @return boolean|array True if the value meets the maximum size, or a feedback object with details if not.
+    */
     public function validate_max_size($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
@@ -165,6 +219,14 @@ class Base_Data_Validations
         return true;
     }
 
+    /*
+    * validate_exp_reg($atributo, $valor)
+    * Validates that a given attribute's value matches a specified regular expression.
+    *
+    * @param string $atributo Name of the attribute to validate.
+    * @param mixed $valor Value of the attribute to validate.
+    * @return boolean|array True if the value matches the regular expression, or a feedback object with details if not.
+    */
     public function validate_exp_reg($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action])) {
@@ -182,6 +244,14 @@ class Base_Data_Validations
         return true;
     }
 
+    /*
+    * validate_personalized($atributo, $valor)
+    * Executes a custom validation method defined in the entity for a specific attribute.
+    *
+    * @param string $atributo Name of the attribute to validate.
+    * @param mixed $valor Value of the attribute to validate.
+    * @return boolean|array True if the custom validation passes, or a feedback object with details if not.
+    */
     public function validate_personalized($atributo, $valor)
     {
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {

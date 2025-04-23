@@ -1,4 +1,13 @@
 <?php
+/*
+* Base_Validations
+* This class combines data and action validations to ensure that all operations comply with the defined rules.
+*
+* @var array $estructura Structure of the entity.
+* @var array $valores Key-value pairs representing the values of the entity's attributes.
+* @var array $listaAtributos List of attributes of the entity.
+* @var string $controlador Controller name for the entity.
+*/
 
 include_once './Base/Base_Action_Validations.php';
 include_once './Base/Base_Data_Validations.php';

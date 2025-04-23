@@ -2,6 +2,15 @@
 
 include_once './Base/Base_Validations.php';
 
+/*
+* Base_CONTROLLER
+* This class acts as a base controller for handling requests and delegating actions to the appropriate service.
+*
+* @var array $estructura Structure of the entity.
+* @var array $valores Key-value pairs representing the values of the entity's attributes.
+* @var array $listaAtributos List of attributes of the entity.
+* @var string $controlador Controller name for the entity.
+*/
 class Base_CONTROLLER extends Base_Validations
 {
     public function __construct()

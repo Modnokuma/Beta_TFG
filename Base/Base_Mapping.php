@@ -1,4 +1,15 @@
 <?php
+/*
+* Base_Mapping
+* This class provides the base functionality for database operations such as ADD, EDIT, DELETE, and SEARCH.
+*
+* @var mysqli $conn Database connection instance.
+* @var string $query SQL query to be executed.
+* @var boolean $ok Indicates if the operation was successful.
+* @var string $code Response code for the operation.
+* @var array $feedback Feedback object containing operation details.
+* @var string $resource Resource affected by the operation.
+*/
 
 include './common/credentialsDB.php';
 

@@ -1,4 +1,15 @@
 <?php
+/*
+* Base_SERVICE
+* This class acts as a service layer, handling business logic and delegating database operations to the model.
+*
+* @var object $model Instance of the model associated with the entity.
+* @var array $listaAtributos List of attributes of the entity.
+* @var array $valores Key-value pairs representing the values of the entity's attributes.
+* @var array $estructura Structure of the entity.
+* @var string $accion Current action being performed (e.g., ADD, EDIT, DELETE).
+* @var string $controlador Controller name for the entity.
+*/
 
 class Base_SERVICE
 {

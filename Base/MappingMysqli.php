@@ -1,4 +1,13 @@
 <?php
+/*
+* MappingMysqli
+* This class extends `Base_Mapping` and provides specific implementations for database operations using MySQLi.
+*
+* @var string $tabla Name of the database table associated with the entity.
+* @var array $valores Key-value pairs representing the values of the entity's attributes.
+* @var array $clavesPrimarias Primary keys of the entity.
+* @var array $listaAtributos List of attributes of the entity.
+*/
 
 include_once './Base/Base_Mapping.php';
 
@@ -207,7 +216,7 @@ class Mapping extends Base_Mapping
 
         return $cadena;
     }
-   
+   //Borrar???
     function foreignKeyExists($table, $foreignKey, $value)
     {
 
