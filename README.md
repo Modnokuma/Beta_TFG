@@ -37,6 +37,25 @@ El proyecto está organizado en las siguientes carpetas y archivos principales.
 
 - **`test.php`**: Archivo que ejecuta todas las validaciones del sistema para comprobar su correcto funcionamiento.
 
+### Descripción de la estructura de las entidades
+El archivo **`estructura.js`** define la estructura general de las entidades del sistema, incluyendo sus atributos y reglas de validación. Este archivo es esencial para garantizar la consistencia en la gestión de datos y la validación de las entidades.
+#### Definición de los atributos
+Cada entidad tiene una lista de atributos que define los campos que la componen. Los atributos incluyen configuraciones específicas que indican si:
+
+- Es una clave primaria (pk).
+- Es un valor autoincremental (autoincrement).
+- Que tipo de valor guarda (type).
+- Permite un valor nulos (not_null).
+- Tiene valores predeterminados (default_value).
+
+#### Reglas de validación
+Cada atributo puede tener reglas de validación específicas para sus diferentes acciones (ADD, EDIT, SEARCH, DELETE) como:
+
+- Tamaño mínimo y máximo (min_size, max_size).
+- Formato utilizando expresiones regulares (exp_reg).
+- Validaciones personalizadas (personalized).
+- Validaciones específicas para archivos, indicando su tipo (file_type) y su tamaño máximo (max_size_file).
+
 ## Requisitos
 
 - **Servidor Web**: Apache o similar.
