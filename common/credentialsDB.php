@@ -10,4 +10,3 @@ define('user_testing', 'dani_test');
 define('pass_testing', 'dani_test');
 
 ?>
-

@@ -16,6 +16,7 @@ class Base_MODEL extends Mapping
     public $valores = array();
     public $listaAtributos = array(); // Atributos del modelo
     public $clavesPrimarias = array(); // Claves primarias del modelo
+    public $estructura = array();
 
     function EDIT()
     {
