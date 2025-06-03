@@ -2,20 +2,20 @@
 include_once './Base/Base_Mapping.php';
 
 /**
-* MappingMysqli
-* This class extends `Base_Mapping` and provides specific implementations for database operations using MySQLi.
-*
-* @package Beta_TFG
-* @subpackage Base
-* @var string $query SQL query to be executed.
-* @var string $tabla Name of the database table associated with the entity.
-* @var array $valores Key-value pairs representing the values of the entity's attributes.
-* @var array $clavesPrimarias Primary keys of the entity.
-* @var string $aux Auxiliary variable for temporary storage.
-* @var boolean $existeFK Indicates if a foreign key exists.
-* @var array $listaAtributos List of attributes of the entity.
-* 
-*/
+ * MappingMysqli
+ * This class extends `Base_Mapping` and provides specific implementations for database operations using MySQLi.
+ *
+ * @package Beta_TFG
+ * @subpackage Base
+ * @var string $query SQL query to be executed.
+ * @var string $tabla Name of the database table associated with the entity.
+ * @var array $valores Key-value pairs representing the values of the entity's attributes.
+ * @var array $clavesPrimarias Primary keys of the entity.
+ * @var string $aux Auxiliary variable for temporary storage.
+ * @var boolean $existeFK Indicates if a foreign key exists.
+ * @var array $listaAtributos List of attributes of the entity.
+ * 
+ */
 
 class Mapping extends Base_Mapping
 {
@@ -41,8 +41,8 @@ class Mapping extends Base_Mapping
      * @return void
      */
     function mapping_ADD()
-        {
-            
+    {
+
         $this->query = "INSERT INTO " . $this->tabla . " ( ";
         $total = count($this->listaAtributos);
         $i = 0;
@@ -230,13 +230,13 @@ class Mapping extends Base_Mapping
 
         foreach ($valores as $clave => $valor) {
             if (array_key_exists($clave, $this->clavesPrimarias)) {
-               
+
                 if ($primero) {
                     $primero = false;
                 } else {
                     $cadena = $cadena . " AND ";
                 }
-               
+
                 ($this->estructura['attributes'][$clave]['type'] == 'integer') ? $valor  : $valor = "'$valor'";
                 $cadena = $cadena . "( " . $clave . " = " . $valor . ")";
             }
@@ -268,16 +268,16 @@ class Mapping extends Base_Mapping
         return $cadena;
     }
 
-   //Borrar???
-   /**
-    * foreignKeyExists()
-    * This method checks if a foreign key exists in the specified table.
-    *
-    * @param [string] $table
-    * @param [string] $foreignKey
-    * @param [mixed] $value
-    * @return void
-    */
+    //Borrar???
+    /**
+     * foreignKeyExists()
+     * This method checks if a foreign key exists in the specified table.
+     *
+     * @param [string] $table
+     * @param [string] $foreignKey
+     * @param [mixed] $value
+     * @return void
+     */
     function foreignKeyExists($table, $foreignKey, $value)
     {
 
@@ -295,6 +295,6 @@ class Mapping extends Base_Mapping
             return true;
         }
 
-        return $result_query;        
+        return $result_query;
     }
 }

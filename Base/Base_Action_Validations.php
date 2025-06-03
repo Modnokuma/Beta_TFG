@@ -1,15 +1,16 @@
 <?php
+
 /**
-* Base_Action_Validations
-* This class is responsible for validating actions on entities.
-*
-* @var array $estructura Structure of the entity.
-* @var array $valores Key-value pairs representing the values of the entity's attributes.
-* @var array $listaAtributos List of attributes of the entity.
-* @var string $controlador Name for the entity.
-* @package Beta_TFG
-* @subpackage Base
-*/
+ * Base_Action_Validations
+ * This class is responsible for validating actions on entities.
+ *
+ * @var array $estructura Structure of the entity.
+ * @var array $valores Key-value pairs representing the values of the entity's attributes.
+ * @var array $listaAtributos List of attributes of the entity.
+ * @var string $controlador Name for the entity.
+ * @package Beta_TFG
+ * @subpackage Base
+ */
 class Base_Action_Validations
 {
     protected $estructura;
@@ -18,15 +19,15 @@ class Base_Action_Validations
     protected $controlador;
 
     /**
-    * __construct($estructura, $valores, $listaAtributos, $controlador)
-    *
-    * Initializes a new instance of the class with the provided parameters.
-    *
-    * @param array $estructura Structure of the entity.
-    * @param array $valores Values to be validated against the entity.
-    * @param array $listaAtributos List of attributes of the entity.
-    * @param string $controlador Name of the controller associated with the entity.
-    */
+     * __construct($estructura, $valores, $listaAtributos, $controlador)
+     *
+     * Initializes a new instance of the class with the provided parameters.
+     *
+     * @param array $estructura Structure of the entity.
+     * @param array $valores Values to be validated against the entity.
+     * @param array $listaAtributos List of attributes of the entity.
+     * @param string $controlador Name of the controller associated with the entity.
+     */
     public function __construct($estructura, $valores, $listaAtributos, $controlador)
     {
         $this->estructura = $estructura;
@@ -36,11 +37,11 @@ class Base_Action_Validations
     }
 
     /**
-    * action_validations()
-    * This method performs a series of validations on the entity's attributes.
-    *
-    * @return boolean|array True if every validation is passed. An array with Feedback details if not.
-    */
+     * action_validations()
+     * This method performs a series of validations on the entity's attributes.
+     *
+     * @return boolean|array True if every validation is passed. An array with Feedback details if not.
+     */
     public function action_validations()
     {
         $respuesta = true;
@@ -70,13 +71,13 @@ class Base_Action_Validations
     }
 
     /**
-    * verificarYIncluirArchivo($rutaArchivo, $clase)
-    * Verifies if a file exists and includes it. If not, includes the Base_SERVICE file.
-    *
-    * @param string $rutaArchivo Path to the file to check.
-    * @param string $clase Class name to include.
-    * @return string The name of the service class included.
-    */
+     * verificarYIncluirArchivo($rutaArchivo, $clase)
+     * Verifies if a file exists and includes it. If not, includes the Base_SERVICE file.
+     *
+     * @param string $rutaArchivo Path to the file to check.
+     * @param string $clase Class name to include.
+     * @return string The name of the service class included.
+     */
     public function verificarYIncluirArchivo($rutaArchivo, $clase)
     {
         if (file_exists($rutaArchivo)) {
@@ -90,11 +91,11 @@ class Base_Action_Validations
     }
 
     /**
-    * action_validate_pks()
-    * This method is used to check that primary keys are unique when adding new data.
-    *
-    * @return boolean|array true if correct, an array with Feedback details if not.
-    */
+     * action_validate_pks()
+     * This method is used to check that primary keys are unique when adding new data.
+     *
+     * @return boolean|array true if correct, an array with Feedback details if not.
+     */
 
     public function action_validate_pks()
     {
@@ -137,11 +138,11 @@ class Base_Action_Validations
     }
 
     /**
-    * unique_validations()
-    * Checks that unique values do not repeat in an entity for ADD/EDIT actions.
-    *
-    * @return boolean|array true if correct, an array with Feedback details if not.
-    */
+     * unique_validations()
+     * Checks that unique values do not repeat in an entity for ADD/EDIT actions.
+     *
+     * @return boolean|array true if correct, an array with Feedback details if not.
+     */
     public function unique_validations()
     {
         // Comprobaciones de atributos unique
@@ -178,14 +179,14 @@ class Base_Action_Validations
 
 
     /**
-    * unique_value_already_exists($campo, $valorvariable)
-    * Verifies if a given value already exists in the database for an unique attribute. 
-    * Only for an ADD action.
-    *
-    * @param string $campo Name of the field to check.
-    * @param mixed $valorvariable Value to check for existence.
-    * @return boolean True if the value does not exist, false if it already exists.
-    */
+     * unique_value_already_exists($campo, $valorvariable)
+     * Verifies if a given value already exists in the database for an unique attribute. 
+     * Only for an ADD action.
+     *
+     * @param string $campo Name of the field to check.
+     * @param mixed $valorvariable Value to check for existence.
+     * @return boolean True if the value does not exist, false if it already exists.
+     */
     public function unique_value_already_exists($campo, $valorvariable)
     {
 
@@ -211,14 +212,14 @@ class Base_Action_Validations
     }
 
     /**
-    * edit_unique_value_already_exists($campo, $valorvariable)
-    * Verifies if a given value already exists in the database for an unique attribute. 
-    * Only for EDIT action.
-    *
-    * @param string $campo Name of the field to check.
-    * @param mixed $valorvariable Value to check for existence.
-    * @return boolean True if the value does not exist, false if it already exists.
-    */
+     * edit_unique_value_already_exists($campo, $valorvariable)
+     * Verifies if a given value already exists in the database for an unique attribute. 
+     * Only for EDIT action.
+     *
+     * @param string $campo Name of the field to check.
+     * @param mixed $valorvariable Value to check for existence.
+     * @return boolean True if the value does not exist, false if it already exists.
+     */
     public function edit_unique_value_already_exists($campo, $valorvariable)
     {
 
@@ -263,11 +264,11 @@ class Base_Action_Validations
     }
 
     /**
-    * exist_in_other_entity()
-    * Verifies if a foreign key value exists in their corresponding parent entities.
-    *
-    * @return boolean|array True if the foreign key exists, an array with Feedback details if not.
-    */
+     * exist_in_other_entity()
+     * Verifies if a foreign key value exists in their corresponding parent entities.
+     *
+     * @return boolean|array True if the foreign key exists, an array with Feedback details if not.
+     */
     public function exist_in_other_entity()
     {
         // FK (error si el valor no esta en la otra tabla)
@@ -322,11 +323,11 @@ class Base_Action_Validations
     }
 
     /**
-    * delete_parent_while_child_exist()
-    * Verifies that you cant delete a parent entity while it has children entities.
-    *
-    * @return boolean|array True if there are no child entities, an array with Feedback details if not.
-    */
+     * delete_parent_while_child_exist()
+     * Verifies that you cant delete a parent entity while it has children entities.
+     *
+     * @return boolean|array True if there are no child entities, an array with Feedback details if not.
+     */
     public function delete_parent_while_child_exist()
     {
         // Borrar una tupla de entidad fuerte si tiene hijos en entidad débil

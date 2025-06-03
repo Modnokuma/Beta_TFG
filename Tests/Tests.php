@@ -4,6 +4,23 @@ include_once './Tests/Tests_Description.php';
 include './common/credentialsDB.php';
 include_once "./common/config.php";
 
+/**
+ * Tests
+ * This class is used to run tests on the API endpoints.
+ * It includes methods for PUT, GET, POST, DELETE, and OPTIONS requests.
+ * @package beta_TFG
+ * @subpackage Tests
+ * @var string $accion // creo que no se usa
+ * @var mixed $variables  Key-value pairs representing the values of the entity's attributes.
+ * @var mixed $entidad // creo que no se usa
+ * @var mixed $estructura Structure of the entity.
+ * @var string $host Database host.
+ * @var string $bd_testing Database name for testing.
+ * @var string $user_testing Database user for testing.
+ * @var string $pass_testing Database password for testing.
+ 
+ */
+
 class Tests
 {
     protected $accion;
@@ -15,12 +32,23 @@ class Tests
     private $user_testing = user_testing;
     private $pass_testing = pass_testing;
 
+    /**
+     * __construct()
+     * This method initializes the Tests class.
+     * It sets the structure of the entity to a predefined description.
+     */
     public function __construct()
     {
         $description = 'test_description';
         $this->estructura = $description;
     }
 
+    /**
+     * test_put($test)
+     * This method sends a PUT request to the API endpoint.
+     * @param array $test Contains the variables to be sent in the request.
+     * @return string The response from the API.
+     */
     public function test_put($test)
     {
 
@@ -34,7 +62,7 @@ class Tests
         ]);
         $response = curl_exec($curl);
         curl_close($curl);
-        
+
         return $response;
     }
 
@@ -55,6 +83,12 @@ class Tests
         return $response;
     }
 
+    /**
+     * test_get($test)
+     * This method sends a GET request to the API endpoint.
+     * @param array $test Contains the variables to be sent in the request.
+     * @return string The response from the API.
+     */
     function test_get($test)
     {
 
@@ -71,6 +105,12 @@ class Tests
         return $response;
     }
 
+    /**
+     * test_post($test)
+     * This method sends a POST request to the API endpoint.
+     * @param array $test Contains the variables to be sent in the request.
+     * @return string The response from the API.
+     */
     function test_post($test)
     {
 
@@ -81,10 +121,16 @@ class Tests
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($test['variables']));
         $response = curl_exec($curl);
         curl_close($curl);
-        
+
         return $response;
     }
 
+    /**
+     * test_delete($test)
+     * This method sends a DELETE request to the API endpoint.
+     * @param array $test Contains the variables to be sent in the request.
+     * @return string The response from the API.
+     */
     public function test_delete($test)
     {
 
@@ -101,7 +147,12 @@ class Tests
         return $response;
     }
 
-
+    /**
+     * test_run($test)
+     * This method runs a specific test based on the action defined in $test.
+     * @param array $test Includes all the test information including action and variables.
+     * @return string The result of the test execution.
+     */
     public function test_run($test)
     {
 
@@ -127,7 +178,11 @@ class Tests
         }
     }
 
-
+    /**
+     * test_exec()
+     * This method executes all the tests defined in 'tests_description'.
+     * @return bool True if the operation was successful.
+     */
     public function test_exec()
     {
         $contadorPruebas = 0;
@@ -137,11 +192,11 @@ class Tests
         foreach (tests_description as $test) {
             $result = $this->test_run($test);
             $result = json_decode($result, true);
-           
+
             if (json_last_error() !== JSON_ERROR_NONE) {
                 echo "Error al decodificar JSON: " . json_last_error_msg();
             }
-            
+
             $output .= "\n";
             $output .= "Tabla: " . $test['variables']['controlador'] . "\n";
             $output .= "Acción: " . $test['variables']['action'] . "\n";
@@ -171,13 +226,22 @@ class Tests
         return true;
     }
 
-
+    /**
+     * run()
+     * Entry point for running the tests.
+     * @return void
+     */
     public function run()
     {
         $this->reset_DB();
         return $this->test_exec();
     }
 
+    /**
+     * reset_DB()
+     * This method resets the database and fills it with predefined test data.
+     * @return bool True if the operation was successful.
+     */
     public function reset_DB()
     {
         $conexion = new mysqli($this->host, $this->user_testing, $this->pass_testing, $this->bd_testing) or die('fallo conexion');
@@ -198,17 +262,22 @@ class Tests
         $conexion->query("SET FOREIGN_KEY_CHECKS = 1");
 
         $this->fill_DB_with_data();
-                
+
         $conexion->close();
         return true;
     }
 
+    /**
+     * fill_DB_with_data()
+     * This method fills the database with predefined test data.
+     * @return void
+     */
     public function fill_DB_with_data()
     {
         foreach (tests_preparation as $test) {
             $result = $this->test_run($test);
             $result = json_decode($result, true);
-           
+
             if (json_last_error() !== JSON_ERROR_NONE) {
                 echo "Error al decodificar JSON: " . json_last_error_msg();
             }

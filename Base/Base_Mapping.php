@@ -2,27 +2,27 @@
 include './common/credentialsDB.php';
 
 /**
-* Base_Mapping
-* This class provides the base functionality for database operations such as ADD, EDIT, DELETE, and SEARCH.
-* It handles the connection to the database, executes SQL queries, and constructs responses based on the results.
-*
-* @package Beta_TFG
-* @subpackage Base
-* @var mysqli $conn Database connection instance.
-* @var string $query SQL query to be executed.
-* @var boolean $ok Indicates if the operation was successful.
-* @var string $code Response code for the operation.
-* @var array $feedback Feedback object containing operation details.
-* @var string $resource Resource affected by the operation.
-* @var string $host Database host.
-* @var string $userbd Database user for production.
-* @var string $passuserbd Database password for production.
-* @var string $bd Database name for production.
-* @var string $bd_testing Database name for testing.
-* @var string $user_testing Database user for testing.
-* @var string $pass_testing Database password for testing.
-* @var array $rows Array to hold rows fetched from the database.
-*/
+ * Base_Mapping
+ * This class provides the base functionality for database operations such as ADD, EDIT, DELETE, and SEARCH.
+ * It handles the connection to the database, executes SQL queries, and constructs responses based on the results.
+ *
+ * @package Beta_TFG
+ * @subpackage Base
+ * @var mysqli $conn Database connection instance.
+ * @var string $query SQL query to be executed.
+ * @var boolean $ok Indicates if the operation was successful.
+ * @var string $code Response code for the operation.
+ * @var array $feedback Feedback object containing operation details.
+ * @var string $resource Resource affected by the operation.
+ * @var string $host Database host.
+ * @var string $userbd Database user for production.
+ * @var string $passuserbd Database password for production.
+ * @var string $bd Database name for production.
+ * @var string $bd_testing Database name for testing.
+ * @var string $user_testing Database user for testing.
+ * @var string $pass_testing Database password for testing.
+ * @var array $rows Array to hold rows fetched from the database.
+ */
 
 class Base_Mapping
 {
@@ -49,11 +49,11 @@ class Base_Mapping
      */
     function connection()
     {
-       
+
         if (isset(variables['TESTING'])) {
             //conexion a la base de datos de pruebas            
             $this->conn = new mysqli($this->host, $this->user_testing, $this->pass_testing, $this->bd_testing) or die('fallo conexion');
-                
+
             return true;
         } else {
 
@@ -95,7 +95,7 @@ class Base_Mapping
         } else {
 
             //Ejecutamos la query
-            
+
             $result_query = $this->conn->query($this->query);
             if ($result_query != true) {
                 //Ha sucedido un error
@@ -112,8 +112,7 @@ class Base_Mapping
                 if (action == 'ADD') {
                     //$lastid = $this->conn->query(SELECT LAST_INSERT_ID());
                     $this->resource = mysqli_insert_id($this->conn);
-                }
-                else{
+                } else {
                     $this->resource = $this->query;
                 }
                 //llamamos al metodo que construye el mensaje
@@ -143,7 +142,7 @@ class Base_Mapping
             return $this->feedback;
         } else {
             $result_query = $this->conn->query($this->query);
-            
+
             if ($result_query != true) {
 
                 $this->ok = false;
@@ -189,7 +188,7 @@ class Base_Mapping
      */
     public function personalized_query($queryPrueba)
     {
-        
+
         if (!($this->connection())) {
 
             $this->ok = false;
@@ -197,7 +196,7 @@ class Base_Mapping
             $this->construct_response();
             return $this->feedback;
         } else {
-            
+
             $result_query = $this->conn->query($queryPrueba);
             if ($result_query != true) {
 

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * responder($texto)
+ * This function sends a JSON response back to the client.
+ * @param mixed $texto data to be sent in the response.
+ * @return void
+ */
 function responder($texto)
 {
     header('Content-type: application/json');
@@ -34,7 +40,7 @@ switch ($metodoHTTP) {
         // echo "Versión de PHP: " . PHP_VERSION . "<br>";
         // echo "Versión completa: " . phpversion() . "<br>";
         // phpinfo();
-        
+
         define('variables', $_GET);
         define('action', 'SEARCH');
         $action = 'SEARCH';
