@@ -1,15 +1,21 @@
 <?php
-/*
+include_once './Base/Base_Mapping.php';
+
+/**
 * MappingMysqli
 * This class extends `Base_Mapping` and provides specific implementations for database operations using MySQLi.
 *
+* @package Beta_TFG
+* @subpackage Base
+* @var string $query SQL query to be executed.
 * @var string $tabla Name of the database table associated with the entity.
 * @var array $valores Key-value pairs representing the values of the entity's attributes.
 * @var array $clavesPrimarias Primary keys of the entity.
+* @var string $aux Auxiliary variable for temporary storage.
+* @var boolean $existeFK Indicates if a foreign key exists.
 * @var array $listaAtributos List of attributes of the entity.
+* 
 */
-
-include_once './Base/Base_Mapping.php';
 
 class Mapping extends Base_Mapping
 {
@@ -22,8 +28,18 @@ class Mapping extends Base_Mapping
     public $existeFK;
     public $listaAtributos = [];
 
+    /**
+     * __construct()
+     * Constructor for the Mapping class.
+     * 
+     */
     function __construct() {}
 
+    /**
+     * mapping_ADD()
+     * This method constructs an SQL INSERT query to add new data to the database.
+     * @return void
+     */
     function mapping_ADD()
         {
             
@@ -72,6 +88,11 @@ class Mapping extends Base_Mapping
         return $this->execute_simple_query();
     }
 
+    /**
+     * mapping_EDIT()
+     * This method constructs an SQL UPDATE query to edit existing data in the database.
+     * @return void
+     */
     function mapping_EDIT()
     {
 
@@ -101,6 +122,12 @@ class Mapping extends Base_Mapping
         return $this->execute_simple_query();
     }
 
+    /**
+     * mapping_SEARCH()
+     * This method constructs an SQL SELECT query to search for data in the database.
+     * It uses a WHERE clause to filter results based on the provided values.
+     * @return void
+     */
     function mapping_SEARCH()
     {
         $nuevos_valores = [];
@@ -129,6 +156,12 @@ class Mapping extends Base_Mapping
         return $this->get_results_from_query();
     }
 
+    /**
+     * construirWhereLike()
+     * This method constructs a WHERE clause for an SQL query using LIKE.
+     * @param array $valores Key-value pairs representing the attributes and their values.
+     * @return string The constructed WHERE clause.
+     */
     function construirWhereLike($valores)
     {
         $cadena = '';
@@ -147,14 +180,22 @@ class Mapping extends Base_Mapping
 
         return $cadena;
     }
-
+    /**
+     * mapping_DELETE()
+     * This method constructs an SQL DELETE query to remove data from the database.
+     * @return void
+     */
     function mapping_DELETE()
     {
         $this->query = 'DELETE FROM ' . $this->tabla . " WHERE ";
         $this->query .= $this->construirWhereIgual($this->valores);
         return $this->execute_simple_query();
     }
-
+    /**
+     * mapping_SEARCH_BY()
+     * This method constructs an SQL SELECT query to search for data in the database using specific attributes.
+     * @return void
+     */
     function mapping_SEARCH_BY()
     {
         $nuevos_valores = [];
@@ -176,7 +217,12 @@ class Mapping extends Base_Mapping
         $this->query .= $query;
         return $this->get_results_from_query();
     }
-
+    /**
+     * construirWhereIgual($valores)
+     * This method constructs a WHERE clause for an SQL query using '='.
+     * @param array $valores Key-value pairs representing the attributes and their values.
+     * @return string The constructed WHERE clause.
+     */
     function construirWhereIgual($valores)
     {
         $cadena = '';
@@ -198,7 +244,12 @@ class Mapping extends Base_Mapping
 
         return $cadena;
     }
-
+    /**
+     * construirWhereIgualSearchBy($valores)
+     * This method constructs a WHERE clause for an SQL query using '=' for specific attributes.
+     * @param array $valores Key-value pairs representing the attributes and their values.
+     * @return string The constructed WHERE clause.
+     */
     function construirWhereIgualSearchBy($valores)
     {
         $cadena = '';
@@ -216,7 +267,17 @@ class Mapping extends Base_Mapping
 
         return $cadena;
     }
+
    //Borrar???
+   /**
+    * foreignKeyExists()
+    * This method checks if a foreign key exists in the specified table.
+    *
+    * @param [string] $table
+    * @param [string] $foreignKey
+    * @param [mixed] $value
+    * @return void
+    */
     function foreignKeyExists($table, $foreignKey, $value)
     {
 

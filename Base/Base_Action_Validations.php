@@ -1,12 +1,14 @@
 <?php
-/*
+/**
 * Base_Action_Validations
-* This class is responsible for validating actions on entities, such as adding, editing, or deleting records.
+* This class is responsible for validating actions on entities.
 *
 * @var array $estructura Structure of the entity.
-* @var array $valores key-value pairs that represent the values of the entity's attributes.
+* @var array $valores Key-value pairs representing the values of the entity's attributes.
 * @var array $listaAtributos List of attributes of the entity.
-* @var string $controlador Controller name for the entity.
+* @var string $controlador Name for the entity.
+* @package Beta_TFG
+* @subpackage Base
 */
 class Base_Action_Validations
 {
@@ -15,7 +17,7 @@ class Base_Action_Validations
     protected $listaAtributos;
     protected $controlador;
 
-    /*
+    /**
     * __construct($estructura, $valores, $listaAtributos, $controlador)
     *
     * Initializes a new instance of the class with the provided parameters.
@@ -33,12 +35,11 @@ class Base_Action_Validations
         $this->controlador = $controlador;
     }
 
-    /*
+    /**
     * action_validations()
-    * Verifies if a file exists and includes it. If not, includes the base service.
+    * This method performs a series of validations on the entity's attributes.
     *
-    * @param void No parameters required.
-    * @return boolean True if every validation is passed. Feedback object with details if not.
+    * @return boolean|array True if every validation is passed. An array with Feedback details if not.
     */
     public function action_validations()
     {
@@ -68,9 +69,9 @@ class Base_Action_Validations
         return $respuesta;
     }
 
-    /*
+    /**
     * verificarYIncluirArchivo($rutaArchivo, $clase)
-    * Verifies if a file exists and includes it. If not, includes the base service.
+    * Verifies if a file exists and includes it. If not, includes the Base_SERVICE file.
     *
     * @param string $rutaArchivo Path to the file to check.
     * @param string $clase Class name to include.
@@ -88,12 +89,11 @@ class Base_Action_Validations
         return $entidad_service;
     }
 
-    /*
+    /**
     * action_validate_pks()
-    * test pk values dont exist in an entity for ADD.
+    * This method is used to check that primary keys are unique when adding new data.
     *
-    * @param void No parameters required.
-    * @return boolean|array true if correct, feedback object with details if not.
+    * @return boolean|array true if correct, an array with Feedback details if not.
     */
 
     public function action_validate_pks()
@@ -136,12 +136,11 @@ class Base_Action_Validations
         return true;
     }
 
-    /*
+    /**
     * unique_validations()
-    * Validates that unique values do not repeat in an entity for ADD/EDIT
+    * Checks that unique values do not repeat in an entity for ADD/EDIT actions.
     *
-    * @param void No parameters required.
-    * @return boolean|array true if correct, feedback object with details if not.
+    * @return boolean|array true if correct, an array with Feedback details if not.
     */
     public function unique_validations()
     {
@@ -178,9 +177,10 @@ class Base_Action_Validations
     }
 
 
-    /*
+    /**
     * unique_value_already_exists($campo, $valorvariable)
-    * Verifies if a given value already exists in the database for a field marked as unique. Only for ADD action.
+    * Verifies if a given value already exists in the database for an unique attribute. 
+    * Only for an ADD action.
     *
     * @param string $campo Name of the field to check.
     * @param mixed $valorvariable Value to check for existence.
@@ -210,9 +210,10 @@ class Base_Action_Validations
         }
     }
 
-    /*
+    /**
     * edit_unique_value_already_exists($campo, $valorvariable)
-    * Verifies if a given value already exists in the database for a field marked as unique. Only for EDIT action.
+    * Verifies if a given value already exists in the database for an unique attribute. 
+    * Only for EDIT action.
     *
     * @param string $campo Name of the field to check.
     * @param mixed $valorvariable Value to check for existence.
@@ -261,12 +262,11 @@ class Base_Action_Validations
         return true;
     }
 
-    /*
+    /**
     * exist_in_other_entity()
     * Verifies if a foreign key value exists in their corresponding parent entities.
     *
-    * @param void No parameters required.
-    * @return boolean|array True if the foreign key exists, feedback object with details if not.
+    * @return boolean|array True if the foreign key exists, an array with Feedback details if not.
     */
     public function exist_in_other_entity()
     {
@@ -321,12 +321,11 @@ class Base_Action_Validations
         return true;
     }
 
-    /*
+    /**
     * delete_parent_while_child_exist()
     * Verifies that you cant delete a parent entity while it has children entities.
     *
-    * @param void No parameters required.
-    * @return boolean|array True if there are no child entities, feedback object with details if not.
+    * @return boolean|array True if there are no child entities, an array with Feedback details if not.
     */
     public function delete_parent_while_child_exist()
     {

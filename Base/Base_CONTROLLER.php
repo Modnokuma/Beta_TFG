@@ -2,7 +2,7 @@
 
 include_once './Base/Base_Validations.php';
 
-/*
+/**
 * Base_CONTROLLER
 * This class acts as a base controller for handling requests and delegating actions to the appropriate service.
 *
@@ -10,9 +10,17 @@ include_once './Base/Base_Validations.php';
 * @var array $valores Key-value pairs representing the values of the entity's attributes.
 * @var array $listaAtributos List of attributes of the entity.
 * @var string $controlador Controller name for the entity.
+* @package Beta_TFG
+* @subpackage Base
 */
+
 class Base_CONTROLLER extends Base_Validations
 {
+    /**
+    * __construct()
+    * Constructor for the Base_CONTROLLER class.
+    * @return void
+    */
     public function __construct()
     {
 

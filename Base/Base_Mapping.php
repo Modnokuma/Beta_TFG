@@ -1,17 +1,28 @@
 <?php
-/*
+include './common/credentialsDB.php';
+
+/**
 * Base_Mapping
 * This class provides the base functionality for database operations such as ADD, EDIT, DELETE, and SEARCH.
+* It handles the connection to the database, executes SQL queries, and constructs responses based on the results.
 *
+* @package Beta_TFG
+* @subpackage Base
 * @var mysqli $conn Database connection instance.
 * @var string $query SQL query to be executed.
 * @var boolean $ok Indicates if the operation was successful.
 * @var string $code Response code for the operation.
 * @var array $feedback Feedback object containing operation details.
 * @var string $resource Resource affected by the operation.
+* @var string $host Database host.
+* @var string $userbd Database user for production.
+* @var string $passuserbd Database password for production.
+* @var string $bd Database name for production.
+* @var string $bd_testing Database name for testing.
+* @var string $user_testing Database user for testing.
+* @var string $pass_testing Database password for testing.
+* @var array $rows Array to hold rows fetched from the database.
 */
-
-include './common/credentialsDB.php';
 
 class Base_Mapping
 {
@@ -31,6 +42,11 @@ class Base_Mapping
     private $pass_testing = pass_testing;
     public $rows = array();
 
+    /**
+     * connection()
+     * This method establishes a connection to the database. It can connect to either the production or testing database.
+     * @return boolean Returns true if the connection is successful, false otherwise.
+     */
     function connection()
     {
        
@@ -51,12 +67,21 @@ class Base_Mapping
         }
     }
 
+    /**
+     * close_connection()
+     * This method closes the database connection.
+     */
     private function close_connection()
     {
         $this->conn->close();
     }
 
-    // Metodo para ejecutar funciones de ADD/EDIT/DELETE
+    /**
+     * execute_simple_query()
+     * This method executes a SQL query (ADD, EDIT, DELETE).
+     * It checks the connection, executes the query, and constructs a response based on the result.
+     * @return array Returns an array with the operation details, it doesn't matter if it was successful or not.
+     */
     public function execute_simple_query()
     {
 
@@ -100,7 +125,12 @@ class Base_Mapping
         $this->close_connection();
     }
 
-    // Metodo para hacer un SEARCH
+    /**
+     * get_results_from_query()
+     * This method executes a SQL query using the SEARCH action.
+     * It checks the connection, executes the query, and constructs a response based on the result.
+     * @return array Returns an array with the operation details, it doesn't matter if it was successful or not.
+     */
     public function get_results_from_query()
     {
 
@@ -151,7 +181,12 @@ class Base_Mapping
     }
 
 
-    // Metodo para ejecutar una query personalizada
+    /**
+     * personalized_query()
+     * This method executes a personalized SQL query.
+     * @param string $queryPrueba
+     * @return mixed Returns the result of the query if successful, or an array with feedback if it fails.
+     */
     public function personalized_query($queryPrueba)
     {
         
@@ -176,7 +211,10 @@ class Base_Mapping
         }
     }
 
-
+    /**
+     * construct_response()
+     * This method constructs the the feedback array with the operation details.
+     */
     public function construct_response()
     {
         $this->feedback['ok'] = $this->ok;

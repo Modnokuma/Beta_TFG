@@ -31,7 +31,10 @@ switch ($metodoHTTP) {
         $action = 'EDIT';
         break;
     case 'GET':
-
+        // echo "Versión de PHP: " . PHP_VERSION . "<br>";
+        // echo "Versión completa: " . phpversion() . "<br>";
+        // phpinfo();
+        
         define('variables', $_GET);
         define('action', 'SEARCH');
         $action = 'SEARCH';

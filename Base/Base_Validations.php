@@ -1,12 +1,14 @@
 <?php
-/*
+/**
 * Base_Validations
 * This class combines data and action validations to ensure that all operations comply with the defined rules.
 *
-* @var array $estructura Structure of the entity.
+* @var array $estructura structure of the entity.
 * @var array $valores Key-value pairs representing the values of the entity's attributes.
 * @var array $listaAtributos List of attributes of the entity.
-* @var string $controlador Controller name for the entity.
+* @var string $controlador Name of the entity.
+* @package Beta_TFG
+* @subpackage Base
 */
 
 include_once './Base/Base_Action_Validations.php';
@@ -20,6 +22,12 @@ class Base_Validations
     protected $listaAtributos;
     protected $controlador;
 
+    /**
+     * validations()
+     * This method performs validations on the data and actions based on the provided structure and values.
+     *
+     * @return boolean|array Returns true if all validations pass, or an array with feedback if any validation fails.
+     */
     public function validations()
     {
         $respuesta = true;
