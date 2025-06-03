@@ -9,6 +9,7 @@ include_once './Base/MappingMysqli.php';
  * @var array $valores Key-value pairs representing the values of the entity's attributes.
  * @var array $listaAtributos List of attributes of the entity.
  * @var array $clavesPrimarias Primary keys of the entity.
+ * @var array $estructura Structure of the entity.
  * @package Beta_TFG
  * @subpackage Base
  */
@@ -19,6 +20,7 @@ class Base_MODEL extends Mapping
     public $valores = array();
     public $listaAtributos = array();
     public $clavesPrimarias = array();
+    public $estructura = array();
 
     /**
      * EDIT()
