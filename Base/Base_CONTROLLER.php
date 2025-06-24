@@ -23,6 +23,8 @@ class Base_CONTROLLER extends Base_Validations
      */
     public function __construct()
     {
+        $controlador = variables['controlador'];
+        include_once "./app/" . $controlador . "/" . $controlador . "_description.php";
         $description = variables['controlador'] . '_description';
 
         // Inicializar las propiedades heredadas
@@ -39,10 +41,9 @@ class Base_CONTROLLER extends Base_Validations
         }
 
         // Si no existen errores
-        $controlador = variables['controlador'];
         $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
-        include_once "./app/" . $controlador . "/" . $controlador . "_description.php";
-
+        
+        
         // Comprobar si los archivos existen antes de incluirlos
         if (!file_exists($serviceFile)) {
             $serviceName = "Base_SERVICE";

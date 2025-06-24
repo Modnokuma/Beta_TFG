@@ -158,7 +158,7 @@ $usuario_description =
                             'min_size' => 6,  //a@m.com
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', //posiblemente
-                            'personalized' => 'personalized_correo_usuario()'
+                            'personalized' => 'personalized_correo_usuario'
                             
                         ],
                         'EDIT' => [

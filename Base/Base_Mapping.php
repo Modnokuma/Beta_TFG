@@ -95,8 +95,8 @@ class Base_Mapping
         } else {
 
             //Ejecutamos la query
-
             $result_query = $this->conn->query($this->query);
+            
             if ($result_query != true) {
                 //Ha sucedido un error
                 $this->ok = false;

@@ -263,7 +263,14 @@ class Base_Data_Validations
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
             $method = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
 
-            $personalized = eval('return $this->objetoentidad->' . $method . ';');
+            if (!method_exists($this->objetoentidad, $method)) {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'personalized_method_not_exists_' . $atributo . '_KO';
+                $feedback['resources'] = false;
+                return $feedback;
+            }
+            
+            $personalized = eval('return $this->objetoentidad->' . $method . '();');
 
             if ($personalized !== true) {
 
@@ -274,3 +281,6 @@ class Base_Data_Validations
         return true;
     }
 }
+//var_dump($method); // ¿Qué devuelve?
+//var_dump(get_class($this->objetoentidad)); // ¿Es usuario_CONTROLLER?
+//var_dump(method_exists($this->objetoentidad, 'personalized_correo_usuario')); // ¿Devuelve true?

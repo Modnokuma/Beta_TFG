@@ -46,7 +46,7 @@ class Mapping extends Base_Mapping
         $this->query = "INSERT INTO " . $this->tabla . " ( ";
         $total = count($this->listaAtributos);
         $i = 0;
-
+        
         foreach ($this->listaAtributos as $atributo) {
 
             if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
