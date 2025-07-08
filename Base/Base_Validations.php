@@ -32,7 +32,7 @@ class Base_Validations
     public function validations()
     {
         $respuesta = true;
-        
+
         $data_validations = new Base_Data_Validations($this->estructura, $this->valores, $this->listaAtributos, $this, $this->controlador);
         $respuesta_data_validations = $data_validations->data_validations();
 

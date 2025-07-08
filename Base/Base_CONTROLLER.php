@@ -42,8 +42,8 @@ class Base_CONTROLLER extends Base_Validations
 
         // Si no existen errores
         $serviceFile = "./app/" . $controlador . "/" . $controlador . "_SERVICE.php";
-        
-        
+
+
         // Comprobar si los archivos existen antes de incluirlos
         if (!file_exists($serviceFile)) {
             $serviceName = "Base_SERVICE";

@@ -264,7 +264,7 @@ class Base_Data_Validations
             $method = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
 
             $exists = $this->function_exists($method);
-            
+
             if ($exists == true) {
                 $personalized = eval('return $this->objetoentidad->' . $method . ';');
 
@@ -290,7 +290,7 @@ class Base_Data_Validations
     public function function_exists($method)
     {
         if (preg_match('/^([a-zA-Z0-9_]+)\s*\(/', $method, $matches)) {
-            $methodName = $matches[1]; 
+            $methodName = $matches[1];
         }
         if (method_exists($this->objetoentidad, $methodName)) {
             return true;

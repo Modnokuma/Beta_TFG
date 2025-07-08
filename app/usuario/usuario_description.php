@@ -16,17 +16,17 @@ $usuario_description =
                         'ADD' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/', //'/^[0-9]+$/', 
-                           
+
                         ],
                         'EDIT' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
-                            
+
                         ],
                         'SEARCH' => [
                             'max_size' => 10,
                             'exp_reg' => '/.*/',
-                          
+
                         ]
                     ]
                 ]
@@ -50,12 +50,12 @@ $usuario_description =
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/',
-                            
+
                         ],
                         'SEARCH' => [
                             'max_size' => 25,
                             'exp_reg' => '/^([a-zA-Z][a-zA-Z0-9_-]+)?$/',
-                           
+
                         ]
                     ]
                 ]
@@ -72,18 +72,18 @@ $usuario_description =
                             'min_size' => 3,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            
+
                         ],
                         'EDIT' => [
                             'min_size' => 3,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            
+
                         ],
                         'SEARCH' => [
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            
+
                         ]
                     ]
                 ]
@@ -101,18 +101,18 @@ $usuario_description =
                             'min_size' => 6,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            
+
                         ],
                         'EDIT' => [
                             'min_size' => 6,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/',
-                            
+
                         ],
                         'SEARCH' => [
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/',
-                            
+
                         ]
                     ]
                 ]
@@ -129,24 +129,24 @@ $usuario_description =
                             'min_size' => 10,
                             'max_size' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]+$/',
-                           
+
                         ],
                         'EDIT' => [
                             'min_size' => 10,
                             'max_size' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]+$/',
-                            
+
                         ],
                         'SEARCH' => [
                             'max_size' => 200,
                             'exp_reg' => '/^[a-zA-Záéíóú0-9\s\,\-\.\#\'\(\)º]*$/',
-                            
+
                         ]
                     ]
                 ]
             ],
             'correo_usuario' => [
-                'type' => 'string',                
+                'type' => 'string',
                 'unique' => true,
                 'not_null' => [
                     'ADD' => true,
@@ -159,18 +159,18 @@ $usuario_description =
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', //posiblemente
                             'personalized' => 'personalized_correo_usuario()'
-                            
+
                         ],
                         'EDIT' => [
                             'min_size' => 6,
                             'max_size' => 45,
                             'exp_reg' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',  //posiblemente
-                           
+
                         ],
                         'SEARCH' => [
                             'max_size' => 45,
                             'exp_reg' => '/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/',  //posiblemente
-                           
+
                         ]
                     ]
                 ]
@@ -189,18 +189,18 @@ $usuario_description =
             //                 'max_size' => 45,
             //              //   'exp_reg' => '/.*/', //posiblemente
             //                 'personalized' => 'personalized_correo_usuario()',
-                            
+
             //             ],
             //             'EDIT' => [
             //                 'min_size' => 6,
             //                 'max_size' => 45,
             //                 'exp_reg' => '/.*/',  //posiblemente
-                           
+
             //             ],
             //             'SEARCH' => [
             //                 'max_size' => 45,
             //                 'exp_reg' => '/.*/',  //posiblemente
-                           
+
             //             ]
             //         ]
             //     ]

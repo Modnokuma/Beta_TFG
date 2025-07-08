@@ -114,8 +114,7 @@ $parametro_description =
             ],
             'formato_parametro' => [
                 'type' => 'string',
-                'not_null' => [
-                ],
+                'not_null' => [],
                 'rules' => [
                     'validations' => [
                         'ADD' => [
@@ -138,8 +137,7 @@ $parametro_description =
             ],
             'rango_desde_parametro' => [
                 'type' => 'integer',
-                'not_null' => [
-                ],
+                'not_null' => [],
                 'rules' => [
                     'validations' => [
                         'ADD' => [
@@ -162,8 +160,7 @@ $parametro_description =
             ],
             'rango_hasta_parametro' => [
                 'type' => 'numeric',
-                'not_null' => [
-                ],
+                'not_null' => [],
                 'rules' => [
                     'validations' => [
                         'ADD' => [
@@ -188,7 +185,7 @@ $parametro_description =
         'associations' => [
             'OneToMany' => [
                 [
-                    'entity' => 'unidad', 
+                    'entity' => 'unidad',
                     'attributes-own' => ['id_parametro'],
                     'attributes-rel' => ['id_parametro']
                 ]

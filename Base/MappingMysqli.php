@@ -46,18 +46,18 @@ class Mapping extends Base_Mapping
         $this->query = "INSERT INTO " . $this->tabla . " ( ";
         $total = count($this->listaAtributos);
         $i = 0;
-        
+
         foreach ($this->listaAtributos as $atributo) {
 
             /*if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
                 $i++;
                 continue;
             }*/
-           if (array_key_exists($atributo, $this->clavesPrimarias)) {
-                 if ($this->valores[$atributo] === '') {
-                    $i++;  
+            if (array_key_exists($atributo, $this->clavesPrimarias)) {
+                if ($this->valores[$atributo] === '') {
+                    $i++;
                     continue;
-                 }
+                }
             }
             $this->query = $this->query . $atributo;
 
@@ -76,12 +76,12 @@ class Mapping extends Base_Mapping
                 continue;
             }*/
             if (array_key_exists($atributo, $this->clavesPrimarias)) {
-                 if ($this->valores[$atributo] === '') {
-                    $i++;  
+                if ($this->valores[$atributo] === '') {
+                    $i++;
                     continue;
-                 }
+                }
             }
-            
+
             if ((isset($this->estructura['attributes'][$atributo]['type']))) {
                 if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
                     $this->query = $this->query . "'" . $this->valores[$atributo] . "'";
