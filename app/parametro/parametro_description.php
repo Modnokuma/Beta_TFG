@@ -115,27 +115,20 @@ $parametro_description =
             'formato_parametro' => [
                 'type' => 'string',
                 'not_null' => [
-                    'ADD' => false,
-                    'EDIT' => false,
-                    'DELETE' => false,
-                    'SEARCH' => false
                 ],
                 'rules' => [
                     'validations' => [
                         'ADD' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
                         ],
                         'EDIT' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
                         ],
                         'SEARCH' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
@@ -144,29 +137,22 @@ $parametro_description =
                 ]
             ],
             'rango_desde_parametro' => [
-                'type' => 'numeric',
+                'type' => 'integer',
                 'not_null' => [
-                    'ADD' => false,
-                    'EDIT' => false,
-                    'DELETE' => false,
-                    'SEARCH' => false
                 ],
                 'rules' => [
                     'validations' => [
                         'ADD' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
                         ],
                         'EDIT' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
                         ],
                         'SEARCH' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
@@ -177,27 +163,20 @@ $parametro_description =
             'rango_hasta_parametro' => [
                 'type' => 'numeric',
                 'not_null' => [
-                    'ADD' => false,
-                    'EDIT' => false,
-                    'DELETE' => false,
-                    'SEARCH' => false
                 ],
                 'rules' => [
                     'validations' => [
                         'ADD' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
                         ],
                         'EDIT' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
                         ],
                         'SEARCH' => [
-                            'min_size' => false,
                             'max_size' => 45,
                             'exp_reg' => '/.*/',
 
