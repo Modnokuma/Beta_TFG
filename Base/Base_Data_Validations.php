@@ -263,24 +263,47 @@ class Base_Data_Validations
         if (isset($this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'])) {
             $method = $this->estructura['attributes'][$atributo]['rules']['validations'][action]['personalized'];
 
-            if (!method_exists($this->objetoentidad, $method)) {
-                $feedback['ok'] = false;
-                $feedback['code'] = 'personalized_method_not_exists_' . $atributo . '_KO';
-                $feedback['resources'] = false;
-                return $feedback;
-            }
+            $exists = $this->function_exists($method);
             
-            $personalized = eval('return $this->objetoentidad->' . $method . '();');
+            if ($exists == true) {
+                $personalized = eval('return $this->objetoentidad->' . $method . ';');
 
-            if ($personalized !== true) {
+                if ($personalized !== true) {
 
-                return $personalized;
+                    return $personalized;
+                }
+            } else {
+                return $exists; // Si no existe el método, devuelve el feedback de error
             }
-        }
 
-        return true;
+            return true;
+        }
+    }
+
+    /**
+     * function_exists($method)
+     * Checks if a method exists in the entity object.
+     *
+     * @param string $method Name of the method to check with atributes.
+     * @return boolean|array True if the method exists, or a feedback object with details if not.
+     */
+    public function function_exists($method)
+    {
+        if (preg_match('/^([a-zA-Z0-9_]+)\s*\(/', $method, $matches)) {
+            $methodName = $matches[1]; 
+        }
+        if (method_exists($this->objetoentidad, $methodName)) {
+            return true;
+        } else {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'personalized_method_not_exists_' . $method . '_KO';
+            $feedback['resources'] = false;
+            return $feedback;
+        }
     }
 }
+
+
 //var_dump($method); // ¿Qué devuelve?
 //var_dump(get_class($this->objetoentidad)); // ¿Es usuario_CONTROLLER?
 //var_dump(method_exists($this->objetoentidad, 'personalized_correo_usuario')); // ¿Devuelve true?
