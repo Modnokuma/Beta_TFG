@@ -49,16 +49,11 @@ class Mapping extends Base_Mapping
 
         foreach ($this->listaAtributos as $atributo) {
 
-            /*if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
+            if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
                 $i++;
                 continue;
-            }*/
-            if (array_key_exists($atributo, $this->clavesPrimarias)) {
-                if ($this->valores[$atributo] === '') {
-                    $i++;
-                    continue;
-                }
             }
+            
             $this->query = $this->query . $atributo;
 
             if (++$i !== $total) {
@@ -71,16 +66,11 @@ class Mapping extends Base_Mapping
 
         foreach ($this->listaAtributos as $atributo) {
 
-            /*if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
+            if (isset($this->estructura['attributes'][$atributo]['autoincrement'])) {
                 $i++;
                 continue;
-            }*/
-            if (array_key_exists($atributo, $this->clavesPrimarias)) {
-                if ($this->valores[$atributo] === '') {
-                    $i++;
-                    continue;
-                }
             }
+            
 
             if ((isset($this->estructura['attributes'][$atributo]['type']))) {
                 if ($this->estructura['attributes'][$atributo]['type'] != "integer") {
