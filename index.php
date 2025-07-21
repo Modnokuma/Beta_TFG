@@ -55,7 +55,7 @@ switch ($metodoHTTP) {
     default:
         $feedback['ok'] = false;
         $feedback['code'] = 'action_doesnt_exist_KO';
-        $feedback['resources'] = "Accion no valida, Entro en el DEFAULT ";
+        $feedback['resources'] = "Accion no valida, Entro en el DEFAULT.";
         responder($feedback);
         break;
 }
@@ -64,7 +64,7 @@ switch ($metodoHTTP) {
 if (!isset(variables['controlador'])) {
     $feedback['ok'] = false;
     $feedback['code'] = 'controller_not_exists_KO';
-    $feedback['resources'] = false;
+    $feedback['resources'] = 'El controlador no existe';
     responder($feedback);
 }
 

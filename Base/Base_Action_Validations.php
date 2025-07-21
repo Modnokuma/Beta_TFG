@@ -157,7 +157,7 @@ class Base_Action_Validations
                         if ($resp !== true) {
                             $feedback['ok'] = false;
                             $feedback['code'] =  $atributo . '_already_exists_KO';
-                            $feedback['resources'] = true;
+                            $feedback['resources'] = 'El valor ' . $this->valores[$atributo] . ' ya existe en ' . $atributo . '.';
                             return $feedback;
                         }
                     } else if (action == 'EDIT') {
@@ -166,7 +166,7 @@ class Base_Action_Validations
                         if ($resp !== true) {
                             $feedback['ok'] = false;
                             $feedback['code'] =  $atributo . '_already_exists_KO';
-                            $feedback['resources'] = true;
+                            $feedback['resources'] = 'El valor ' . $this->valores[$atributo] . ' ya existe en ' . $atributo . '.';
                             return $feedback;
                         }
                     }
@@ -314,7 +314,7 @@ class Base_Action_Validations
                 } else {
                     $feedback['ok'] = false;
                     $feedback['code'] = 'foreign_key_values_not_in_' . $tablaFk . '_KO';
-                    $feedback['resources'] = true;
+                    $feedback['resources'] = 'El valor de la clave foránea no existe en ' . $tablaFk . '.';
                     return $feedback;
                 }
             }
@@ -372,7 +372,7 @@ class Base_Action_Validations
                 if ($resultado['code'] === 'RECORDSET_DATOS') {
                     $feedback['ok'] = false;
                     $feedback['code'] = 'delete_parent_while_children_in_' . $entidadHija . '_KO';
-                    $feedback['resources'] = true;
+                    $feedback['resources'] = 'No se puede eliminar ' . $this->controlador . ' porque tiene hijos en ' . $entidadHija . '.';
                     return $feedback;
                 } else {
                     return true;

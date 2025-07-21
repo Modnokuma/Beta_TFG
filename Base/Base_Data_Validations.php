@@ -108,7 +108,7 @@ class Base_Data_Validations
                         if (!isset($this->estructura['attributes'][$atributo]['default_value'])) {
                             $feedback['ok'] = false;
                             $feedback['code'] = $atributo . '_is_null_KO';
-                            $feedback['resources'] = false;
+                            $feedback['resources'] = $atributo . 'es nulo, debe tener un valor.';
                             return $feedback;
                         }
                     }
@@ -137,7 +137,7 @@ class Base_Data_Validations
 
             $feedback['ok'] = false;
             $feedback['code'] = 'search_by_null_KO';
-            $feedback['resources'] = false;
+            $feedback['resources'] = 'No se ha proporcionado ningun atributo para buscar.';
             return $feedback;
         }
         return true;
@@ -192,7 +192,7 @@ class Base_Data_Validations
                 if (strlen($valor) < $minSize) {
                     $feedback['ok'] = false;
                     $feedback['code'] = 'min_size_' . $atributo . '_KO';
-                    $feedback['resources'] = false;
+                    $feedback['resources'] = $atributo . ' debe tener al menos ' . $minSize . ' caracteres.';
                     return $feedback;
                 }
             }
@@ -217,7 +217,7 @@ class Base_Data_Validations
                 if (strlen($valor) > $maxSize) {
                     $feedback['ok'] = false;
                     $feedback['code'] = 'max_size_' . $atributo . '_KO';
-                    $feedback['resources'] = false;
+                    $feedback['resources'] = $atributo . ' no puede tener más de ' . $maxSize . ' caracteres.';
                     return $feedback;
                 }
             }
@@ -242,7 +242,7 @@ class Base_Data_Validations
                 if (!preg_match($expReg, $valor)) {
                     $feedback['ok'] = false;
                     $feedback['code'] = 'exp_reg_' . $atributo . '_KO';
-                    $feedback['resources'] = false;
+                    $feedback['resources'] = $atributo . ' no cumple con el formato requerido.';
                     return $feedback;
                 }
             }
@@ -297,7 +297,7 @@ class Base_Data_Validations
         } else {
             $feedback['ok'] = false;
             $feedback['code'] = 'personalized_method_not_exists_' . $method . '_KO';
-            $feedback['resources'] = false;
+            $feedback['resources'] = 'El método personalizado ' . $method . ' no existe';
             return $feedback;
         }
     }
