@@ -58,21 +58,7 @@ const tests_preparation = [
 ];
 
 const tests_description = [
-    /*'testAdd_usuario' => [
-        'variables' => [
-            'nombre_usuario' => 'Daniel',
-            'organizacion_usuario' => 'ESEI',
-            'puesto_usuario' => 'alumno',
-            'direccion_usuario' => 'Calle A Nº1 4ºD',
-            'correo_usuario' => 'a@a.es',
-            'foto_usuario' => '',
-            'TESTING' => true,
-            'action' => 'ADD',
-            'controlador' => 'usuario'
-       ],
-        'mensaje' => 'SQL_OK'
-   ],*/
-    'testAdd_usuario' => [
+   'testAdd_usuario' => [
         'variables' => [
             'id_usuario' => 67,
             'nombre_usuario' => 'Daniel',

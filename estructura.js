@@ -3,159 +3,200 @@
 // implica que tienes que comprobar si un elemento existe antes de preguntar su valor
 
 const estructura_generica = {
-    attributes_list: [], //array atributos (obligatorio)
-    columnas_visibles_tabla : [], //array columnas visibles (obligatorio)
-    columnas_modificadas_tabla: [], //array de atributos a cambiar formato en la tabla de datos (No obligatorio, solo si se cambia formato informacion en tabla)
+    entity: 'nombredeentidad', // nombre de la entidad (obligatorio)
     attributes: { // conjunto de descripciones de atributos de la entidad (obligatorio)
-        nombredeatributo :{ // clave con el nombre del atributo
-            html: { //indicación de elemento en html para mostrar este campo
-                tag: 'tag html', //tag html (select, input, textarea, .....)
-                options : ['valor1', 'valor2'], // atributo de un tag select. array con las options (obligatorio con tag select)
-                type : "", // atributo de tag input (file, text, data, number,.... ) obligatorio con tag input
-                rows: 0,// atributo de tag textarea corresponde con las filas. Obligatorio con un textarea
-                columns: 0,// atributo de tag textarea corresponde con las columnas. Obligatorio con un textarea
-                multiple: true, // atributo de valores multiples (input file, select, chechbox, ...). Obligatorio si puede coger multiples valores el atributo
-                component_visible_size: 7, // atributo de longitud fisica del campo del formulario. Obligatorio si se quiere que tenga su tamaño adecuado
+        nombredeatributo :{ //nombre del atributo(obligatorio)
+            pk: true, // indica si es clave primaria. No obligatorio, solo si es clave primaria
+            autoincrement: true, // indica si es autoincremental. No obligatorio, solo si es autoincremetal
+            type: 'tipo', // tipo de dato del atributo (string, number, date, boolean, file, etc).(obligatorio)
+            unique: true, // indica si es unico. No obligatorio, solo si es unico
+            not_null:{// indica si el atributo no puede ser nulo. No obligatorio, solo si no puede ser nulo
+                ADD: true, // indica si no puede ser nulo en la accion ADD. No obligatorio
+                EDIT: true, // indica si no puede ser nulo  en la accion EDIT. No obligatorio
+                SEARCH: true, // indica si no puede ser nulo  en la accion SEARCH. No obligatorio
+                DELETE: true // indica ssi no puede ser nulo  en la accion DELETE. No obligatorio                
             },
-            is_pk: true, // indica si es clave primaria. No obligatorio, solo si es clave primaria
-            is_autoincrement: true, // indica si es autoincremental. No obligatorio, solo si es autoincremetal
-            is_null: true, // indica si el atributo permite nulos/vacios. No obligatorio, solo si permite nulos/vacios
-            default_value: 'valorpordefecto', // indica si hay un valor por defecto que colocar en el campo si esta vacio. No obligatorio, solo si se desea un valor por defecto (obviamente seria en el ADD)
-            validation_rules:{ // reglas de validacion
-                nombreaccion:{ // indicación de la accion. No obligatorio si para el campo no hay validacion.(ADD,EDIT, SEARCH)
-                    min_size: [8, "nombredeatributo_min_size_KO"], // funcion atomica tamaño minimo, tiene el parametro de tamaño minimo del atributo (el que sea) y el codigo de error a devolver. No obligatorio sino se comprueba el tamaño minimo
-                    max_size: [68, "nombredeatributo_max_size_KO"], // funcion atomica tamaño maximo, tiene el parametro de tamaño maximo del atributo (el que sea) y el codigo de error a devolver. No obligatorio sino se comprueba el tamaño maximo
-                    format: ["expresionregular", "nombredeatributo_format_KO"], // funcion atomica formato de valor, tiene el parametro de expresión regular del valor del atributo (el que sea) y el codigo de error a devolver. No obligatorio sino se comprueba el formato
-                    no_file: "nuevo_nombredeatributo_no_file_KO", // funcion atomica no existe fichero. no obligatorio segun accion
-                    file_type :["application/pdf","nuevo_nombredeatributo_file_type_KO"], // funcion atomica tipo mime fichero. No obligatorio si no se comprueba tipo de fichero
-                    max_size_file: [2000, "nuevo_nombredeatributo_max_size_file_KO"], // funcion atomica tamaño maximo fichero. No obligatorio si no se comprueba tamaño maximo fichero
-                    format_name_file: ["expresionregular","nuevo_nombredeatributo_format_name_file_KO"], // funcion atomica formato nombre fichero. No obligatorio sino se comprueba el formato del nombre y extension
-                    personalized: "personalized_validation_nombreatributo($extravalues)", // funcion personalizada. corresponde con un metodo en la clase entidad correspondiente, para ejecutarla deben existir las variables parametro de la funcion (id, valor, extravalues). No obligatorio sino hay funciones de validacioin personalizadas
-                }    
+            default_value: 'valorpordefecto', // indica si hay un valor por defecto que colocar en el campo si esta vacio. No obligatorio, solo si se desea un valor por defecto (en la accion ADD)
+            rules:{ // reglas de validacion (obligatorio)
+                validations: { // conjunto de validaciones que se aplican al atributo (obligatorio)
+                    nombreaccion:{ // indicación de la accion. No obligatorio si para el campo no hay validacion.(ADD, EDIT,SEARCH)
+                        min_size: [8], // funcion atomica tamaño minimo, tiene el parametro de tamaño minimo del atributo (el que sea). No obligatorio sino se comprueba el tamaño minimo
+                        max_size: [68], // funcion atomica tamaño maximo, tiene el parametro de tamaño maximo del atributo (el que sea). No obligatorio sino se comprueba el tamaño maximo
+                        exp_reg: ["expresionregular"], // funcion atomica para comprobar el formato del atributo, tiene el parametro de expresión regular del valor del atributo (el que sea). No obligatorio sino se comprueba el formato
+                        personalized: "personalized_validation_nombreatributo($extravalues)", // funcion personalizada. corresponde con un metodo en la clase entidad correspondiente, para ejecutarla deben existir las variables parametro de la funcion (id, valor, extravalues). No obligatorio sino hay funciones de validacioin personalizadas
+                    } 
+                }         
             }
         }, // fin de este atributo y se rellena para los siguientes
+    },
+    associations: { // conjunto de asociaciones con otras entidades (opcional)
+        nombredeasociacion: { // nombre de la asociacion(one-to-one, one-to-many, many-to-many). (obligatorio)
+            entity: 'nombredeentidad', // nombre de la entidad asociada (obligatorio)
+            attributesPropios: ['nombredeatributo'], // nombre del atributo de esta entidad relacionado con la entidad asociada (obligatorio)
+            attributesRelacionados: ['id_atributo1', 'id_atributo2'], // nombre del atributo de la entidad asociada relacionado con esta entidad (obligatorio)
+        }
     }
 };
 
-const estructura_persona = {
-    attributes_list: ['dni', 'nombre_persona', 'apellidos_persona', 'rol', 'fechaNacimiento_persona', 'direccion_persona', 'telefono_persona', 'email_persona', 'foto_persona'],
-    columnas_visibles_tabla : ['dni', 'nombre_persona', 'telefono_persona'],
-    columnas_modificadas_tabla: ['foto_persona'],
+const estructura_usuario = {
+    entity: 'usuario',
     attributes: {
-        dni: {
-            html: {
-                tag: 'input',
-                type: 'text',
+        id_usuario: {
+            pk: true,
+            autoincrement: true,
+            type: 'integer',
+            not_null: {
+                EDIT: true,
+                DELETE: true
             },
-            is_pk: true,
-            is_not_null: true,
-            component_visible_size: 9,
-            validation_rules: {
-                ADD:{
-                    min_size : [9, 'dni_min_size_KO'],
-				    max_size: [9,'dni_max_size_KO'],
-                    reg_exp : ['^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$', 'dni_format_KO'],
-                },
-                EDIT:{
-                    min_size : [9, 'dni_min_size_KO'],
-				    max_size: [9,'dni_max_size_KO'],
-                    reg_exp : ['^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$', 'dni_format_KO'],
-                },
-                SEARCH:{
-				    max_size: [9,'dni_max_size_KO'],
-                    reg_exp : ['^[0-9]+[TRWAGMYFPDXBNJZSQVHLCKE]$', 'dni_format_KO'],
+            rules: {
+                validations: {
+                    ADD: {
+                        max_size: 10,
+                        exp_reg: /.*/
+                    },
+                    EDIT: {
+                        max_size: 10,
+                        exp_reg: /.*/
+                    },
+                    SEARCH: {
+                        max_size: 10,
+                        exp_reg: /.*/
+                    }
                 }
             }
         },
-        nombre_persona: {
-            html: {
-                tag: 'input',
-                type: 'text',
+        nombre_usuario: {
+            type: 'string',
+            unique: true,
+            not_null: {
+                ADD: true,
+                EDIT: true
             },
-            is_not_null: true,
-            validation_rules: {
-                ADD:{
-                    min_size : [9, 'nombre_persona_min_size_KO'],
-				    max_size: [9,'nombre_persona_max_size_KO'],
-                    reg_exp : ['^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$', 'nombre_persona_format_KO'],
-                },
-                EDIT:{
-                    min_size : [9, 'nombre_persona_min_size_KO'],
-				    max_size: [9,'nombre_persona_max_size_KO'],
-                    reg_exp : ['^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$', 'nombre_persona_format_KO'],
-                },
-                SEARCH:{
-				    max_size: [9,'nombre_persona_max_size_KO'],
-                    reg_exp : ['^[0-9]+[TRWAGMYFPDXBNJZSQVHLCKE]$', 'nombre_persona_format_KO'],
+            rules: {
+                validations: {
+                    ADD: {
+                        min_size: 3,
+                        max_size: 25,
+                        exp_reg: /^[a-zA-Z][a-zA-Z0-9_-]+$/,
+                        personalized: 'validarDesdeParametro($atributo)'
+                    },
+                    EDIT: {
+                        min_size: 3,
+                        max_size: 25,
+                        exp_reg: /^[a-zA-Z][a-zA-Z0-9_-]+$/
+                    },
+                    SEARCH: {
+                        max_size: 25,
+                        exp_reg: /^([a-zA-Z][a-zA-Z0-9_-]+)?$/
+                    }
                 }
             }
         },
-        apellidos_persona: {
-            html: {
-                tag: 'input',
-                type: 'text',
+        organizacion_usuario: {
+            type: 'string',
+            not_null: {
+                ADD: true,
+                EDIT: true
             },
-            is_not_null: true,
-            validation_rules: {
+            rules: {
+                validations: {
+                    ADD: {
+                        min_size: 3,
+                        max_size: 45,
+                        exp_reg: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/
+                    },
+                    EDIT: {
+                        min_size: 3,
+                        max_size: 45,
+                        exp_reg: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/
+                    },
+                    SEARCH: {
+                        max_size: 45,
+                        exp_reg: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/
+                    }
+                }
             }
         },
-        fechaNacimiento_persona: {
-            html: {
-                tag: 'input',
-                type: 'date',
+        puesto_usuario: {
+            type: 'string',
+            not_null: {
+                ADD: true,
+                EDIT: true
             },
-            is_not_null: true,
-            validation_rules: {
-                ADD:{
-                    min_size: [10, 'fechaNacimiento_persona_min_size_KO'],
-                    personalize: ["personalized_validation_fechaNacimiento_persona(arrayatributosvalores)"],
-                },
+            default_value: 'alumno',
+            rules: {
+                validations: {
+                    ADD: {
+                        min_size: 6,
+                        max_size: 45,
+                        exp_reg: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/
+                    },
+                    EDIT: {
+                        min_size: 6,
+                        max_size: 45,
+                        exp_reg: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/
+                    },
+                    SEARCH: {
+                        max_size: 45,
+                        exp_reg: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/
+                    }
+                }
             }
         },
-        direccion_persona: {
-            html: {
-                tag: 'textarea',
-                cols: 100,
-                rows: 10
+        direccion_usuario: {
+            type: 'string',
+            not_null: {
+                ADD: true,
+                EDIT: true
             },
-            is_not_null: true,
-            validation_rules: {
+            rules: {
+                validations: {
+                    ADD: {
+                        min_size: 10,
+                        max_size: 200,
+                        exp_reg: /^[a-zA-Záéíóú0-9\s,\-\.#'()º]+$/
+                    },
+                    EDIT: {
+                        min_size: 10,
+                        max_size: 200,
+                        exp_reg: /^[a-zA-Záéíóú0-9\s,\-\.#'()º]+$/
+                    },
+                    SEARCH: {
+                        max_size: 200,
+                        exp_reg: /^[a-zA-Záéíóú0-9\s,\-\.#'()º]*$/
+                    }
+                }
             }
         },
-        telefono_persona: {
-            html: {
-                tag: 'input',
-                type: 'text',
+        correo_usuario: {
+            type: 'string',
+            unique: true,
+            not_null: {
+                ADD: true,
+                EDIT: true
             },
-            is_not_null: true,
-            validation_rules: {
+            rules: {
+                validations: {
+                    ADD: {
+                        min_size: 6,
+                        max_size: 45,
+                        exp_reg: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        personalized: 'personalized_correo_usuario()'
+                    },
+                    EDIT: {
+                        min_size: 6,
+                        max_size: 45,
+                        exp_reg: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+                    },
+                    SEARCH: {
+                        max_size: 45,
+                        exp_reg: /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/
+                    }
+                }
             }
-        },
-        email_persona: {
-            html: {
-                tag: 'input',
-                type: 'text',
-            },
-            is_not_null: true,
-            validation_rules: {
-            }
-        },
-        foto_persona: {
-            html: {
-                tag: 'input',
-                type: 'file',
-            },
-            is_not_null: true,
-            validation_rules: {
-                ADD:{
-                    no_file: "nuevo_foto_persona_no_file_KO", 
-                    file_type :["application/pdf", "nuevo_foto_persona_file_type_KO"],
-                    max_size_file: [2000, "nuevo_foto_persona_max_size_file_KO"],
-                },
-            }
-        },
-    },
-
+        }
+    }
 };
 
 /*
