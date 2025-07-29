@@ -44,7 +44,7 @@ $usuario_description =
                             'min_size' => 3,
                             'max_size' => 25,
                             'exp_reg' => '/^[a-zA-Z][a-zA-Z0-9_-]+$/',
-                            'personalized' => 'validarDesdeParametro($atributo)'
+                            //'personalized' => 'validarDesdeParametro($atributo)'
                         ],
                         'EDIT' => [
                             'min_size' => 3,

@@ -159,7 +159,7 @@ $parametro_description =
                 ]
             ],
             'rango_hasta_parametro' => [
-                'type' => 'numeric',
+                'type' => 'integer',
                 'not_null' => [],
                 'rules' => [
                     'validations' => [

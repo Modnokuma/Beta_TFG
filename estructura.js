@@ -20,8 +20,8 @@ const estructura_generica = {
             rules:{ // reglas de validacion (obligatorio)
                 validations: { // conjunto de validaciones que se aplican al atributo (obligatorio)
                     nombreaccion:{ // indicación de la accion. No obligatorio si para el campo no hay validacion.(ADD, EDIT,SEARCH)
-                        min_size: [8], // funcion atomica tamaño minimo, tiene el parametro de tamaño minimo del atributo (el que sea). No obligatorio sino se comprueba el tamaño minimo
-                        max_size: [68], // funcion atomica tamaño maximo, tiene el parametro de tamaño maximo del atributo (el que sea). No obligatorio sino se comprueba el tamaño maximo
+                        min_size: 8, // funcion atomica tamaño minimo, tiene el parametro de tamaño minimo del atributo (el que sea). No obligatorio sino se comprueba el tamaño minimo
+                        max_size: 68, // funcion atomica tamaño maximo, tiene el parametro de tamaño maximo del atributo (el que sea). No obligatorio sino se comprueba el tamaño maximo
                         exp_reg: ["expresionregular"], // funcion atomica para comprobar el formato del atributo, tiene el parametro de expresión regular del valor del atributo (el que sea). No obligatorio sino se comprueba el formato
                         personalized: "personalized_validation_nombreatributo($extravalues)", // funcion personalizada. corresponde con un metodo en la clase entidad correspondiente, para ejecutarla deben existir las variables parametro de la funcion (id, valor, extravalues). No obligatorio sino hay funciones de validacioin personalizadas
                     } 
@@ -78,8 +78,7 @@ const estructura_usuario = {
                     ADD: {
                         min_size: 3,
                         max_size: 25,
-                        exp_reg: /^[a-zA-Z][a-zA-Z0-9_-]+$/,
-                        personalized: 'validarDesdeParametro($atributo)'
+                        exp_reg: /^[a-zA-Z][a-zA-Z0-9_-]+$/
                     },
                     EDIT: {
                         min_size: 3,
